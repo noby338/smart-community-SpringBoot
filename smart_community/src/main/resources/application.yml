@@ -1,12 +1,14 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/rbac_shiro?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     username: root
-    password: root
+    password: 123
 #    ???
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.woniuxy.smart_community.entity
+
 logging:
   level:
     com.woniuxy.springbootshiro.dao: debug
