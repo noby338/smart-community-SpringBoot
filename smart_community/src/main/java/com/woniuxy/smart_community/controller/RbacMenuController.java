@@ -20,7 +20,7 @@ public class RbacMenuController {
     /**
      * 服务对象
      */
-    @Resource
+//    @Resource
     private RbacMenuService rbacMenuService;
 
 

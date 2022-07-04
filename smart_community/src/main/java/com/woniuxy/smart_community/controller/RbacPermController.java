@@ -20,7 +20,7 @@ public class RbacPermController {
     /**
      * 服务对象
      */
-    @Resource
+//    @Resource
     private RbacPermService rbacPermService;
 
 

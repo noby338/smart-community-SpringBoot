@@ -2,6 +2,7 @@ package com.woniuxy.smart_community.controller;
 
 import com.woniuxy.smart_community.entity.RbacManager;
 import com.woniuxy.smart_community.service.RbacManagerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class RbacManagerController {
     /**
      * 服务对象
      */
-    @Resource
+//    @Resource
     private RbacManagerService rbacManagerService;
 
 

@@ -20,7 +20,7 @@ public class RbacRoleController {
     /**
      * 服务对象
      */
-    @Resource
+//    @Resource
     private RbacRoleService rbacRoleService;
 
 
