@@ -5,8 +5,8 @@
     <groupId>com.woniuxy</groupId>
     <artifactId>Smart_community</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Smart_community</name>
-    <description>Smart_community</description>
+<!--    <name>Smart_community</name>-->
+<!--    <description>Smart_community</description>-->
 
     <properties>
         <java.version>1.8</java.version>
@@ -23,6 +23,11 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
             <exclusions>
@@ -32,7 +37,30 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!--lombok包-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <!--spring整合mybatis-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+        <!--mysql连接默认版本是8.X  我们使用的是数据库版本是5.X-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.35</version>
+        </dependency>
+
+
+
     </dependencies>
+
 
     <dependencyManagement>
         <dependencies>
