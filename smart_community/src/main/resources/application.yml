@@ -1,9 +1,15 @@
+# MySQL配置统一
+# 数据库名：smart_community
+# 数据库密码：123
+# 数据库版本:MySQL5.7.*
+
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/smart_community?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123
+
 # Mybatis配置
 mybatis:
   mapper-locations: classpath:mapper/*.xml
