@@ -15,28 +15,12 @@ import java.util.List;
 public interface HouseDao {
 
     /**
-     * 通过房间信息查询相关数据
-     *
-     * @param house 房间号
-     * @return 实例对象
-     */
-    List<House> selectHouseByHouseInfo(@Param("house") House house);
-
-    /**
      * 新增房间数据
      *
      * @param house 实例对象
      * @return 影响行数
      */
     int insert(@Param("house")House house);
-
-    /**
-     * 通过主键修改房间信息数据
-     *
-     * @param house 实例对象
-     * @return 影响行数
-     */
-    int update(@Param("house") House house);
 
     /**
      * 通过主键删除房间信息数据
@@ -47,11 +31,27 @@ public interface HouseDao {
     int deleteById(Integer id);
 
     /**
+     * 通过主键修改房间信息数据
+     *
+     * @param house 实例对象
+     * @return 影响行数
+     */
+    int update(@Param("house") House house);
+
+    /**
+     * 通过房间信息查询相关数据
+     *
+     * @param house 房间号
+     * @return 实例对象
+     */
+    List<House> selectHouseByHouseInfo(@Param("house") House house);
+
+    /**
      * 根据房间信息统计总行数
      *
      * @param house 查询条件
      * @return 总行数
      */
-    int count(@Param("house") House house);
+    Integer count(@Param("house") House house);
 
 }
