@@ -18,7 +18,8 @@ mybatis:
 # 日志文件打印级别
 logging:
   level:
-    com.woniuxy.springbootshiro.dao: debug
+    root: debug
+
 
 #PageHelper分页插件配置
 pagehelper:
