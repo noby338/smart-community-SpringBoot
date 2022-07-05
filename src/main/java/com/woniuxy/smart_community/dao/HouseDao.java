@@ -15,20 +15,12 @@ import java.util.List;
 public interface HouseDao {
 
     /**
-     * 通过房间号查询单条数据
-     *
-     * @param houseNum 房间号
-     * @return 实例对象
-     */
-    House selectHouseByHouseNum(Integer houseNum);
-
-    /**
      * 通过房间信息查询相关数据
      *
-     * @param houseinfo 房间号
+     * @param house 房间号
      * @return 实例对象
      */
-    List<House> selectHouseByHouseInfo(@Param("houseinfo") House houseinfo);
+    List<House> selectHouseByHouseInfo(@Param("house") House house);
 
     /**
      * 新增房间数据
