@@ -2,6 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.woniuxy.smart_community.dao.HouseDao">
 
+    <!--新增房间数据-->
+    <insert id="insert">
+        insert into house(id, building, unit, floor, house_num, house_people_nums, house_state)
+        values (#{house.id}, #{house.building}, #{house.unit}, #{house.floor}, #{house.house_num}, #{house.house_people_nums}, #{house.house_state})
+    </insert>
+
+    <!--通过主键删除房间信息数据-->
+    <delete id="deleteById">
+        delete from house where id = #{id}
+    </delete>
+
+    <!--通过主键修改房间信息数据-->
+    <update id="update">
+        update house
+        <set>
+            <if test="house.building != null and house.building != ''">
+                building = #{house.building},
+            </if>
+            <if test="house.unit != null and house.unit != ''">
+                unit = #{house.unit},
+            </if>
+            <if test="house.floor != null and house.floor != ''">
+                floor = #{house.floor},
+            </if>
+            <if test="house.house_num != null and #{house.house_num} != ''">
+                house_num = #{house.house_num},
+            </if>
+            <if test="house.house_people_nums != null and house.house_people_nums != ''">
+                house_people_nums = #{house.house_people_nums},
+            </if>
+            <if test="house.house_state != null and house.house_state != ''">
+                house_state = #{house.house_state}
+            </if>
+        </set>
+        where id = #{house.id}
+    </update>
+
     <!--通过房间信息查询相关数据-->
     <select id="selectHouseByHouseInfo" resultType="house">
         select * from house
@@ -18,7 +55,7 @@
             <if test="house.floor != null">
                 and floor = #{house.floor}
             </if>
-            <if test="#{house.house_num} != null and #{house.house_num} != ''">
+            <if test="house.house_num != null and house.house_num != ''">
                 and house_num = #{house.house_num}
             </if>
             <if test="house.house_people_nums != null">
@@ -30,69 +67,31 @@
         </where>
     </select>
 
-    <!--新增房间数据-->
-    <insert id="insert">
-        insert into house(id, building, unit, floor, house_num, house_people_nums, house_state)
-        values (#{house.id}, #{house.building}, #{house.unit}, #{house.floor}, #{house.house_num}, #{house.house_people_nums}, #{house.house_state})
-    </insert>
-
-
-    <!--通过主键修改房间信息数据-->
-    <update id="update">
-        update house
-            <set>
-                <if test="house.building != null and house.building != ''">
-                     building = #{house.building},
-                </if>
-                <if test="house.unit != null and house.unit != ''">
-                     unit = #{house.unit},
-                </if>
-                <if test="house.floor != null and house.floor != ''">
-                     floor = #{house.floor},
-                </if>
-                <if test="#{house.house_num} != null and #{house.house_num} != ''">
-                     house_num = #{house.house_num},
-                </if>
-                <if test="house.house_people_nums != null and house.house_people_nums != ''">
-                     house_people_nums = #{house.house_people_nums},
-                </if>
-                <if test="house.house_state != null and house.house_state != ''">
-                     house_state = #{house.house_state}
-                </if>
-            </set>
-        where id = #{house.id}
-    </update>
-
-    <!--通过主键删除房间信息数据-->
-    <delete id="deleteById">
-        delete from house where id = #{id}
-    </delete>
-
     <!--根据房间信息统计总行数-->
     <select id="count" resultType="integer">
-        select count(1)
+        select count(*)
         from house
         <where>
-            <if test="id != null">
-                and id = #{id}
+            <if test="house.id != null">
+                and id = #{house.id}
             </if>
-            <if test="building != null and building != ''">
-                and building = #{building}
+            <if test="house.building != null">
+                and building = #{house.building}
             </if>
-            <if test="unit != null and unit != ''">
-                and unit = #{unit}
+            <if test="house.unit != null ">
+                and unit = #{house.unit}
             </if>
-            <if test="floor != null and floor != ''">
-                and floor = #{floor}
+            <if test="house.floor != null">
+                and floor = #{house.floor}
             </if>
-            <if test="house_num != null and house_num != ''">
-                and house_num = #{house_num}
+            <if test="house.house_num != null and house.house_num != ''">
+                and house_num = #{house.house_num}
             </if>
-            <if test="house_people_nums != null and house_people_nums != ''">
-                and house_people_nums = #{house_people_nums}
+            <if test="house.house_people_nums != null">
+                and house_people_nums = #{house.house_people_nums}
             </if>
-            <if test="house_state != null and house_state != ''">
-                and house_state = #{house_state}
+            <if test="house.house_state != null">
+                and house_state = #{house.house_state}
             </if>
         </where>
     </select>
