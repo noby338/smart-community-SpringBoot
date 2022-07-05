@@ -22,8 +22,5 @@ public class RbacManagerController {
      */
 //    @Resource
     private RbacManagerService rbacManagerService;
-
-
-
 }
 

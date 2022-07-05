@@ -1,0 +1,4 @@
+### 测试 test controller
+GET http://localhost:8080/getName/100
+Content-Type: application/json
+x-requested-with: XMLHttpRequest
