@@ -16,12 +16,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class HouseHold {
-    private int id;
+    private Integer id;
     private String name;
-    private int age;
+    private Integer age;
     private boolean gender;
     private String telephone;
-    private int house_id;
+    private Integer house_id;
     private boolean is_owner;
-    private int state;
+    private Integer state;
 }

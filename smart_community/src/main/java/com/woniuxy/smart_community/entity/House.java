@@ -16,11 +16,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class House {
-    private int id;
-    private int building;
-    private int unit;
-    private int floor;
+    private Integer id;
+    private Integer building;
+    private Integer unit;
+    private Integer floor;
     private String house_num;
-    private int house_people_nums;
-    private int house_state;
+    private Integer house_people_nums;
+    private Integer house_state;
 }
