@@ -1,12 +1,8 @@
 package com.woniuxy.smart_community.controller;
 
-import com.woniuxy.smart_community.entity.RbacManager;
 import com.woniuxy.smart_community.service.RbacManagerService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * (RbacManager)表控制层
