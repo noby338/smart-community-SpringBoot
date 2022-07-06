@@ -9,6 +9,9 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: root
+  mvc:
+    servlet:
+      load-on-startup: 1
 
 # Mybatis配置
 mybatis:
@@ -27,5 +30,3 @@ logging:
 #  reasonable: true
 #  support-methods-arguments: true
 #  params: count=countSql
-
-

@@ -24,9 +24,9 @@ public class HouseDaoTest {
             house.setBuilding(i%2);
             house.setUnit(i%3);
             house.setFloor(i%24);
-            house.setHouse_num("i+123");
-            house.setHouse_people_nums(i%8);
-            house.setHouse_state(i%2);
+            house.setHouseNum("i+123");
+            house.setHousePeopleNums(i%8);
+            house.setHouseState(i%2);
             houseDao.insertHouse(house);
         }
     }
@@ -46,9 +46,9 @@ public class HouseDaoTest {
             house.setBuilding(i%2);
             house.setUnit(i%2);
             house.setFloor(i%2);
-            house.setHouse_num("12131415");
-            house.setHouse_people_nums(i%2);
-            house.setHouse_state(i%2);
+            house.setHouseNum("12131415");
+            house.setHousePeopleNums(i%2);
+            house.setHouseState(i%2);
             houseDao.updateHouse(house);
         }
     }

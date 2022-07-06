@@ -5,9 +5,9 @@ import com.woniuxy.smart_community.service.HouseService;
 import com.woniuxy.smart_community.service.impl.HouseServiceImpl;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import java.util.List;
  * @ClassName -> HouseController
  * @Version 1.0
  **/
-@Service
+@RequestMapping("/house")
 public class HouseController {
 
     @Autowired

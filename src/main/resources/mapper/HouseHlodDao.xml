@@ -38,7 +38,7 @@
     <!--新增房间数据-->
     <insert id="insert"   >
         insert into household(id, name, age, gender, telephone, house_id, is_owner, state)
-        values (#{houseHold.id}, #{houseHold.name}, #{houseHold.age}, #{houseHold.gender}, #{houseHold.telephone}, #{houseHold.house_id}, #{houseHold.is_owner}, #{houseHold.state})
+        values (#{houseHold.id}, #{houseHold.name}, #{houseHold.age}, #{houseHold.gender}, #{houseHold.telephone}, #{houseHold.houseId}, #{houseHold.isOwner}, #{houseHold.state})
     </insert>
 
 
@@ -62,10 +62,10 @@
                     telephone = #{houseHold.telephone},
                 </if>
                 <if test="houseHold.house_id != null ">
-                    house_id = #{houseHold.house_id},
+                    house_id = #{houseHold.houseId},
                 </if>
                 <if test="houseHold.is_owner != null and houseHold.is_owner != '' ">
-                    is_owner = #{houseHold.is_owner},
+                    is_owner = #{houseHold.isOwner},
                 </if>
                 <if test="houseHold.state != null ">
                     state = #{houseHold.state}
@@ -76,7 +76,7 @@
 
     <!--通过主键删除房间信息数据-->
     <delete id="deleteById">
-        delete from household where id = #{houseHold.id}
+        delete from household where id = #{houseHold.houseId}
     </delete>
 
     <!--通过主键删除房间信息数据-->
@@ -105,10 +105,10 @@
                 and telephone = #{houseHold.telephone}
             </if>
             <if test="houseHold.house_id != null ">
-                and house_id = #{houseHold.house_id}
+                and house_id = #{houseHold.houseId}
             </if>
             <if test="houseHold.is_owner != null and houseHold.is_owner != '' ">
-                and is_owner = #{houseHold.is_owner}
+                and is_owner = #{houseHold.isOwner}
             </if>
             <if test="houseHold.state != null ">
                 and state = #{houseHold.state}
