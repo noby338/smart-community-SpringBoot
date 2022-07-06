@@ -49,6 +49,14 @@ public interface HouseHoldDao {
     int deleteById(Integer id);
 
     /**
+     * 通过主键删除数据
+     *
+     * @param id 主键
+     * @return 影响行数
+     */
+    int deleteByHouseId(Integer id);
+
+    /**
      * 根据信息统计总行数
      *
      * @param houseHold 查询条件

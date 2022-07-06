@@ -76,6 +76,11 @@
         delete from household where id = #{houseHold.id}
     </delete>
 
+    <!--通过主键删除房间信息数据-->
+    <delete id="deleteByHouseId">
+        delete from household where house_id = #{id}
+    </delete>
+
     <!--根据人口信息统计总行数-->
     <select id="count" resultType="integer">
         select count(*)
