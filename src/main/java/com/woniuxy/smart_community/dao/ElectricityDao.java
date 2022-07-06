@@ -14,4 +14,5 @@ public interface ElectricityDao {
      * @return Electricity 电费实体类
      */
     Electricity selectByElectricity(int electricityId);
+    void insert(Electricity electricity);
 }

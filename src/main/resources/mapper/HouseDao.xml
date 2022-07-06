@@ -3,20 +3,20 @@
 <mapper namespace="com.woniuxy.smart_community.dao.HouseDao">
 
     <!--配置数据库别名-->
-    <resultMap type="com.woniuxy.smart_community.entity.House" id="HouseMap">
-        <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="building" column="building" jdbcType="INTEGER"/>
-        <result property="unit" column="unit" jdbcType="INTEGER"/>
-        <result property="floor" column="floor" jdbcType="INTEGER"/>
-        <result property="houseNum" column="house_num" jdbcType="VARCHAR"/>
-        <result property="housePeopleNums" column="house_people_nums" jdbcType="INTEGER"/>
-        <result property="houseState" column="house_state" jdbcType="INTEGER"/>
-    </resultMap>
+<!--    <resultMap type="com.woniuxy.smart_community.entity.House" id="HouseMap">-->
+<!--        <result property="id" column="id" jdbcType="INTEGER"/>-->
+<!--        <result property="building" column="building" jdbcType="INTEGER"/>-->
+<!--        <result property="unit" column="unit" jdbcType="INTEGER"/>-->
+<!--        <result property="floor" column="floor" jdbcType="INTEGER"/>-->
+<!--        <result property="houseNum" column="house_num" jdbcType="VARCHAR"/>-->
+<!--        <result property="housePeopleNums" column="house_people_nums" jdbcType="INTEGER"/>-->
+<!--        <result property="houseState" column="house_state" jdbcType="INTEGER"/>-->
+<!--    </resultMap>-->
 
     <!--新增房间数据-->
     <insert id="insertHouse">
         insert into house(id, building, unit, floor, house_num, house_people_nums, house_state)
-        values (#{house.id}, #{house.building}, #{house.unit}, #{house.floor}, #{house.houseNum}, #{house.housePeopleNums}, #{house.house_state})
+        values (#{house.id}, #{house.building}, #{house.unit}, #{house.floor}, #{house.houseNum}, #{house.housePeopleNums}, #{house.houseState})
     </insert>
 
     <!--通过主键删除房间信息数据-->
@@ -51,7 +51,8 @@
     </update>
 
     <!--通过房间信息查询相关数据-->
-    <select id="selectHouseByHouseInfo" resultMap="HouseMap">
+    <!--<select id="selectHouseByHouseInfo" resultMap="HouseMap">-->
+    <select id="selectHouseByHouseInfo" resultType="house">
         select * from house
         <where>
             <if test="house.id != null">
