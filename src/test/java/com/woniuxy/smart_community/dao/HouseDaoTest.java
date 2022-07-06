@@ -27,7 +27,7 @@ public class HouseDaoTest {
             house.setHouse_num("i+123");
             house.setHouse_people_nums(i%8);
             house.setHouse_state(i%2);
-            houseDao.insert(house);
+            houseDao.insertHouse(house);
         }
     }
 
@@ -49,19 +49,19 @@ public class HouseDaoTest {
             house.setHouse_num("12131415");
             house.setHouse_people_nums(i%2);
             house.setHouse_state(i%2);
-            houseDao.update(house);
+            houseDao.updateHouse(house);
         }
     }
 
     @Test
     public void deleteByIdTest(){
-        houseDao.deleteById(1);
+        houseDao.deleteHouseById(1);
     }
 
     @Test
     public void count(){
         House house = new House();
-//        house.setFloor();
-        System.out.println(houseDao.count(house));
+        house.setFloor(2);
+        System.out.println(houseDao.countHouses(house));
     }
 }

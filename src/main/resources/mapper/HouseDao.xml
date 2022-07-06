@@ -3,18 +3,18 @@
 <mapper namespace="com.woniuxy.smart_community.dao.HouseDao">
 
     <!--新增房间数据-->
-    <insert id="insert">
+    <insert id="insertHouse">
         insert into house(id, building, unit, floor, house_num, house_people_nums, house_state)
         values (#{house.id}, #{house.building}, #{house.unit}, #{house.floor}, #{house.house_num}, #{house.house_people_nums}, #{house.house_state})
     </insert>
 
     <!--通过主键删除房间信息数据-->
-    <delete id="deleteById">
+    <delete id="deleteHouseById">
         delete from house where id = #{id}
     </delete>
 
     <!--通过主键修改房间信息数据-->
-    <update id="update">
+    <update id="updateHouse">
         update house
         <set>
             <if test="house.building != null and house.building != ''">
@@ -68,7 +68,7 @@
     </select>
 
     <!--根据房间信息统计总行数-->
-    <select id="count" resultType="integer">
+    <select id="countHouses" resultType="integer">
         select count(*)
         from house
         <where>
