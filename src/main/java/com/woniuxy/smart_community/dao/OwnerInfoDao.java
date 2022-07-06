@@ -9,10 +9,10 @@ import java.util.List;
 @Mapper
 public interface OwnerInfoDao {
 //  查询区
-    OwnersInfo selectOwnameByOwid(int owid);
+    OwnersInfo selectOwnameByOwid(int owId);
 
-    OwnersInfo selectOwnerByOwnameAndPhone(@Param("owname") String owname,
-                                           @Param("owphone") String owphone);
+    OwnersInfo selectOwnerByOwnameAndPhone(@Param("owName") String owname,
+                                           @Param("owPhone") String owphone);
 
     OwnersInfo selectOwnerByOwnerinfo(@Param("ownersInfo") OwnersInfo ownersInfo);
 
@@ -27,6 +27,6 @@ public interface OwnerInfoDao {
     void updateOwnerByOwnerinfo(@Param("ownersInfo") OwnersInfo ownersInfo);
 
 //    delete  管理员使用
-    void deleteOwnerByOwid(int owid);
+    void deleteOwnerByOwid(int owId);
 
 }

@@ -4,20 +4,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//停车场车辆信息
+/**
+ * @Author: LittleCode
+ * @Date:   2022/7/6
+ * @Descrition: 停车场车辆信息
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class CarInfo {
-    private Integer carid;
-    private String carno;   //车牌号 8位
-    private String carjpg;  //照片 路径
+    private Integer carId;
+    private String carNo;   //车牌号 8位
+    private String carJpg;  //照片 路径
 
-    private int parkid;     //外键 关联车位信息
+    private Integer parkId;     //外键 关联车位信息
     private ParkingInfo parkingInfo;
 
-    private int owid;       //外键 关联车主信息
+    private Integer owId;       //外键 关联车主信息
     private OwnersInfo ownersInfo;
 
-    private int state;      //车辆状态  0：失效  1：有效
+    private Integer carState;      //车辆状态  0：失效  1：有效
 }
