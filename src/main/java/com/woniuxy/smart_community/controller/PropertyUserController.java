@@ -23,10 +23,10 @@ public class PropertyUserController {
      */
     @Autowired
     private PropertyUserService propertyUserService;
-@RequestMapping("/findAll")
-    public ResponseEntity findAll() {
+@RequestMapping("/findAll/{currentPage}/{pageSize}")
+    public ResponseEntity findAll(@PathVariable("currentPage") int currentPage,@PathVariable("pageSize") int pageSize) {
 
-       return propertyUserService.findAll();
+       return propertyUserService.findAll(currentPage, pageSize);
     }
 
 
