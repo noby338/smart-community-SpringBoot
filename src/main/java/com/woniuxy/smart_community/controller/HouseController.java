@@ -1,13 +1,12 @@
 package com.woniuxy.smart_community.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.woniuxy.smart_community.entity.House;
 import com.woniuxy.smart_community.service.HouseService;
 import com.woniuxy.smart_community.service.impl.HouseServiceImpl;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +18,9 @@ import java.util.List;
  * @ClassName -> HouseController
  * @Version 1.0
  **/
+@CrossOrigin
+@ResponseBody
+@RestController
 @RequestMapping("/house")
 public class HouseController {
 
