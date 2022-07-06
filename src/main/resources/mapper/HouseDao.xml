@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.woniuxy.smart_community.dao.HouseDao">
 
+    <!--配置数据库别名-->
+    <resultMap type="com.woniuxy.smart_community.entity.House" id="HouseMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="building" column="building" jdbcType="INTEGER"/>
+        <result property="unit" column="unit" jdbcType="INTEGER"/>
+        <result property="floor" column="floor" jdbcType="INTEGER"/>
+        <result property="houseNum" column="house_num" jdbcType="VARCHAR"/>
+        <result property="housePeopleNums" column="house_people_nums" jdbcType="INTEGER"/>
+        <result property="houseState" column="house_state" jdbcType="INTEGER"/>
+    </resultMap>
+
     <!--新增房间数据-->
     <insert id="insertHouse">
         insert into house(id, building, unit, floor, house_num, house_people_nums, house_state)
@@ -40,7 +51,7 @@
     </update>
 
     <!--通过房间信息查询相关数据-->
-    <select id="selectHouseByHouseInfo" resultType="com.woniuxy.smart_community.entity.House">
+    <select id="selectHouseByHouseInfo" resultMap="HouseMap">
         select * from house
         <where>
             <if test="house.id != null">

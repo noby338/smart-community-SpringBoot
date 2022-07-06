@@ -43,7 +43,7 @@ public class HouseServiceTest {
     public void selectHouseByHouseInfoTest(){
         House house = new House();
         house.setFloor(1);
-        List<House> houses = houseService.selectHouseByHouseInfo(house,1,5);
+        List<House> houses = houseService.selectHouseByHouseInfo(house,1,100);
         System.out.println(houses);
     }
 

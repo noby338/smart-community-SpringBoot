@@ -2,8 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.woniuxy.smart_community.dao.HouseHoldDao">
 
+    <!--配置数据库属性别名-->
+    <resultMap type="com.woniuxy.smart_community.entity.House" id="HouseHoidMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="age" column="age" jdbcType="INTEGER"/>
+        <result property="gender" column="gender" jdbcType="BOOLEAN"/>
+        <result property="telephone" column="telephone" jdbcType="VARCHAR"/>
+        <result property="houseId" column="house_id" jdbcType="INTEGER"/>
+        <result property="isOwner" column="is_owner" jdbcType="BOOLEAN"/>
+        <result property="state" column="state" jdbcType="INTEGER"/>
+    </resultMap>
+
     <!--通过房间信息查询相关数据-->
-    <select id="selectHouseHoldByHouseHoldInfo" resultType="com.woniuxy.smart_community.entity.HouseHold">
+    <select id="selectHouseHoldByHouseHoldInfo" resultMap="HouseHoidMap">
         select
           *
         from household
@@ -23,11 +35,11 @@
             <if test="houseHold.telephone != null and houseHold.telephone != ''">
                 and telephone = #{houseHold.telephone}
             </if>
-            <if test="houseHold.house_id != null ">
-                and house_id = #{houseHold.house_id}
+            <if test="houseHold.houseId != null ">
+                and house_id = #{houseHold.houseId}
             </if>
-            <if test="houseHold.is_owner != null and houseHold.is_owner != '' ">
-                and is_owner = #{houseHold.is_owner}
+            <if test="houseHold.isOwner != null and houseHold.isOwner != '' ">
+                and is_owner = #{houseHold.isOwner}
             </if>
             <if test="houseHold.state != null ">
                 and state = #{houseHold.state}
@@ -61,10 +73,10 @@
                 <if test="houseHold.telephone != null and houseHold.telephone != ''">
                     telephone = #{houseHold.telephone},
                 </if>
-                <if test="houseHold.house_id != null ">
+                <if test="houseHold.houseId != null ">
                     house_id = #{houseHold.houseId},
                 </if>
-                <if test="houseHold.is_owner != null and houseHold.is_owner != '' ">
+                <if test="houseHold.isOwner != null and houseHold.isOwner != '' ">
                     is_owner = #{houseHold.isOwner},
                 </if>
                 <if test="houseHold.state != null ">
@@ -104,10 +116,10 @@
             <if test="houseHold.telephone != null and houseHold.telephone != ''">
                 and telephone = #{houseHold.telephone}
             </if>
-            <if test="houseHold.house_id != null ">
+            <if test="houseHold.houseId != null ">
                 and house_id = #{houseHold.houseId}
             </if>
-            <if test="houseHold.is_owner != null and houseHold.is_owner != '' ">
+            <if test="houseHold.isOwner != null and houseHold.isOwner != '' ">
                 and is_owner = #{houseHold.isOwner}
             </if>
             <if test="houseHold.state != null ">
