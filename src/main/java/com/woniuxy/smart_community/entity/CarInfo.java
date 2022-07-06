@@ -3,11 +3,13 @@ package com.woniuxy.smart_community.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.ibatis.type.Alias;
 
 //停车场车辆信息
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Alias("CarInfo")
 public class CarInfo {
     private Integer carid;
     private String carno;   //车牌号 8位
