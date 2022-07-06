@@ -35,6 +35,7 @@ public class HouseHoldDaoTset {
     @Test
     public void selectHouseHoldByHouseHoldInfoTest(){
         HouseHold houseHold = new HouseHold();
-        houseHold.setAge(15);
+        houseHold.setAge(1);
+        System.out.println(houseHoldDao.selectHouseHoldByHouseHoldInfo(houseHold));
     }
 }
