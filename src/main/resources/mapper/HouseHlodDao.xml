@@ -8,29 +8,29 @@
           *
         from household
         <where>
-            <if test="id != null">
-                and id = #{id}
+            <if test="houseHold.id != null">
+                and id = #{houseHold.id}
             </if>
-            <if test="name != null and name != ''">
-                and name = #{name}
+            <if test="houseHold.name != null and houseHold.name != ''">
+                and name = #{houseHold.name}
             </if>
-            <if test="age != null ">
-                and age = #{age}
+            <if test="houseHold.age != null">
+                and age = #{houseHold.age}
             </if>
-            <if test="gender != null ">
-                and gender = #{gender}
+            <if test="houseHold.gender != null and houseHold.gender != '' ">
+                and gender = #{houseHold.gender}
             </if>
-            <if test="telephone != null and telephone != ''">
-                and telephone = #{telephone}
+            <if test="houseHold.telephone != null and houseHold.telephone != ''">
+                and telephone = #{houseHold.telephone}
             </if>
-            <if test="house_id != null ">
-                and house_id = #{house_id}
+            <if test="houseHold.house_id != null ">
+                and house_id = #{houseHold.house_id}
             </if>
-            <if test="is_owner != null and is_owner != ''">
-                and is_owner = #{is_owner}
+            <if test="houseHold.is_owner != null and houseHold.is_owner != '' ">
+                and is_owner = #{houseHold.is_owner}
             </if>
-            <if test="state != null and state != ''">
-                and state = #{state}
+            <if test="houseHold.state != null ">
+                and state = #{houseHold.state}
             </if>
         </where>
     </select>
@@ -38,7 +38,7 @@
     <!--新增房间数据-->
     <insert id="insert"   >
         insert into household(id, name, age, gender, telephone, house_id, is_owner, state)
-        values (#{id}, #{name}, #{age}, #{gender}, #{telephone}, #{house_id}, #{is_owner}, #{state})
+        values (#{houseHold.id}, #{houseHold.name}, #{houseHold.age}, #{houseHold.gender}, #{houseHold.telephone}, #{houseHold.house_id}, #{houseHold.is_owner}, #{houseHold.state})
     </insert>
 
 
@@ -47,63 +47,68 @@
         update household
             <set>
                 <if test="name != null and name != ''">
-                    and name = #{name}
+                    and name = #{houseHold.name}
                 </if>
                 <if test="age != null">
-                    and age = #{age}
+                    and age = #{houseHold.age}
                 </if>
-                <if test="gender != null and gender != ''">
-                    and gender = #{gender}
+                <if test="gender != null ">
+                    and gender = #{houseHold.gender}
                 </if>
                 <if test="telephone != null and telephone != ''">
-                    and telephone = #{telephone}
+                    and telephone = #{houseHold.telephone}
                 </if>
                 <if test="house_id != null">
-                    and house_id = #{house_id}
+                    and house_id = #{houseHold.house_id}
                 </if>
-                <if test="is_owner != null and is_owner != ''">
-                    and is_owner = #{is_owner}
+                <if test="is_owner != null ">
+                    and is_owner = #{houseHold.is_owner}
                 </if>
-                <if test="state != null and state != ''">
-                    and state = #{state}
+                <if test="state != null ">
+                    and state = #{houseHold.state}
                 </if>
             </set>
-        where id = #{id}
+        where id = #{houseHold.id}
     </update>
 
     <!--通过主键删除房间信息数据-->
     <delete id="deleteById">
-        delete from household where id = #{id}
+        delete from household where id = #{houseHold.id}
+    </delete>
+
+    <!--通过主键删除房间信息数据-->
+    <delete id="deleteByHouseId">
+        delete from household where house_id = #{id}
     </delete>
 
     <!--根据人口信息统计总行数-->
     <select id="count" resultType="integer">
-        select count(1)
+        select count(*)
         from household
         <where>
             <if test="id != null">
-                and id = #{id}
+                and id = #{houseHold.id}
             </if>
             <if test="name != null and name != ''">
-                and name = #{name}
+                and name = #{houseHold.name}
             </if>
             <if test="age != null ">
-                and age = #{age}
+                and age = #{houseHold.age}
             </if>
             <if test="gender != null ">
-                and gender = #{gender}
+                and gender = #{houseHold.gender}
             </if>
             <if test="telephone != null and telephone != ''">
-                and telephone = #{telephone}
+                and telephone = #{houseHold.telephone}
             </if>
             <if test="house_id != null ">
-                and house_id = #{house_id}
+                and house_id = #{houseHold.house_id}
             </if>
-            <if test="is_owner != null and is_owner != ''">
-                and is_owner = #{is_owner}
+            <if test="is_owner != null ">
+                and is_owner = #{houseHold.is_owner}
             </if>
-            <if test="state != null and state != ''">
-                and state = #{state}
+            <if test="state != null ">
+                and state = #{houseHold.state}
             </if>
         </where>
     </select>

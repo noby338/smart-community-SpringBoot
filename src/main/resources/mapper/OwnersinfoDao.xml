@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- XML约束头:MyBatis的约束文件使用的dtd，规范这个XML文档处理 遵守XML的一般规则以外，要遵守的自定义规则:能够使用哪些标签，使用哪些属性，出现的次数，标签的先后属性 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper是映射文件的根节点 namespace属性：名称空间，命名空间.就是一个名字 现在可以任意，以后使用接口的全限定名 -->
+<mapper namespace="com.woniuxy.smart_community.dao.OwnerInfoDao">
+<!--查询-->
+    <select id="selectOwnerByOwnerinfo" resultType="ownersInfo">
+        select * from owners_info
+        <include refid="selectOwnersinfo"/>
+    </select>
+
+    <select id="selectOwnameByOwid" resultType="ownersInfo">
+        select * from owners_info where owid=#{owid}
+    </select>
+
+    <select id="selectOwnerByOwnameAndPhone" resultType="ownersInfo">
+        select * from owners_info
+        <where>
+            <if test="owname!=null and owname!=''">
+                and owname like '%' #{owname} '%'
+            </if>
+            <if test="owphone!=null and owname!=''">
+                and owphone like '%' #{owphone} '%'
+            </if>
+        </where>
+
+    </select>
+
+
+
+    <select id="selectAll" resultType="ownersInfo">
+        select * from owners_info
+    </select>
+
+
+
+    
+<!--添加-->
+    <insert id="insertOwnerinfo">
+        insert into owners_info values(null,#{ownersInfo.owname},#{ownersInfo.owphone},#{ownersInfo.id},#{ownersInfo.owtype})
+    </insert>
+
+
+<!--修改-->
+    <update id="updateOwnerByOwnerinfo">
+        update owners_info set <include refid="updateOwnersinfo"/> where owid=#{ownersInfo.owid}
+    </update>
+
+
+<!--删除-->
+    <delete id="deleteOwnerByOwid">
+        delete owners_info where owid=#{owid}
+    </delete>
+
+
+<!--共用功能-->
+    <!--对象查询-->
+    <sql id="selectOwnersinfo">
+        <where>
+            <if test="ownersInfo.owid!=null">
+                and owid=#{ownersInfo.owid}
+            </if>
+            <if test="ownersInfo.owname!=null and ownersInfo.owname!=''">
+                and owname like '%' #{ownersInfo.owname} '%'
+            </if>
+            <if test="ownersInfo.owphone!=null and ownersInfo.owphone!=''">
+                and owphone like '%' #{ownersInfo.owphone}
+            </if>
+            <if test="ownersInfo.owtype!=null">
+                and owtype like '%' #{ownersInfo.owtype} '%'
+            </if>
+            <if test="ownersInfo.id!=null and ownersInfo.id!=''">
+                and id=#{ownersInfo.id}
+            </if>
+        </where>
+    </sql>
+
+    <!--对象属性修改-->
+    <sql id="updateOwnersinfo">
+            <if test="ownersInfo.owname!=null and ownersInfo.owname!=''">
+                owname=#{ownersInfo.owname}
+            </if>
+            <if test="ownersInfo.owphone!=null and ownersInfo.owphone!=''">
+                ,owphone=#{ownersInfo.owphone}
+            </if>
+            <if test="ownersInfo.owtype!=null and ownersInfo.owtype!=''">
+                ,owtype=#{ownersInfo.owtype},
+            </if>
+            <if test="ownersInfo.id!=null and ownersInfo.id!=''">
+                ,id=#{ownersInfo.id}
+            </if>
+
+    </sql>
+
+</mapper>

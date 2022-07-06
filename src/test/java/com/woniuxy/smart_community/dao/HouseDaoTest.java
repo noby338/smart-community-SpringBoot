@@ -19,29 +19,49 @@ public class HouseDaoTest {
     @Test
     public void insertHouse(){
         House house = new House();
-        for(int i = 0 ;i<100;i++){
+        for(int i = 0 ;i<50;i++){
             house.setId(i);
-            house.setBuilding(i/2);
-            house.setUnit(i/3);
-            house.setFloor(i/6);
-            house.setHouse_num("123456789");
-            house.setHouse_people_nums(i/8);
+            house.setBuilding(i%2);
+            house.setUnit(i%3);
+            house.setFloor(i%24);
+            house.setHouse_num("i+123");
+            house.setHouse_people_nums(i%8);
             house.setHouse_state(i%2);
-            int nums = houseDao.insert(house);
+            houseDao.insert(house);
         }
     }
+
+    @Test
+    public  void  selectHouseByHouseInfoTest(){
+        House house = new House();
+        house.setFloor(1);
+        System.out.println(houseDao.selectHouseByHouseInfo(house));
+    }
+
     @Test
     public void updateHouse(){
         House house = new House();
         for(int i = 0 ;i<100;i++){
             house.setId(i);
-            house.setBuilding(i%4);
-            house.setUnit(i%3);
-            house.setFloor(i%6);
-            house.setHouse_num("");
-            house.setHouse_people_nums(i/8);
+            house.setBuilding(i%2);
+            house.setUnit(i%2);
+            house.setFloor(i%2);
+            house.setHouse_num("12131415");
+            house.setHouse_people_nums(i%2);
             house.setHouse_state(i%2);
-            int nums = houseDao.update(house);
+            houseDao.update(house);
         }
+    }
+
+    @Test
+    public void deleteByIdTest(){
+        houseDao.deleteById(1);
+    }
+
+    @Test
+    public void count(){
+        House house = new House();
+//        house.setFloor();
+        System.out.println(houseDao.count(house));
     }
 }

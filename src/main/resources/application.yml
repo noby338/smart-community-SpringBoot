@@ -18,7 +18,7 @@ mybatis:
 # 日志文件打印级别
 logging:
   level:
-    com.woniuxy.springbootshiro.dao: debug
+    com.woniuxy.smart_community.dao: debug
 
 #PageHelper分页插件配置
 pagehelper:
@@ -26,4 +26,5 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
+
 
