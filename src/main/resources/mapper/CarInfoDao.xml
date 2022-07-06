@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- XML约束头:MyBatis的约束文件使用的dtd，规范这个XML文档处理 遵守XML的一般规则以外，要遵守的自定义规则:能够使用哪些标签，使用哪些属性，出现的次数，标签的先后属性 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper是映射文件的根节点 namespace属性：名称空间，命名空间.就是一个名字 现在可以任意，以后使用接口的全限定名 -->
+<mapper namespace="com.woniuxy.smart_community.dao.CarInfoDao">
+<!--查询-->
+    <select id="selectAllCarInfos" resultType="carInfo">
+        select * from car_info
+    </select>
+
+    <select id="selectCarInfoByCarid" resultType="carInfo">
+        select * from car_info where carid=#{carid}
+    </select>
+
+    <select id="selectCarInfoByCarno" resultType="carInfo">
+        select * from car_info where carno like '%' #{carno} '%'
+    </select>
+
+
+
+    
+<!--添加-->
+    <insert id="insertCarInfo">
+        insert into car_info values(null,
+        #{carInfo.carno},#{carInfo.carjpg},#{carInfo.parkid},#{carInfo.owid},1)
+    </insert>
+
+
+<!--修改-->
+    <update id="updateCarInfoState">
+        update car_info set carstate=#{state} where carid=#{carid}
+    </update>
+
+
+<!--删除-->
+    <delete id="deleteCarInfoByCarid">
+        delete car_info where carid=#{carid}
+    </delete>
+
+
+<!--共用功能-->
+
+
+
+</mapper>

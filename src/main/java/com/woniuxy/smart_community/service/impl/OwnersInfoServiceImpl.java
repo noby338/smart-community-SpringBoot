@@ -9,7 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+/**
+ * @Author: LittleCode
+ * @Date:   2022/7/6  
+ * @Descrition:
+ */
 @Slf4j
 @Service
 public class OwnersInfoServiceImpl implements OwnersInfoService {
@@ -23,6 +27,7 @@ public class OwnersInfoServiceImpl implements OwnersInfoService {
         log.debug("调用getOwnameByOwid方法，根据用户owid查询对象");
         return ownersInfo;
     }
+
 
     @Override
     public OwnersInfo getOwnerByOwnameAndOwphone(String owname, String owphone) {

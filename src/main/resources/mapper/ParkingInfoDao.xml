@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- XML约束头:MyBatis的约束文件使用的dtd，规范这个XML文档处理 遵守XML的一般规则以外，要遵守的自定义规则:能够使用哪些标签，使用哪些属性，出现的次数，标签的先后属性 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper是映射文件的根节点 namespace属性：名称空间，命名空间.就是一个名字 现在可以任意，以后使用接口的全限定名 -->
+<mapper namespace="com.woniuxy.smart_community.dao.ParkingInfoDao">
+<!--查询-->
+    <select id="selectAllParkingInfo" resultType="parkingInfo">
+        select * from parking_info
+    </select>
+
+    <select id="selectParkingInfoByParkingInfo" resultType="parkingInfo">
+        select * from parking_info
+        <include refid="selectParkingInfo"/>
+    </select>
+
+    <select id="selectParkingInfoByParkid" resultType="parkingInfo">
+        select * from parking_info where parkid=#{parkid}
+    </select>
+
+
+<!--添加-->
+    <insert id="insertParkingInfo">
+        insert into parking_info values(null,#{parkingInfo.parkno},
+        #{parkingInfo.parklotid},#{parkingInfo.parkarea},#{parkingInfo.parkingType},#{parkingInfo.owid})
+    </insert>
+
+
+<!--修改-->
+    <!--修改所有-->
+    <update id="updateParkingInfo">
+        update parking_info set
+        <include refid="updateParkingInfo"/>
+        where parkid=#{parkingInfo.parkid}
+    </update>
+<!--修改基本信息-->
+    <update id="updateParkingInfoByType">
+        update parking_info set
+        <if test="ptypeid!=null">
+            ptypeid=#{ptypeid}
+        </if>
+        <if test="owid!=null">
+            ,owid=#{owid}
+        </if>
+        where parkid=#{parkid}
+    </update>
+
+
+
+<!--删除-->
+
+
+
+<!--共用功能-->
+    <sql id="selectParkingInfo">
+        <where>
+            <if test="parkingInfo.parkid!=null">
+                and parkid=#{parkingInfo.parkid}
+            </if>
+            <if test="parkingInfo.parkno!=null and parkingInfo.parkno!=''">
+                and parkno like '%' #{parkingInfo.parkno}
+            </if>
+            <if test="parkingInfo.parklotid!=null">
+                and parklotid=#{paringInfo.parklotid}
+            </if>
+            <if test="parkingInfo.parkarea!=null">
+                and parkarea=#{parkingInfo.parkarea}
+            </if>
+            <if test="parkingInfo.ptypeid!=null">
+                and ptypeid=#{parkingInfo.ptypeid}
+            </if>
+            <if test="parkingInfo.owid!=null">
+                and owid=#{parkingInfo.owid}
+            </if>
+        </where>
+    </sql>
+
+    <!--修改信息判断-->
+    <sql id="updateParkingInfo">
+        <if test="parkingInfo.parkno!=null and parkingInfo.parkno!=''">
+            parkno=#{parkingInfo.parkno}
+        </if>
+        <if test="parkingInfo.parklotid!=null">
+            ,parklotid=#{paringInfo.parklotid}
+        </if>
+        <if test="parkingInfo.parkarea!=null">
+            ,parkarea=#{parkingInfo.parkarea}
+        </if>
+        <if test="parkingInfo.ptypeid!=null">
+            ,ptypeid=#{parkingInfo.ptypeid}
+        </if>
+        <if test="parkingInfo.owid!=null">
+            ,owid=#{parkingInfo.owid}
+        </if>
+    </sql>
+
+
+
+</mapper>
