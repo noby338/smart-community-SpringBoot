@@ -12,8 +12,14 @@ import java.util.List;
  * @since 2022-07-06 10:20:02
  */
 public interface PropertyUserDao {
+/*/*
+ * Description : TODO  <br/>
+ * ChangeLog : 1. 创建 (2022/7/6 11:22 [58369]);
+ ** @param null
+ * *  @return 所有账号
+*/
 
 
-    List findAll();
+    List<PropertyUser> findAll();
 }
 

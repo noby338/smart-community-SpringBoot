@@ -3,7 +3,7 @@
 <mapper namespace="com.woniuxy.smart_community.dao.HouseHoldDao">
 
     <!--通过房间信息查询相关数据-->
-    <select id="selectHouseHoldByHouseHoldInfo" resultType="houseHold">
+    <select id="selectHouseHoldByHouseHoldInfo" resultType="com.woniuxy.smart_community.entity.HouseHold">
         select
           *
         from household

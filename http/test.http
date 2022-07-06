@@ -2,3 +2,7 @@
 GET http://localhost:8080/getName/100
 Content-Type: application/json
 x-requested-with: XMLHttpRequest
+###
+GET http://localhost:8080/user/findAll
+Content-Type: application/json
+x-requested-with: XMLHttpRequest
