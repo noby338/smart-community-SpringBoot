@@ -5,6 +5,8 @@ package com.woniuxy.smart_community.service.impl;/**
  * @version 1.0
  */
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.woniuxy.smart_community.dao.PropertyUserDao;
 import com.woniuxy.smart_community.entity.PropertyUser;
 import com.woniuxy.smart_community.entity.ResponseEntity;
@@ -24,9 +26,15 @@ public class PropertyUserServiceImpl implements PropertyUserService {
     @Autowired(required = false)
     PropertyUserDao propertyUserDao;
     @Override
-    public ResponseEntity findAll() {
-       return new ResponseEntity(200,"查询成功", propertyUserDao.findAll());
-
+    public ResponseEntity findAll(int currentPage, int pageSize) {
+        PageHelper.startPage(currentPage, pageSize);
+        List<PropertyUser> all = propertyUserDao.findAll();
+        PageInfo<PropertyUser> of=PageInfo.of(all);
+        if(all.size()>0) {
+            return new ResponseEntity(200, "查询成功", of);
+        }else {
+            return new ResponseEntity(200, "查询失败", null);
+        }
     }
 
     @Override

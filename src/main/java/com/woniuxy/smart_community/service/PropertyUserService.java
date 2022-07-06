@@ -2,6 +2,7 @@ package com.woniuxy.smart_community.service;
 
 import com.woniuxy.smart_community.entity.PropertyUser;
 import com.woniuxy.smart_community.entity.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public interface PropertyUserService {
 
-    ResponseEntity findAll();
+    ResponseEntity findAll(int currentPage,int pageSize);
 
     /**
      * 通过主键删除数据
