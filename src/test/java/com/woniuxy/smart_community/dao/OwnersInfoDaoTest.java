@@ -35,7 +35,7 @@ public class OwnersInfoDaoTest {
     //添加
     @Test
     void testinsert01(){
-        OwnersInfo OwnersInfo=new OwnersInfo(null, "xh","12332988976","小区业主",4);
+        OwnersInfo OwnersInfo=new OwnersInfo(null, "xh","12332988976","小区业主",null);
         ownerInfoDao.insertOwnerinfo(OwnersInfo);
     }
 

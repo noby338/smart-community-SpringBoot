@@ -22,7 +22,8 @@ logging:
 
 #PageHelper分页插件配置
 pagehelper:
-  dialect: mysql
+  #dialect: mysql
+  dialect: com.github.pagehelper.dialect.helper.MySqlDialect
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
