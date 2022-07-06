@@ -50,6 +50,7 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.1.2</version>
         </dependency>
+
         <!--mysql连接默认版本是8.X  我们使用的是数据库版本是5.X-->
         <dependency>
             <groupId>mysql</groupId>
@@ -57,10 +58,11 @@
             <version>5.1.35</version>
         </dependency>
 
+        <!--分页插件-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper</artifactId>
-            <version>5.1.11</version>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.4.1</version>
         </dependency>
 
     </dependencies>

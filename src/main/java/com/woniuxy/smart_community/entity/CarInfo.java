@@ -3,6 +3,7 @@ package com.woniuxy.smart_community.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.ibatis.type.Alias;
 
 /**
  * @Author: LittleCode
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Alias("CarInfo")
 public class CarInfo {
     private Integer carId;
     private String carNo;   //车牌号 8位

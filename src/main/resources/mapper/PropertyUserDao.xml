@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniuxy.smart_community.dao.PropertyUserDao">
+
+    <resultMap type="com.woniuxy.smart_community.entity.PropertyUser" id="PropertyUserMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="loginName" column="login_name" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="age" column="age" jdbcType="INTEGER"/>
+        <result property="gender" column="gender" jdbcType="INTEGER"/>
+        <result property="tellphone" column="tellphone" jdbcType="VARCHAR"/>
+        <result property="state" column="state" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PropertyUserMap">
+        select
+          id, login_name, password, name, age, gender, tellphone, state
+        from property_user
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="findAll" resultMap="PropertyUserMap">
+        select
+          id, login_name, password, name, age, gender, tellphone, state
+        from property_user
+
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from property_user
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="loginName != null and loginName != ''">
+                and login_name = #{loginName}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="age != null">
+                and age = #{age}
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <if test="tellphone != null and tellphone != ''">
+                and tellphone = #{tellphone}
+            </if>
+            <if test="state != null">
+                and state = #{state}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into property_user(login_name, password, name, age, gender, tellphone, state)
+        values (#{loginName}, #{password}, #{name}, #{age}, #{gender}, #{tellphone}, #{state})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into property_user(login_name, password, name, age, gender, tellphone, state)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.loginName}, #{entity.password}, #{entity.name}, #{entity.age}, #{entity.gender}, #{entity.tellphone}, #{entity.state})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into property_user(login_name, password, name, age, gender, tellphone, state)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.loginName}, #{entity.password}, #{entity.name}, #{entity.age}, #{entity.gender}, #{entity.tellphone}, #{entity.state})
+        </foreach>
+        on duplicate key update
+        login_name = values(login_name),
+        password = values(password),
+        name = values(name),
+        age = values(age),
+        gender = values(gender),
+        tellphone = values(tellphone),
+        state = values(state)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update property_user
+        <set>
+            <if test="loginName != null and loginName != ''">
+                login_name = #{loginName},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="age != null">
+                age = #{age},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="tellphone != null and tellphone != ''">
+                tellphone = #{tellphone},
+            </if>
+            <if test="state != null">
+                state = #{state},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from property_user where id = #{id}
+    </delete>
+
+</mapper>
+

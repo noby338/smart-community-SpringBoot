@@ -21,7 +21,7 @@ public class HouseHold {
     private Integer age;
     private boolean gender;
     private String telephone;
-    private Integer house_id;
-    private boolean is_owner;
+    private Integer houseId;
+    private boolean isOwner;
     private Integer state;
 }

@@ -3,18 +3,18 @@
 <mapper namespace="com.woniuxy.smart_community.dao.HouseDao">
 
     <!--新增房间数据-->
-    <insert id="insert">
+    <insert id="insertHouse">
         insert into house(id, building, unit, floor, house_num, house_people_nums, house_state)
-        values (#{house.id}, #{house.building}, #{house.unit}, #{house.floor}, #{house.house_num}, #{house.house_people_nums}, #{house.house_state})
+        values (#{house.id}, #{house.building}, #{house.unit}, #{house.floor}, #{house.houseNum}, #{house.housePeopleNums}, #{house.house_state})
     </insert>
 
     <!--通过主键删除房间信息数据-->
-    <delete id="deleteById">
+    <delete id="deleteHouseById">
         delete from house where id = #{id}
     </delete>
 
     <!--通过主键修改房间信息数据-->
-    <update id="update">
+    <update id="updateHouse">
         update house
         <set>
             <if test="house.building != null and house.building != ''">
@@ -26,14 +26,14 @@
             <if test="house.floor != null and house.floor != ''">
                 floor = #{house.floor},
             </if>
-            <if test="house.house_num != null and #{house.house_num} != ''">
-                house_num = #{house.house_num},
+            <if test="house.houseNum != null and #{house.houseNum} != ''">
+                house_num = #{house.houseNum},
             </if>
-            <if test="house.house_people_nums != null and house.house_people_nums != ''">
-                house_people_nums = #{house.house_people_nums},
+            <if test="house.housePeopleNums != null and house.housePeopleNums != ''">
+                house_people_nums = #{house.housePeopleNums},
             </if>
-            <if test="house.house_state != null and house.house_state != ''">
-                house_state = #{house.house_state}
+            <if test="house.houseState != null and house.houseState != ''">
+                house_state = #{house.houseState}
             </if>
         </set>
         where id = #{house.id}
@@ -55,20 +55,20 @@
             <if test="house.floor != null">
                 and floor = #{house.floor}
             </if>
-            <if test="house.house_num != null and house.house_num != ''">
-                and house_num = #{house.house_num}
+            <if test="house.houseNum != null and house.houseNum != ''">
+                and house_num = #{house.houseNum}
             </if>
-            <if test="house.house_people_nums != null">
-                and house_people_nums = #{house.house_people_nums}
+            <if test="house.housePeopleNums != null">
+                and house_people_nums = #{house.housePeopleNums}
             </if>
-            <if test="house.house_state != null and house.house_state != ''">
-                and house_state = #{house.house_state}
+            <if test="house.houseState != null and house.houseState != ''">
+                and house_state = #{house.houseState}
             </if>
         </where>
     </select>
 
     <!--根据房间信息统计总行数-->
-    <select id="count" resultType="integer">
+    <select id="countHouses" resultType="integer">
         select count(*)
         from house
         <where>
@@ -84,14 +84,14 @@
             <if test="house.floor != null">
                 and floor = #{house.floor}
             </if>
-            <if test="house.house_num != null and house.house_num != ''">
-                and house_num = #{house.house_num}
+            <if test="house.houseNum != null and house.houseNum != ''">
+                and house_num = #{house.houseNum}
             </if>
-            <if test="house.house_people_nums != null">
-                and house_people_nums = #{house.house_people_nums}
+            <if test="house.housePeopleNums != null">
+                and house_people_nums = #{house.housePeopleNums}
             </if>
-            <if test="house.house_state != null">
-                and house_state = #{house.house_state}
+            <if test="house.houseState != null">
+                and house_state = #{house.houseState}
             </if>
         </where>
     </select>
