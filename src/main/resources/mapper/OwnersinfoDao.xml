@@ -6,16 +6,16 @@
 <!-- mapper是映射文件的根节点 namespace属性：名称空间，命名空间.就是一个名字 现在可以任意，以后使用接口的全限定名 -->
 <mapper namespace="com.woniuxy.smart_community.dao.OwnerInfoDao">
 <!--查询-->
-    <select id="selectOwnerByOwnerinfo" resultType="ownersInfo">
+    <select id="selectOwnerByOwnerinfo" resultType="com.woniuxy.smart_community.entity.OwnersInfo">
         select * from owners_info
         <include refid="selectOwnersinfo"/>
     </select>
 
-    <select id="selectOwnameByOwid" resultType="ownersInfo">
+    <select id="selectOwnameByOwid" resultType="com.woniuxy.smart_community.entity.OwnersInfo">
         select * from owners_info where owid=#{owid}
     </select>
 
-    <select id="selectOwnerByOwnameAndPhone" resultType="ownersInfo">
+    <select id="selectOwnerByOwnameAndPhone" resultType="com.woniuxy.smart_community.entity.OwnersInfo">
         select * from owners_info
         <where>
             <if test="owname!=null and owname!=''">
@@ -30,7 +30,7 @@
 
 
 
-    <select id="selectAll" resultType="ownersInfo">
+    <select id="selectAll" resultType="com.woniuxy.smart_community.entity.OwnersInfo">
         select * from owners_info
     </select>
 
