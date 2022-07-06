@@ -34,7 +34,7 @@ public class HouseDaoTest {
     @Test
     public  void  selectHouseByHouseInfoTest(){
         House house = new House();
-        house.setFloor(5);
+        house.setFloor(1);
         System.out.println(houseDao.selectHouseByHouseInfo(house));
     }
 
@@ -61,7 +61,7 @@ public class HouseDaoTest {
     @Test
     public void count(){
         House house = new House();
-        house.setFloor(2);
+//        house.setFloor();
         System.out.println(houseDao.count(house));
     }
 }

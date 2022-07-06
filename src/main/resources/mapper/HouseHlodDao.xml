@@ -8,28 +8,28 @@
           *
         from household
         <where>
-            <if test="id != null">
+            <if test="houseHold.id != null">
                 and id = #{houseHold.id}
             </if>
-            <if test="name != null and name != ''">
+            <if test="houseHold.name != null and houseHold.name != ''">
                 and name = #{houseHold.name}
             </if>
-            <if test="age != null ">
+            <if test="houseHold.age != null">
                 and age = #{houseHold.age}
             </if>
-            <if test="gender != null ">
+            <if test="houseHold.gender != null and houseHold.gender != '' ">
                 and gender = #{houseHold.gender}
             </if>
-            <if test="telephone != null and telephone != ''">
+            <if test="houseHold.telephone != null and houseHold.telephone != ''">
                 and telephone = #{houseHold.telephone}
             </if>
-            <if test="house_id != null ">
+            <if test="houseHold.house_id != null ">
                 and house_id = #{houseHold.house_id}
             </if>
-            <if test="is_owner != null ">
+            <if test="houseHold.is_owner != null and houseHold.is_owner != '' ">
                 and is_owner = #{houseHold.is_owner}
             </if>
-            <if test="state != null ">
+            <if test="houseHold.state != null ">
                 and state = #{houseHold.state}
             </if>
         </where>
@@ -73,7 +73,7 @@
 
     <!--通过主键删除房间信息数据-->
     <delete id="deleteById">
-        delete from household where id = #{id}
+        delete from household where id = #{houseHold.id}
     </delete>
 
     <!--通过主键删除房间信息数据-->
