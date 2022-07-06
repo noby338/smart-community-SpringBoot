@@ -27,8 +27,8 @@
     
 <!--添加-->
     <insert id="insertParkingLot">
-        insert into parking_lot values(null,#{parkingLot.parking_lot_name},#{parkingLot.park_nums},
-        #{parkingLot.sell_park_nums},#{parkingLot.hire_park_nums},#{parkingLot.now_use_nums},1)
+        insert into parking_lot values(null,#{parkingLot.parkingLotName},#{parkingLot.parkNums},
+        #{parkingLot.sellParkNums},#{parkingLot.hireParkNums},#{parkingLot.nowUseNums},1)
     </insert>
 
 

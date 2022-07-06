@@ -6,16 +6,19 @@
 <!-- mapper是映射文件的根节点 namespace属性：名称空间，命名空间.就是一个名字 现在可以任意，以后使用接口的全限定名 -->
 <mapper namespace="com.woniuxy.smart_community.dao.CarInfoDao">
 <!--查询-->
-    <select id="selectAllCarInfos" resultType="carInfo">
-        select * from car_info
+    <select id="selectAllCarInfos" resultMap="carInfoMapper">
+        select * from car_info c,parking_info p,owners_info o
+        where c.parkid=p.parkid and c.owid=o.owid
     </select>
 
-    <select id="selectCarInfoByCarid" resultType="carInfo">
-        select * from car_info where carid=#{carid}
+    <select id="selectCarInfoByCarid" resultMap="carInfoMapper">
+        select * from car_info c,parking_info p,owners_info o
+        where c.parkid=p.parkid and c.owid=o.owid and carid=#{carid}
     </select>
 
-    <select id="selectCarInfoByCarno" resultType="carInfo">
-        select * from car_info where carno like '%' #{carno} '%'
+    <select id="selectCarInfoByCarno" resultMap="carInfoMapper">
+        select * from car_info c,parking_info p,owners_info o
+        where c.parkid=p.parkid and c.owid=o.owid and carno like '%' #{carno} '%'
     </select>
 
 
@@ -24,23 +27,38 @@
 <!--添加-->
     <insert id="insertCarInfo">
         insert into car_info values(null,
-        #{carInfo.carno},#{carInfo.carjpg},#{carInfo.parkid},#{carInfo.owid},1)
+        #{carInfo.carNo},#{carInfo.carJpg},#{carInfo.parkId},#{carInfo.owId},1)
     </insert>
 
 
 <!--修改-->
     <update id="updateCarInfoState">
-        update car_info set carstate=#{state} where carid=#{carid}
+        update car_info set carstate=#{carState} where carid=#{carId}
     </update>
 
 
 <!--删除-->
     <delete id="deleteCarInfoByCarid">
-        delete car_info where carid=#{carid}
+        delete car_info where carid=#{carId}
     </delete>
 
 
 <!--共用功能-->
+
+    <resultMap id="carInfoMapper" type="carInfo">
+        <id column="carid" property="carId"/>
+        <result column="carno" property="carNo"/>
+        <result column="carjpg" property="carJpg"/>
+        <result column="carstate" property="carState"/>
+        <association property="parkingInfo" javaType="parkingInfo" column="parkid" select="selectParkingInfoByParkId"/>
+        <association property="ownersInfo" javaType="ownersInfo" column="owid" select="selectOwnersInfoByOwId"/>
+    </resultMap>
+    <select id="selectParkingInfoByParkId" resultType="parkingInfo">
+        select * from parking_info where parkid=#{parkid}
+    </select>
+    <select id="selectOwnersInfoByOwId" resultType="ownersInfo">
+        select * from owners_info where owid=#{owid}
+    </select>
 
 
 

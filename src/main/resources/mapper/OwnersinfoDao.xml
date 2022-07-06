@@ -6,32 +6,29 @@
 <!-- mapper是映射文件的根节点 namespace属性：名称空间，命名空间.就是一个名字 现在可以任意，以后使用接口的全限定名 -->
 <mapper namespace="com.woniuxy.smart_community.dao.OwnerInfoDao">
 <!--查询-->
-    <select id="selectOwnerByOwnerinfo" resultType="com.woniuxy.smart_community.entity.OwnersInfo">
-        select * from owners_info
+    <select id="selectOwnerByOwnerinfo" resultMap="ownersInfoMapper">
+        select * from owners_info o,house h where o.id=h.id
         <include refid="selectOwnersinfo"/>
     </select>
 
-    <select id="selectOwnameByOwid" resultType="com.woniuxy.smart_community.entity.OwnersInfo">
-        select * from owners_info where owid=#{owid}
+    <select id="selectOwnameByOwid" resultMap="ownersInfoMapper">
+        select * from owners_info o,house h where o.id=h.id and owid=#{owid}
     </select>
 
-    <select id="selectOwnerByOwnameAndPhone" resultType="com.woniuxy.smart_community.entity.OwnersInfo">
-        select * from owners_info
-        <where>
+    <select id="selectOwnerByOwnameAndPhone" resultMap="ownersInfoMapper">
+        select * from owners_info o,house h  where o.id=h.id
             <if test="owname!=null and owname!=''">
-                and owname like '%' #{owname} '%'
+                and owname like '%' #{owName} '%'
             </if>
             <if test="owphone!=null and owname!=''">
-                and owphone like '%' #{owphone} '%'
+                and owphone like '%' #{owPhone} '%'
             </if>
-        </where>
-
     </select>
 
 
 
-    <select id="selectAll" resultType="com.woniuxy.smart_community.entity.OwnersInfo">
-        select * from owners_info
+    <select id="selectAll" resultMap="ownersInfoMapper">
+        select * from owners_info o,house h  where o.id=h.id
     </select>
 
 
@@ -39,54 +36,63 @@
     
 <!--添加-->
     <insert id="insertOwnerinfo">
-        insert into owners_info values(null,#{ownersInfo.owname},#{ownersInfo.owphone},#{ownersInfo.id},#{ownersInfo.owtype})
+        insert into owners_info values(null,#{ownersInfo.owName},#{ownersInfo.owPhone},#{ownersInfo.id},#{ownersInfo.owType})
     </insert>
 
 
 <!--修改-->
     <update id="updateOwnerByOwnerinfo">
-        update owners_info set <include refid="updateOwnersinfo"/> where owid=#{ownersInfo.owid}
+        update owners_info set <include refid="updateOwnersinfo"/> where owid=#{ownersInfo.owId}
     </update>
 
 
 <!--删除-->
     <delete id="deleteOwnerByOwid">
-        delete owners_info where owid=#{owid}
+        delete owners_info where owid=#{owId}
     </delete>
 
 
 <!--共用功能-->
+    <!--联表查询-->
+    <resultMap id="ownersInfoMapper" type="ownersInfo">
+        <association property="house" javaType="house" column="id" select="selecctHouseById"/>
+    </resultMap>
+    <select id="selecctHouseById">
+        select * from house where id=#{id}
+    </select>
+
+
     <!--对象查询-->
     <sql id="selectOwnersinfo">
-        <where>
-            <if test="ownersInfo.owid!=null">
-                and owid=#{ownersInfo.owid}
+
+            <if test="ownersInfo.owId!=null">
+                and owid=#{ownersInfo.owId}
             </if>
-            <if test="ownersInfo.owname!=null and ownersInfo.owname!=''">
-                and owname like '%' #{ownersInfo.owname} '%'
+            <if test="ownersInfo.owName!=null and ownersInfo.owName!=''">
+                and owname like '%' #{ownersInfo.owName} '%'
             </if>
-            <if test="ownersInfo.owphone!=null and ownersInfo.owphone!=''">
-                and owphone like '%' #{ownersInfo.owphone}
+            <if test="ownersInfo.owPhone!=null and ownersInfo.owPhone!=''">
+                and owphone like '%' #{ownersInfo.owPhone}
             </if>
-            <if test="ownersInfo.owtype!=null">
-                and owtype like '%' #{ownersInfo.owtype} '%'
+            <if test="ownersInfo.owType!=null">
+                and owtype like '%' #{ownersInfo.owType} '%'
             </if>
             <if test="ownersInfo.id!=null and ownersInfo.id!=''">
                 and id=#{ownersInfo.id}
             </if>
-        </where>
+
     </sql>
 
     <!--对象属性修改-->
     <sql id="updateOwnersinfo">
-            <if test="ownersInfo.owname!=null and ownersInfo.owname!=''">
-                owname=#{ownersInfo.owname}
+            <if test="ownersInfo.owName!=null and ownersInfo.owName!=''">
+                owname=#{ownersInfo.owName}
             </if>
-            <if test="ownersInfo.owphone!=null and ownersInfo.owphone!=''">
-                ,owphone=#{ownersInfo.owphone}
+            <if test="ownersInfo.owPhone!=null and ownersInfo.owPhone!=''">
+                ,owphone=#{ownersInfo.owPhone}
             </if>
-            <if test="ownersInfo.owtype!=null and ownersInfo.owtype!=''">
-                ,owtype=#{ownersInfo.owtype},
+            <if test="ownersInfo.owType!=null and ownersInfo.owType!=''">
+                ,owtype=#{ownersInfo.owType},
             </if>
             <if test="ownersInfo.id!=null and ownersInfo.id!=''">
                 ,id=#{ownersInfo.id}

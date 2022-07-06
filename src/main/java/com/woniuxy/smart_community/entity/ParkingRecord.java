@@ -6,25 +6,28 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
-
-//----------停车场中车辆进出记录表
+/**
+ * @Author: LittleCode
+ * @Date:   2022/7/6
+ * @Descrition: 停车场中车辆进出记录表
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class ParkingRecord {
-    private Integer precordid;
-    private String precordno;       //进出记录编号  32位
-    private String carno;           //车牌号
+    private Integer pRecordId;
+    private String pRecordNo;       //进出记录编号  32位
+    private String carNo;           //车牌号
 
-    private int carid;              //外键 关联车辆信息
+    private Integer carId;              //外键 关联车辆信息
     private CarInfo carInfo;
 
-    private int owid;               //外键  关联车主信息
+    private Integer owId;               //外键  关联车主信息
     private OwnersInfo ownersInfo;
 
-    private Date pintime;
-    private Date poutime;
+    private Date pIntime;
+    private Date pOutime;
 
-    private BigDecimal pcost;       //费用价格
-    private String paytype;         //支付方式  后台编写分类
+    private BigDecimal pCost;       //费用价格
+    private String payType;         //支付方式  后台编写分类
 }

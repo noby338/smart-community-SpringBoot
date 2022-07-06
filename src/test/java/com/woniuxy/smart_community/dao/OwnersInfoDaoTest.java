@@ -23,7 +23,7 @@ public class OwnersInfoDaoTest {
     @Test
     void test02(){
         OwnersInfo OwnersInfo = new OwnersInfo();
-        OwnersInfo.setOwname("zs");
+        OwnersInfo.setOwName("zs");
         System.out.println(ownerInfoDao.selectOwnerByOwnerinfo(OwnersInfo));
     }
 
@@ -35,8 +35,9 @@ public class OwnersInfoDaoTest {
     //添加
     @Test
     void testinsert01(){
-        OwnersInfo OwnersInfo=new OwnersInfo(null, "xh","12332988976","小区业主",null);
-        ownerInfoDao.insertOwnerinfo(OwnersInfo);
+        //OwnersInfo OwnersInfo=new OwnersInfo(null, "xh","12332988976","小区业主",null);
+        OwnersInfo ownersInfo = new OwnersInfo(null, "xh", "18966789999", "小区业主", 1, null);
+        ownerInfoDao.insertOwnerinfo(ownersInfo);
     }
 
 
@@ -44,8 +45,8 @@ public class OwnersInfoDaoTest {
     @Test
     void testup01(){
         OwnersInfo ownersifo=new OwnersInfo();
-        ownersifo.setOwid(1);
-        ownersifo.setOwname("zs");
+        ownersifo.setOwId(1);
+        ownersifo.setOwName("zs");
         ownersifo.setId(4);
         ownerInfoDao.updateOwnerByOwnerinfo(ownersifo);
     }
