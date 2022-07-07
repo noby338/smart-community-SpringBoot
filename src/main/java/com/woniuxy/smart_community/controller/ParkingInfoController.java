@@ -1,9 +1,11 @@
 package com.woniuxy.smart_community.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.woniuxy.smart_community.entity.OwnersInfo;
 import com.woniuxy.smart_community.entity.ParkingInfo;
 import com.woniuxy.smart_community.entity.ParkingLot;
 import com.woniuxy.smart_community.entity.ResponseEntity;
+import com.woniuxy.smart_community.service.OwnersInfoService;
 import com.woniuxy.smart_community.service.ParkingInfoService;
 import com.woniuxy.smart_community.service.ParkingLotService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,12 @@ public class ParkingInfoController {
     @Autowired
     ParkingLotService parkingLotService;
 
+
     @PostMapping("/getParkingInfoByPage/{pageNum}/{pageSize}")
     public ResponseEntity<PageInfo<ParkingInfo>> getAllParkingInfoByPage(@PathVariable int pageNum,
                                                         @PathVariable int pageSize,
                                                         @RequestBody ParkingInfo parkingInfo){
+        System.out.println("进入getParkingInfoByPage--parkingInfo="+parkingInfo);
         ResponseEntity<PageInfo<ParkingInfo>> responseEntity = null;
         System.out.println("分页查询:pageNum="+pageNum+"--pageSize="+pageSize+"---ParkingInfo="+parkingInfo);
         PageInfo<ParkingInfo> parkingInfoByPage = parkingInfoService.getParkingInfoByPage(pageNum, pageSize, parkingInfo);
@@ -54,7 +58,11 @@ public class ParkingInfoController {
      * @return
      */
     @PostMapping("buyParking")
-    public ResponseEntity buyParkingBusiness(){
+    public ResponseEntity buyParkingBusiness(OwnersInfo ownersInfo,ParkingInfo parkingInfo,int pTypeId){
+        ResponseEntity responseEntity=null;
+
+
+
         return null;
     }
 

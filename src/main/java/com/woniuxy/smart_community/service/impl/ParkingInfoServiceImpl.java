@@ -3,7 +3,10 @@ package com.woniuxy.smart_community.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.woniuxy.smart_community.dao.ParkingInfoDao;
+import com.woniuxy.smart_community.entity.OwnersInfo;
 import com.woniuxy.smart_community.entity.ParkingInfo;
+import com.woniuxy.smart_community.entity.ResponseEntity;
+import com.woniuxy.smart_community.service.OwnersInfoService;
 import com.woniuxy.smart_community.service.ParkingInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,10 @@ public class ParkingInfoServiceImpl implements ParkingInfoService {
 
     @Autowired
     ParkingInfoDao parkingInfoDao;
+    @Autowired
+    OwnersInfoService ownersInfoService;
+
+
 
     @Override
     public List<ParkingInfo> getAllParkingInfo() {
@@ -45,6 +52,32 @@ public class ParkingInfoServiceImpl implements ParkingInfoService {
         pageInfo.setTotal(total);
         System.out.println("最新total="+total);
         return pageInfo;
+    }
+
+    /**
+     * 购买车位，数据库操作
+     * @param ownersInfo
+     * @param parkingInfo
+     * @return
+     */
+    @Override
+    public void addParkingOrderBusiness(OwnersInfo ownersInfo, ParkingInfo parkingInfo,int pTypeId) {
+        System.out.println("前端传过来的用户信息："+ownersInfo);
+        System.out.println("前端传来的车位信息："+parkingInfo);
+        OwnersInfo findOwnersInfo = ownersInfoService.getOwnerByOwnameAndOwphone(ownersInfo.getOwName(), ownersInfo.getOwPhone());
+        if(findOwnersInfo!=null){
+            parkingInfoDao.updateParkingInfoByType(pTypeId,findOwnersInfo.getOwId(),parkingInfo.getParkId());
+        }
+            ownersInfoService.addOwnerinfo(ownersInfo);
+            int owId=ownersInfo.getOwId();
+        parkingInfoDao.updateParkingInfoByType(pTypeId,owId,parkingInfo.getParkId());
+            System.out.println("先添加用户信息获取主键="+ownersInfo.getOwId()+"-----owId="+owId);
+
+
+
+
+
+
     }
 
 

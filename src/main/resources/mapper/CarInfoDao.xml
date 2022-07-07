@@ -7,18 +7,15 @@
 <mapper namespace="com.woniuxy.smart_community.dao.CarInfoDao">
 <!--查询-->
     <select id="selectAllCarInfos" resultMap="carInfoMapper">
-        select * from car_info c,parking_info p,owners_info o
-        where c.parkid=p.parkid and c.owid=o.owid
+        select * from car_info
     </select>
 
     <select id="selectCarInfoByCarid" resultMap="carInfoMapper">
-        select * from car_info c,parking_info p,owners_info o
-        where c.parkid=p.parkid and c.owid=o.owid and carid=#{carid}
+        select * from car_info where carid=#{carId}
     </select>
 
     <select id="selectCarInfoByCarno" resultMap="carInfoMapper">
-        select * from car_info c,parking_info p,owners_info o
-        where c.parkid=p.parkid and c.owid=o.owid and carno like '%' #{carno} '%'
+        select * from car_info where carno like '%' #{carNo} '%'
     </select>
 
 

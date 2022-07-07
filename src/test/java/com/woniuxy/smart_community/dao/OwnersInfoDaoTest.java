@@ -17,7 +17,7 @@ public class OwnersInfoDaoTest {
 
     @Test
     void test03(){
-        System.out.println(ownerInfoDao.selectOwnameByOwid(1));
+        System.out.println(ownerInfoDao.selectOwnameByOwid(5));
     }
 
     @Test
@@ -48,6 +48,7 @@ public class OwnersInfoDaoTest {
         ownersifo.setOwId(1);
         ownersifo.setOwName("zs");
         ownersifo.setId(4);
+        
         ownerInfoDao.updateOwnerByOwnerinfo(ownersifo);
     }
 
