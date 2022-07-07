@@ -24,10 +24,16 @@ public class ParkingInfoDaoTest {
      @Test
     void test02(){
          ParkingInfo parkingInfo=new ParkingInfo();
-         parkingInfo.setParkId(1);
+         //parkingInfo.setParkId(1);
+         parkingInfo.setParkNo("A");
+         System.out.println(parkingInfoDao.selectCount(parkingInfo));
          System.out.println(parkingInfoDao.selectParkingInfoByParkingInfo(parkingInfo));
     }
-     @Test
+
+    /**
+     * 批量添加信息
+     */
+    @Test
     void test03(){
         for(int i=0;i<200;i++){
             ParkingInfo parkingInfo=new ParkingInfo();
