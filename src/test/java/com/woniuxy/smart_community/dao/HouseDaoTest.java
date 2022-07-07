@@ -49,13 +49,16 @@ public class HouseDaoTest {
             house.setHouseNum("12131415");
             house.setHousePeopleNums(i%2);
             house.setHouseState(i%2);
+            house.setRemark("i"+"qwertyuiop");
             houseDao.updateHouse(house);
         }
     }
 
     @Test
     public void deleteByIdTest(){
-        houseDao.deleteHouseById(1);
+
+        houseDao.deleteHouseById(16);
+
     }
 
     @Test

@@ -23,7 +23,7 @@ public class HouseServiceTest {
 
     @Test
     public void insertHouseTest(){
-        House house= new House(99,4,5,6,"789",10,1);
+        House house= new House(99,4,5,6,"789",10,1, "123456789");
         houseService.insertHouse(house);
     }
 
@@ -34,7 +34,7 @@ public class HouseServiceTest {
 
     @Test
     public void updateHouseTest(){
-        House house= new House(1,4,5,6,"789",10,1);
+        House house= new House(1,4,5,6,"789",10,1,"qwertyui");
         houseService.updateHouse(house);
     }
 
@@ -50,7 +50,7 @@ public class HouseServiceTest {
     public void countHousesTest(){
         House house = new House();
         house.setFloor(1);
-        Integer houses = houseService.countHouses(house);
+        ResponseEntity houses = houseService.countHouses(house);
         System.out.println(houses);
     }
 }

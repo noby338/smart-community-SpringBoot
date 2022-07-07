@@ -4,12 +4,12 @@
 
     <!--新增房间数据-->
     <insert id="insertHouse">
-        insert into house(id, building, unit, floor, house_num, house_people_nums, house_state)
-        values (#{house.id}, #{house.building}, #{house.unit}, #{house.floor}, #{house.houseNum}, #{house.housePeopleNums}, #{house.houseState})
+        insert into house(id, building, unit, floor, house_num, house_people_nums, house_state, remark)
+        values (#{house.id}, #{house.building}, #{house.unit}, #{house.floor}, #{house.houseNum}, #{house.housePeopleNums}, #{house.houseState}, #{house.remark})
     </insert>
 
     <!--通过主键删除房间信息数据-->
-    <delete id="deleteHouseById">
+    <delete id="deleteHouseById" >
         delete from house where id = #{id}
     </delete>
 

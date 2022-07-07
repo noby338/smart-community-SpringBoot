@@ -19,6 +19,7 @@ import java.util.List;
  * @ClassName -> HouseServiceImpl
  * @Version 1.0
  **/
+@SuppressWarnings("ALL")
 @Service
 public class HouseServiceImpl implements HouseService {
 
@@ -26,21 +27,33 @@ public class HouseServiceImpl implements HouseService {
     HouseDao houseDao;
 
     @Override
-    public int insertHouse(House house) {
+    public ResponseEntity insertHouse(House house) {
         int isadd = houseDao.insertHouse(house);
-        return isadd;
+        if(isadd == 1){
+            return new ResponseEntity(200,"添加成功！",isadd);
+        }else {
+            return new ResponseEntity(401, "添加失败！", null);
+        }
     }
 
     @Override
-    public int deleteHouseById(Integer id) {
+    public ResponseEntity deleteHouseById(Integer id) {
         int isdelete = houseDao.deleteHouseById(id);
-        return isdelete;
+        if(isdelete == 1){
+            return new ResponseEntity(200,"删除成功！",null);
+        }else {
+            return new ResponseEntity(401, "删除失败！", null);
+        }
     }
 
     @Override
-    public int updateHouse(House house) {
+    public ResponseEntity updateHouse(House house) {
         int isupdate = houseDao.updateHouse(house);
-        return isupdate;
+        if(isupdate == 1){
+            return new ResponseEntity(200,"更新成功！",null);
+        }else {
+            return new ResponseEntity(401, "更新失败！", null);
+        }
     }
 
     @Override
@@ -56,8 +69,12 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public Integer countHouses(House house) {
+    public ResponseEntity countHouses(House house) {
         Integer countHouses = houseDao.countHouses(house);
-        return countHouses;
+        if(countHouses == 1){
+            return new ResponseEntity(200,"获取成功！",countHouses);
+        }else {
+            return new ResponseEntity(401, "删除失败！", null);
+        }
     }
 }

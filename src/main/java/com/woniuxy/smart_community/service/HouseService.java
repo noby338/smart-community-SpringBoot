@@ -21,7 +21,7 @@ public interface HouseService {
      * @param house 实例对象
      * @return 影响行数
      */
-    int insertHouse(@Param("house") House house);
+    ResponseEntity insertHouse(@Param("house") House house);
 
     /**
      * 通过主键删除房间信息数据
@@ -29,7 +29,7 @@ public interface HouseService {
      * @param id 主键
      * @return 影响行数
      */
-    int deleteHouseById(Integer id);
+    ResponseEntity deleteHouseById(Integer id);
 
     /**
      * 通过主键修改房间信息数据
@@ -37,7 +37,7 @@ public interface HouseService {
      * @param house 实例对象
      * @return 影响行数
      */
-    int updateHouse(@Param("house") House house);
+    ResponseEntity updateHouse(@Param("house") House house);
 
     /**
      * 通过房间信息查询相关数据
@@ -53,6 +53,6 @@ public interface HouseService {
      * @param house 查询条件
      * @return 总行数
      */
-    Integer countHouses(@Param("house") House house);
+    ResponseEntity countHouses(@Param("house") House house);
 
 }

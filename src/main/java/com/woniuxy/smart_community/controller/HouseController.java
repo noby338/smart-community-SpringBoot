@@ -29,9 +29,8 @@ public class HouseController {
      * 新增房间数据
      */
     @PostMapping("/insertHouse")
-    public String insertHouse(@Param("house") House house){
-        int i = houseService.insertHouse(house);
-        return null;
+    public ResponseEntity insertHouse(@Param("house") House house){
+        return houseService.insertHouse(house);
     }
 
 
@@ -41,9 +40,9 @@ public class HouseController {
      * @param id 主键
      * @return 影响行数
      */
-    public String deleteHouseById(Integer id){
-        int i = houseService.deleteHouseById(id);
-        return  null;
+    @PostMapping("/deleteHouse")
+    public ResponseEntity deleteHouseById(@Param("id") Integer id){
+        return houseService.deleteHouseById(id);
     }
 
     /**
@@ -52,9 +51,10 @@ public class HouseController {
      * @param house 实例对象
      * @return 影响行数
      */
-     public String updateHouse(@Param("house") House house){
-         int i = houseService.updateHouse(house);
-         return null;
+     public ResponseEntity updateHouse(@Param("house") House house){
+         ResponseEntity response = houseService.updateHouse(house);
+         System.out.println(response);
+         return response;
      }
 
     /**
@@ -79,9 +79,8 @@ public class HouseController {
      * @param house 查询条件
      * @return 总行数
      */
-    public String countHouses(@Param("house") House house){
-        Integer count = houseService.countHouses(house);
-        return null;
+    public ResponseEntity countHouses(@Param("house") House house){
+        return houseService.countHouses(house);
     }
 
 }
