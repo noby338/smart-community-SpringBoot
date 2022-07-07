@@ -46,4 +46,6 @@ public class ParkingInfoServiceImpl implements ParkingInfoService {
         System.out.println("最新total="+total);
         return pageInfo;
     }
+
+
 }

@@ -1,49 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!-- XML约束头:MyBatis的约束文件使用的dtd，规范这个XML文档处理 遵守XML的一般规则以外，要遵守的自定义规则:能够使用哪些标签，使用哪些属性，出现的次数，标签的先后属性 -->
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- mapper是映射文件的根节点 namespace属性：名称空间，命名空间.就是一个名字 现在可以任意，以后使用接口的全限定名 -->
 <mapper namespace="com.woniuxy.smart_community.dao.ParkingInfoDao">
-<!--多表查询-->
+    <!--多表查询-->
     <select id="selectCount" resultType="int">
-        select count(*) from parking_info where parkid>0 <include refid="selectParkingInfo"/>
+        select count(*) from parking_info
+        <include refid="selectParkingInfo"/>
     </select>
 
     <select id="selectAllParkingInfo" resultMap="parkingInfoMapper">
-        select * from parking_info p,parking_lot pl,owners_info o,parking_type pt
-        where pl.id=p.parklotid and p.owid=o.owid and p.ptypeid=pt.ptypeid
+        select * from parking_info
+
     </select>
 
 
     <!--根据对象详细查询-->
+    <!--    <select id="selectParkingInfoByParkingInfo" resultMap="parkingInfoMapper">-->
+    <!--        select * from parking_info p,parking_lot pl,owners_info o,parking_type pt-->
+    <!--        where pl.id=p.parklotid and p.ptypeid=pt.ptypeid-->
+    <!--        <include refid="selectParkingInfo"/>-->
+    <!--        &lt;!&ndash;表中owid可能为null所以放在下面的判断语句中&ndash;&gt;-->
+    <!--    </select>-->
     <select id="selectParkingInfoByParkingInfo" resultMap="parkingInfoMapper">
-        select * from parking_info p,parking_lot pl,owners_info o,parking_type pt
-        where pl.id=p.parklotid and p.owid=o.owid and p.ptypeid=pt.ptypeid
+        select * from parking_info
         <include refid="selectParkingInfo"/>
+        <!--表中owid可能为null所以放在下面的判断语句中-->
     </select>
 
     <select id="selectParkingInfoByParkid" resultMap="parkingInfoMapper">
-        select * from parking_info p,parking_lot pl,owners_info o,parking_type pt
-        where pl.id=p.parklotid and p.owid=o.owid and p.ptypeid=pt.ptypeid and parkid=#{parkId}
+        select * from parking_info where parkid = #{parkId}
     </select>
 
 
-<!--添加-->
-    <insert id="insertParkingInfo" parameterType="parkingInfo" useGeneratedKeys="true" keyProperty="parkId" keyColumn="parkid">
-        insert into parking_info values(null,#{parkingInfo.parkNo},
-        #{parkingInfo.parkLotId},#{parkingInfo.parkArea},#{parkingInfo.pTypeId},#{parkingInfo.owId})
+    <!--添加-->
+    <insert id="insertParkingInfo" parameterType="parkingInfo" useGeneratedKeys="true" keyProperty="parkId"
+            keyColumn="parkid">
+        insert into parking_info
+        values (null, #{parkingInfo.parkNo},
+                #{parkingInfo.parkLotId}, #{parkingInfo.parkArea}, #{parkingInfo.pTypeId}, #{parkingInfo.owId})
     </insert>
 
 
-<!--修改-->
+    <!--修改-->
     <!--修改所有-->
     <update id="updateParkingInfo">
         update parking_info set
         <include refid="updateParkingInfo"/>
         where parkid=#{parkingInfo.parkId}
     </update>
-<!--修改基本信息-->
+    <!--修改基本信息-->
     <update id="updateParkingInfoByType">
         update parking_info set
         <if test="pTypeTd!=null">
@@ -55,24 +63,33 @@
         where parkid=#{parkId}
     </update>
 
-    
-<!--删除-->
+
+    <!--删除-->
     <delete id="deleteParkingInfoByParkid">
-        delete parking_info where parkid=#{parkId}
+        delete
+        parking_info where parkid=#{parkId}
     </delete>
 
 
-
-<!--共用功能-->
+    <!--共用功能-->
     <!--联表查询-->
     <resultMap id="parkingInfoMapper" type="parkingInfo">
         <id column="parkid" property="parkId"/>
         <result column="parkno" property="parkNo"/>
         <result column="parkarea" property="parkArea"/>
         <!-- 一对一查询 -->
-        <association property="parkingLot" javaType="ParkingLot" column="parklotid" select="selectParkingLotByparkLotId" />
-        <association property="parkingType" javaType="ParkingType" column="ptypeid" select="selectParkingTypeBypTypeId"/>
-        <association property="ownersInfo" javaType="OwnersInfo" column="owid" select="selectOwnersInfoByOwid"/>
+        <association property="parkingLot" javaType="ParkingLot" column="parklotid"
+                     select="selectParkingLotByparkLotId"/>
+        <association property="parkingType" javaType="ParkingType" column="ptypeid"
+                     select="selectParkingTypeBypTypeId"/>
+        <association property="ownersInfo" javaType="OwnersInfo" column="owid" select="selectOwnersInfoByOwid">
+            <id column="owid" property="owId"/>
+            <result column="owname" property="owName"/>
+            <result column="owphone" property="owPhone"/>
+            <result column="owtype" property="owType"/>
+            <!--            <association property="house" javaType="house" column="id" select="selectHouseInfoById"/>-->
+            <result column="id" property="id"/>
+        </association>
     </resultMap>
 
     <!--表的列名和实体类属性名不一致-->
@@ -87,28 +104,39 @@
     </resultMap>
 
     <select id="selectParkingLotByparkLotId" resultMap="parkingLotMapper">
-        select * from parking_lot where id=#{parklotid}
+        select *
+        from parking_lot
+        where id = #{parklotid}
     </select>
     <select id="selectParkingTypeBypTypeId" resultType="parkingType">
-        select * from parking_type where ptypeid=#{ptypeid}
+        select *
+        from parking_type
+        where ptypeid = #{ptypeid}
     </select>
     <select id="selectOwnersInfoByOwid" resultType="ownersInfo">
-        select * from  owners_info where owid=#{owid}
+        select *
+        from owners_info
+        where owid = #{owId}
     </select>
 
 
     <sql id="selectParkingInfo">
+        <where>
             <if test="parkingInfo.parkId!=null">
                 and parkid=#{parkingInfo.parkId}
             </if>
             <if test="parkingInfo.parkNo!=null and parkingInfo.parkNo!=''">
-                and parkno like '%' #{parkingInfo.parkNo}
+                and parkno like '%' #{parkingInfo.parkNo} '%'
             </if>
             <if test="parkingInfo.parkArea!=null">
-                and parkarea=#{parkingInfo.parkArea}
+                and parkarea>=#{parkingInfo.parkArea}
             </if>
-
+            <if test="parkingInfo.pTypeId!=null">
+                and ptypeid=#{parkingInfo.pTypeId}
+            </if>
+        </where>
     </sql>
+
 
     <!--修改信息判断-->
     <sql id="updateParkingInfo">
@@ -128,7 +156,6 @@
             ,owid=#{parkingInfo.owId}
         </if>
     </sql>
-
 
 
 </mapper>

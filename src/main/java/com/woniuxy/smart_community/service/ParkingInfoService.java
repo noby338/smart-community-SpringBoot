@@ -22,4 +22,5 @@ public interface ParkingInfoService {
      */
     PageInfo<ParkingInfo> getParkingInfoByPage(int pageIndex, int pageSize, ParkingInfo parkingInfo);
 
+
 }

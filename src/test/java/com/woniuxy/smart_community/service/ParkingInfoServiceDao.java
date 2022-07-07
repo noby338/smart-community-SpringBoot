@@ -30,4 +30,16 @@ public class ParkingInfoServiceDao {
         System.out.println(parkingInfoByPage);
     }
 
+    @Test
+    void test03(){
+        ParkingInfo parkingInfo=new ParkingInfo();
+        parkingInfo.setParkNo("A");
+        System.out.println(parkingInfoService.getParkingInfoByPage(1,3,parkingInfo));
+    }
+
+    @Test
+    void test04(){
+
+    }
+
 }
