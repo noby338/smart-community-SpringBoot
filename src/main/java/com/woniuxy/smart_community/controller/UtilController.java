@@ -1,7 +1,7 @@
 package com.woniuxy.smart_community.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.woniuxy.smart_community.entity.ResponseResult;
+import com.woniuxy.smart_community.entity.ResponseEntity;
 import com.woniuxy.smart_community.entity.UtilPrice;
 import com.woniuxy.smart_community.service.UtilPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +22,8 @@ public class UtilController {
     UtilPriceService utilPriceService;
 
     @GetMapping("/selectAll")
-    public ResponseResult<List<UtilPrice>> selectAll() {
+    public ResponseEntity<List<UtilPrice>> selectAll() {
         List<UtilPrice> utilPrices = utilPriceService.selectAll();
-        return new ResponseResult<>(200,"y",utilPrices);
+        return new ResponseEntity<>(200,"y",utilPrices);
     }
 }
