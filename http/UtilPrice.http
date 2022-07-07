@@ -1,0 +1,5 @@
+### 测试 获取所有的单价及价格梯度
+GET http://localhost:8080/utilPrice/selectAll
+Content-Type: application/json
+x-requested-with: XMLHttpRequest
+

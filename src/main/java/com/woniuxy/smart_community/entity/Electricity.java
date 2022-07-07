@@ -15,10 +15,10 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Electricity {
-    private int id;
-    private int houseId;//房屋id
+    private Integer id;
+    private Integer houseId;//房屋id
     private String month;//缴费的年月记录
     private Double nowMonthNums;//本月用量
     private Double nowPrices;//本月待缴费
-    private int state;//1：正常，2：欠费，3：禁用
+    private Integer state;//1：正常，2：欠费，3：禁用
 }

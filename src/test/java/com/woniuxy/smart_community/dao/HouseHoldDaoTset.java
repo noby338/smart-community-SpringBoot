@@ -29,7 +29,6 @@ public class HouseHoldDaoTset {
             houseHold.setState(i%2);
             houseHoldDao.insert(houseHold);
         }
-
     }
 
     @Test
