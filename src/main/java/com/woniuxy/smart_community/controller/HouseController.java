@@ -1,14 +1,12 @@
 package com.woniuxy.smart_community.controller;
 
-import com.github.pagehelper.PageInfo;
 import com.woniuxy.smart_community.entity.House;
+import com.woniuxy.smart_community.entity.ResponseEntity;
 import com.woniuxy.smart_community.service.HouseService;
 import com.woniuxy.smart_community.service.impl.HouseServiceImpl;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * @Author :  Fiver_Hu
@@ -18,7 +16,7 @@ import java.util.List;
  * @ClassName -> HouseController
  * @Version 1.0
  **/
-@CrossOrigin
+//@CrossOrigin
 @ResponseBody
 @RestController
 @RequestMapping("/house")
@@ -66,12 +64,13 @@ public class HouseController {
      * @return 实例对象
      */
     @GetMapping("/selectAllHouse")
-    public List<House> selectHouseByHouseInfo(
+    public ResponseEntity selectHouseByHouseInfo(
             @Param("house") House house,
             @Param("pageNum")  int pageNum,
-            @Param("pageSize") int pageSize){
-        List<House> houses = houseService.selectHouseByHouseInfo(house, pageNum, pageSize);
-        return houses;
+            @Param("pageSize")  int pageSize){
+        ResponseEntity response = houseService.selectHouseByHouseInfo(house, pageNum, pageSize);
+        System.out.println(response);
+        return response;
     }
 
     /**

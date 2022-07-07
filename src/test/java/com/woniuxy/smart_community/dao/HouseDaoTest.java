@@ -21,12 +21,12 @@ public class HouseDaoTest {
         House house = new House();
         for(int i = 0 ;i<50;i++){
             house.setId(i);
-            house.setBuilding(i%2);
-            house.setUnit(i%3);
+            house.setBuilding(i%5);
+            house.setUnit(i%5);
             house.setFloor(i%24);
             house.setHouseNum("i+123");
-            house.setHousePeopleNums(i%8);
-            house.setHouseState(i%2);
+            house.setHousePeopleNums(i%12);
+            house.setHouseState(i%5);
             houseDao.insertHouse(house);
         }
     }
