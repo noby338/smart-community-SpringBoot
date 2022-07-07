@@ -5,7 +5,7 @@
     <!--新增房间数据-->
     <insert id="insertHouse">
         insert into house(id, building, unit, floor, house_num, house_people_nums, house_state)
-        values (#{house.id}, #{house.building}, #{house.unit}, #{house.floor}, #{house.houseNum}, #{house.housePeopleNums}, #{house.house_state})
+        values (#{house.id}, #{house.building}, #{house.unit}, #{house.floor}, #{house.houseNum}, #{house.housePeopleNums}, #{house.houseState})
     </insert>
 
     <!--通过主键删除房间信息数据-->

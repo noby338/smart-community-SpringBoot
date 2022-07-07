@@ -1,9 +1,8 @@
 package com.woniuxy.smart_community.service;
 
 import com.woniuxy.smart_community.entity.House;
+import com.woniuxy.smart_community.entity.ResponseEntity;
 import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 /**
  * @Author Fiver_Hu
@@ -46,7 +45,7 @@ public interface HouseService {
      * @param house 房间号
      * @return 实例对象
      */
-    List<House> selectHouseByHouseInfo(House house, int pageNum, int pageSize);
+    ResponseEntity selectHouseByHouseInfo(House house, int pageNum, int pageSize);
 
     /**
      * 根据房间信息统计总行数

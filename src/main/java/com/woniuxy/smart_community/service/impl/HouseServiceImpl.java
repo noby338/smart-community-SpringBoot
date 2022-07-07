@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.woniuxy.smart_community.dao.HouseDao;
 import com.woniuxy.smart_community.entity.House;
+import com.woniuxy.smart_community.entity.ResponseEntity;
 import com.woniuxy.smart_community.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,11 +44,15 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public List<House> selectHouseByHouseInfo(House house, int pageNum, int pageSize) {
+    public ResponseEntity selectHouseByHouseInfo(House house, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         List<House> houses = houseDao.selectHouseByHouseInfo(house);
         PageInfo<House> pageInfo = new PageInfo<>(houses);
-        return pageInfo.getList();
+        if(houses.size()>0){
+            return new ResponseEntity(200,"获取成功！",pageInfo);
+        }else {
+            return new ResponseEntity(401,"获取失败！",pageInfo);
+        }
     }
 
     @Override
