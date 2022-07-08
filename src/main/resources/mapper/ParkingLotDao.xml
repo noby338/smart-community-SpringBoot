@@ -52,20 +52,20 @@
     <!--状态修改需要更高权限，单独方法-->
     <!--对象属性修改-->
     <sql id="updateParkingLot">
-            <if test="parkingLot.parking_lot_name!=null and parkingLot.parking_lot_name!=''">
-                parking_lot_name=#{parkingLot.parking_lot_name}
+            <if test="parkingLot.parkingLotName!=null and parkingLot.parkingLotName!=''">
+                parking_lot_name=#{parkingLot.parkingLotName}
             </if>
-            <if test="parkingLot.park_nums!=null and parkingLot.park_nums!=''">
-                ,park_nums=#{parkingLot.park_nums}
+            <if test="parkingLot.parkNums!=null and parkingLot.parkNums!=''">
+                ,park_nums=#{parkingLot.parkNums}
             </if>
-            <if test="parkingLot.sell_park_nums!=null and parkingLot.sell_park_nums!=''">
-                ,sell_park_nums=#{parkingLot.sell_park_nums},
+            <if test="parkingLot.sellParkNums!=null and parkingLot.sellParkNums!=''">
+                ,sell_park_nums=#{parkingLot.sellParkNums}
             </if>
-            <if test="parkingLot.hire_park_nums!=null and parkingLot.hire_park_nums!=''">
-                ,hire_park_nums=#{parkingLot.hire_park_nums}
+            <if test="parkingLot.hireParkNums!=null and parkingLot.hireParkNums!=''">
+                ,hire_park_nums=#{parkingLot.hireParkNums}
             </if>
-            <if test="parkingLot.now_use_nums!=null and parkingLot.now_use_nums!=''">
-                ,now_use_nums=#{parkingLot.now_use_nums}
+            <if test="parkingLot.nowUseNums!=null and parkingLot.nowUseNums!=''">
+                ,now_use_nums=#{parkingLot.nowUseNums}
             </if>
 <!--            <if test="parkingLot.state!=null">-->
 <!--                ,state=#{parkingLot.state}-->
