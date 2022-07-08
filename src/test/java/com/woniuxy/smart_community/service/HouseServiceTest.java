@@ -29,7 +29,7 @@ public class HouseServiceTest {
 
     @Test
     public void deleteHouseByIdTest(){
-        houseService.deleteHouseById(99);
+        houseService.deleteHouseById(6);
     }
 
     @Test

@@ -19,7 +19,7 @@ public class HouseDaoTest {
     @Test
     public void insertHouse(){
         House house = new House();
-        for(int i = 0 ;i<50;i++){
+        for(int i = 50 ;i<150;i++){
             house.setId(i);
             house.setBuilding(i%5);
             house.setUnit(i%5);
@@ -27,6 +27,7 @@ public class HouseDaoTest {
             house.setHouseNum("i+123");
             house.setHousePeopleNums(i%12);
             house.setHouseState(i%5);
+            house.setRemark('i'+"asdvfgjythbht");
             houseDao.insertHouse(house);
         }
     }
