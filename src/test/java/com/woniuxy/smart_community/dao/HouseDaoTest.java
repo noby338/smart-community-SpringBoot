@@ -21,13 +21,13 @@ public class HouseDaoTest {
         House house = new House();
         for(int i = 50 ;i<150;i++){
             house.setId(i);
-            house.setBuilding(i%5);
+            house.setBuilding(i%9);
             house.setUnit(i%5);
-            house.setFloor(i%24);
-            house.setHouseNum("i+123");
-            house.setHousePeopleNums(i%12);
-            house.setHouseState(i%5);
-            house.setRemark('i'+"asdvfgjythbht");
+            house.setFloor(i%10);
+            house.setHouseNum("0"+i%9+"0"+i%5+"0"+i%10 );
+            house.setHousePeopleNums(i%5);
+            house.setHouseState(i%4);
+            house.setRemark("i"+"qwertyuiop");
             houseDao.insertHouse(house);
         }
     }
@@ -44,12 +44,12 @@ public class HouseDaoTest {
         House house = new House();
         for(int i = 0 ;i<100;i++){
             house.setId(i);
-            house.setBuilding(i%2);
-            house.setUnit(i%2);
-            house.setFloor(i%2);
-            house.setHouseNum("12131415");
-            house.setHousePeopleNums(i%2);
-            house.setHouseState(i%2);
+            house.setBuilding(i%9);
+            house.setUnit(i%5);
+            house.setFloor(i%10);
+            house.setHouseNum("0"+"i%9"+"0"+"i%5"+"0"+"i%10" );
+            house.setHousePeopleNums(i%5);
+            house.setHouseState(i%4);
             house.setRemark("i"+"qwertyuiop");
             houseDao.updateHouse(house);
         }

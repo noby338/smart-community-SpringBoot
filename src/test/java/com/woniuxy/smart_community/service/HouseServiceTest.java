@@ -19,7 +19,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class HouseServiceTest {
 
     @Autowired
-    HouseService houseService = new HouseServiceImpl();
+    HouseServiceImpl houseService;
+
 
     @Test
     public void insertHouseTest(){
