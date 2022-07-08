@@ -1,6 +1,8 @@
 package com.woniuxy.smart_community.dao;
 
 import com.woniuxy.smart_community.entity.Electricity;
+import com.woniuxy.smart_community.service.GradientPriceService;
+import net.sf.jsqlparser.util.deparser.GrantDeParser;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +21,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class ElectricityDaoTest {
     @Autowired
     ElectricityDao electricityDao;
+    @Autowired
+    GradientPriceService gradientPriceService;
 
     @Test
     void selectByElectricity() {
@@ -34,24 +38,22 @@ class ElectricityDaoTest {
         Electricity electricity = new Electricity();
         int year = 2022;
         int month = 1;
-        for (int i = 1; i <= 200; i++) {//房屋id
-            BigDecimal nowMonthNums = new BigDecimal(0);//某房屋某月份的初始表用量
-            for (int i1 = 0; i1 < 3; i1++) {//月份
+        //房屋id
+        for (int i = 1; i <= 200; i++) {
+            //某房屋某月份的初始表用量
+            BigDecimal nowMonthNums = new BigDecimal(0);
+            //月份
+            for (int i1 = 0; i1 < 3; i1++) {
                 electricity.setHouseId(i);
                 electricity.setMonth(String.format("%02d/%02d", year,month+i1));
-                nowMonthNums = BigDecimal.valueOf((int) ((Math.random() * 500 * 10000) + 20 * 10000) / 10000.0).add(nowMonthNums);
+                //本月随机写入[20,400)度用电量
+                double randomSage = (int) ((Math.random() * 400 * 10000) + 20 * 10000) / 10000.0;
+                nowMonthNums = BigDecimal.valueOf(randomSage).add(nowMonthNums);
                 electricity.setNowMonthNums(nowMonthNums.doubleValue());
+                electricity.setNowPrices(gradientPriceService.getPriceByUtilIdQuantity(2, randomSage).doubleValue());
+                electricity.setState(1);
                 electricityDao.insert(electricity);
             }
         }
-
-
-
-//        BigDecimal nowMonthNums = new BigDecimal(0);
-//        for (int i1 = 0; i1 < 5; i1++) {//月份
-//            System.out.println("nowMonthNums = " + nowMonthNums);
-//            nowMonthNums = BigDecimal.valueOf((int) ((Math.random() * 500 * 10000) + 20 * 10000) / 10000.0).add(nowMonthNums);
-//
-//        }
     }
 }

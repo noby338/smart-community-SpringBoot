@@ -23,8 +23,8 @@ public class HouseServiceTest {
 
     @Test
     public void insertHouseTest(){
-        House house= new House(99,4,5,6,"789",10,1);
-        houseService.insertHouse(house);
+//        House house= new House(99,4,5,6,"789",10,1);
+//        houseService.insertHouse(house);
     }
 
     @Test
@@ -34,14 +34,14 @@ public class HouseServiceTest {
 
     @Test
     public void updateHouseTest(){
-        House house= new House(1,4,5,6,"789",10,1);
-        houseService.updateHouse(house);
+//        House house= new House(1,4,5,6,"789",10,1);
+//        houseService.updateHouse(house);
     }
 
     @Test
     public void selectHouseByHouseInfoTest(){
         House house = new House();
-        house.setFloor(1);
+//        house.setFloor(1);
         ResponseEntity response = houseService.selectHouseByHouseInfo(house,1,100);
         System.out.println(response);
     }
@@ -49,7 +49,7 @@ public class HouseServiceTest {
     @Test
     public void countHousesTest(){
         House house = new House();
-        house.setFloor(1);
+//        house.setFloor(1);
         Integer houses = houseService.countHouses(house);
         System.out.println(houses);
     }

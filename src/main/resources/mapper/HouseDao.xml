@@ -3,10 +3,15 @@
 <mapper namespace="com.woniuxy.smart_community.dao.HouseDao">
 
     <!--新增房间数据-->
+<!--    <insert id="insertHouse">-->
+<!--        insert into house(id, building_id, unit_id, floor_id, house_num, house_people_nums, house_state)-->
+<!--        values (#{house.id}, #{house.building}, #{house.unit}, #{house.floor}, #{house.houseNum}, #{house.housePeopleNums}, #{house.houseState})-->
+<!--    </insert>-->
     <insert id="insertHouse">
-        insert into house(id, building, unit, floor, house_num, house_people_nums, house_state)
-        values (#{house.id}, #{house.building}, #{house.unit}, #{house.floor}, #{house.houseNum}, #{house.housePeopleNums}, #{house.houseState})
+        insert into house( floor_id, house_num, house_people_nums, house_state)
+        values ( #{floorId}, #{houseNum}, #{housePeopleNums}, #{houseState})
     </insert>
+
 
     <!--通过主键删除房间信息数据-->
     <delete id="deleteHouseById">
