@@ -18,18 +18,20 @@ import java.util.Random;
 public class HouseHoldDaoTset {
     @Autowired
     HouseHoldDao houseHoldDao;
+    RandomUserInfo randomUserInfo = new RandomUserInfo();
 
     @Test
     public void insertTest(){
         HouseHold houseHold = new HouseHold();
-        for(int i =0;i<50;i++){
-            houseHold.setId(i);
-            houseHold.setAge(12);
-            houseHold.setGender(true);
-            houseHold.setName("i");
-            houseHold.setTelephone("1346789");
-            houseHold.setOwner(false);
-            houseHold.setState(i%2);
+        for(int i =0;i<1000;i++){
+            boolean sex = randomUserInfo.getSex();
+            houseHold.setName(randomUserInfo.getFamilyName()+randomUserInfo.getName(sex));
+            houseHold.setAge(randomUserInfo.getAge());
+            houseHold.setGender(sex);
+            houseHold.setTelephone("189"+(int)(Math.random() * 100000000 + 1));
+            houseHold.setHouseId((int)(Math.random() * 1000 + 1));
+            houseHold.setOwner(randomUserInfo.getSex());
+            houseHold.setState((int) ((Math.random() * 10+1)%2));
             houseHoldDao.insert(houseHold);
         }
     }
@@ -37,7 +39,7 @@ public class HouseHoldDaoTset {
     @Test
     public void updateTest(){
         HouseHold houseHold = new HouseHold();
-        for(int i =0;i<200;i++){
+        for(int i =0;i<100;i++){
             houseHold.setId(i);
             houseHold.setAge(i%12);
             houseHold.setHouseId(i%12);
@@ -71,8 +73,8 @@ public class HouseHoldDaoTset {
     @Test
     public void countByHouseInfoTest(){
         HouseHold houseHold = new HouseHold();
-        houseHold.setHouseId(2);
-        System.out.println(houseHoldDao.countByHouseInfo(houseHold));
+        houseHold.setHouseId(894);
+        System.out.println(houseHoldDao.countByHouseHouseInfo(houseHold));
     }
 
     @Test
@@ -83,7 +85,7 @@ public class HouseHoldDaoTset {
         System.out.println(sex);
         System.out.println(randomUserInfo.getFamilyName());
         System.out.println(randomUserInfo.getAge());
-        System.out.println(randomUserInfo.getNameAndSex(sex));
+        System.out.println(randomUserInfo.getName(sex));
     }
 
     public class RandomUserInfo{
@@ -113,7 +115,7 @@ public class HouseHoldDaoTset {
          * @param sex
          * @return
          */
-        public String getNameAndSex(boolean sex) {
+        public String getName(boolean sex) {
             String name = "";
             int randNum = new Random().nextInt(2) + 1;//1,2
             int strLen = (sex) ? boyName.length() : girlName.length();//判断男女名字

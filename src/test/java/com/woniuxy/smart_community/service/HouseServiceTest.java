@@ -47,11 +47,4 @@ public class HouseServiceTest {
         System.out.println(response);
     }
 
-    @Test
-    public void countHousesTest(){
-        House house = new House();
-//        house.setFloor(1);
-        Integer houses = houseService.countHouses(house);
-        System.out.println(houses);
-    }
 }

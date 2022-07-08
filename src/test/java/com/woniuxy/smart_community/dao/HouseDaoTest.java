@@ -2,10 +2,13 @@ package com.woniuxy.smart_community.dao;
 
 import com.woniuxy.smart_community.entity.House;
 import com.woniuxy.smart_community.entity.HouseFloor;
+import com.woniuxy.smart_community.entity.HouseHold;
 import com.woniuxy.smart_community.entity.HouseUnit;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Random;
 
 /**
  * @ClassName -> HouseDaoTest
@@ -13,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @Date 2022/7/5 16:43 星期二
  * @Version 1.0
  **/
+@SuppressWarnings("ALL")
 @SpringBootTest
 public class HouseDaoTest {
     @Autowired
@@ -21,6 +25,8 @@ public class HouseDaoTest {
     HouseUnitDao houseUnitDao;
     @Autowired
     HouseFloorDao houseFloorDao;
+    @Autowired
+    HouseHoldDao houseHoldDao;
 
     @Test
     public void insertHouse(){
@@ -45,38 +51,36 @@ public class HouseDaoTest {
 
 
     }
-//
-//    @Test
-//    public  void  selectHouseByHouseInfoTest(){
-//        House house = new House();
-//        house.setFloor(1);
-//        System.out.println(houseDao.selectHouseByHouseInfo(house));
-//    }
-//
-//    @Test
-//    public void updateHouse(){
-//        House house = new House();
-//        for(int i = 0 ;i<100;i++){
-//            house.setId(i);
-//            house.setBuilding(i%2);
-//            house.setUnit(i%2);
-//            house.setFloor(i%2);
-//            house.setHouseNum("12131415");
-//            house.setHousePeopleNums(i%2);
-//            house.setHouseState(i%2);
-//            houseDao.updateHouse(house);
-//        }
-//    }
-//
-//    @Test
-//    public void deleteByIdTest(){
-//        houseDao.deleteHouseById(1);
-//    }
-//
-//    @Test
-//    public void count(){
-//        House house = new House();
-//        house.setFloor(2);
-//        System.out.println(houseDao.countHouses(house));
-//    }
+
+
+    @Test
+    public void updateHouse(){
+        House house = new House();
+        HouseHold houseHold = new HouseHold();
+        for(int i = 1 ;i<=1000;i++){
+            house.setId(i);
+            houseHold.setHouseId(i);
+            int peoples = houseHoldDao.countByHouseHouseInfo(houseHold);
+            if (peoples>0){
+                house.setHousePeopleNums(peoples);
+                house.setHouseState(new Random().nextInt(2) + 1);
+            }else {
+                house.setHousePeopleNums(peoples);
+                if((i % 3) == 0){
+                    house.setHouseState(3);
+                }else if((i%3)==1){
+                    house.setHouseState(4);
+                }else {
+                    house.setHouseState(5);
+                }
+            }
+            houseDao.updateHouse(house);
+        }
+    }
+
+    @Test
+    public void deleteByIdTest(){
+        houseDao.deleteHouseById(1);
+    }
+
 }
