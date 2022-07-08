@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- XML约束头:MyBatis的约束文件使用的dtd，规范这个XML文档处理 遵守XML的一般规则以外，要遵守的自定义规则:能够使用哪些标签，使用哪些属性，出现的次数，标签的先后属性 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper是映射文件的根节点 namespace属性：名称空间，命名空间.就是一个名字 现在可以任意，以后使用接口的全限定名 -->
+<mapper namespace="com.woniuxy.smart_community.dao.ParkingOrderList">
+<!--查询-->
+    <select id="selectParkingOrderListByOrderInfo" resultMap="parkingOrderListMapper">
+        select * from parking_order_list
+        <include refid="selectParkingOrderList"/>
+    </select>
+
+    <select id="selectParkingOrderListNums" resultType="int">
+        select count(*) from parking_order_list
+        <include refid="selectParkingOrderList"/>
+    </select>
+
+
+
+    
+<!--添加 添加信息，可以直接过去添加信息的主键-->
+    <insert id="insertParkingOrderInfo" parameterType="parkingOrderList"
+            useGeneratedKeys="true" keyProperty="orderId" keyColumn="orderid" >
+        insert into parking_order_list values(null,#{parkingOrder.orderNo},
+        #{parkingOrder.parkId},#{parkingOrder.orderTime},#{parkingOrder.orderEndTime},
+        #{parkingOrder.orderCost},#{parkingOrder.owId},#{parkingOrder.pTypeId},
+        #{parkingOrder.payType},1,#{parkingOrder.ordeRemark})
+    </insert>
+
+
+<!--修改-->
+    <update id="updateParkingOrderState">
+        update parking_order_list set orderstate=#{orderState}
+        <where>
+            <if test="orderId!=null">
+                and orderid=#{orderId}
+            </if>
+            <if test="orderNo!=null adn noderNo!=''">
+                and orderno=#{orderNo}
+            </if>
+
+        </where>
+    </update>
+
+
+
+<!--删除-->
+
+
+
+<!--共用功能-->
+
+    <resultMap id="parkingOrderListMapper" type="parkingOrderList">
+        <id column="orderid" property="orderId"/>
+        <result column="orderno" property="orderNo"/>
+        <result column="ordertime" property="orderTime"/>
+        <result column="orderendtime" property="orderEndTime"/>
+        <result column="ordercost" property="orderCost"/>
+        <result column="paytype" property="payType"/>
+        <result column="orderstate" property="orderState"/>
+        <association property="parkingInfo" javaType="ParkingInfo" column="parkid" select="selectParkingInfoByParkId"/>
+        <association property="ownersInfo" javaType="OwnersInfo" column="owid" select="selectOwnersInfoByOwid"/>
+        <association property="parkingType" javaType="ParkingType" column="ptypeid" select="selectParkingTypeByPtypeid"/>
+    </resultMap>
+    <select id="selectParkingInfoByParkId" resultType="parkingInfo">
+        select * from parking_info where parkid=#{parkid}
+    </select>
+    <select id="selectOwnersInfoByOwid" resultType="ownersInfo">
+        select * from owners_info where owid=#{owid}
+    </select>
+    <select id="selectParkingTypeByPtypeid" resultType="parkingType">
+        select * from parking_type where ptypeid=#{ptypeid}
+    </select>
+
+
+    <sql id="selectParkingOrderList">
+        <where>
+            <if test="parkingOrder.orderId!=null">
+                and orderid=#{parkingOrder.orderId}
+            </if>
+            <if test="parkingOrder.orderNo!=null and parkingOrder.orderNo!=''">
+                and orderno=#{parkingOrder.orderNo}
+            </if>
+            <if test="parkingOrder.parkId!=null">
+                and parkid=#{parkingOrder.parkId}
+            </if>
+            <if test="parkingOrder.orderTime!=null">
+                and ordertime <![CDATA[>=]]> #{parkingOrder.orderTime}
+            </if>
+            <if test="parkingOrder.orderEndTime!=null">
+                and orderendtime <![CDATA[<=]]> #{parkingOrder.orderEndTime}
+            </if>
+            <if test="parkingOrder.owId!=null">
+                and owid=#{parkingOrder.owId}
+            </if>
+            <if test="parkingOrder.pTypeId!=null">
+                and ptypeid=#{parkingOrder.pTypeId}
+            </if>
+            <if test="parkingOrder.orderState!=null">
+                and orderstate=#{parkingOrder.orderState}
+            </if>
+            <if test="parkingOrder.ordeRemark!=null and parkingOrder.ordeRmark!=''">
+                and ordermark like '%' #{parkingOrder.ordeRmark} '%'
+            </if>
+        </where>
+    </sql>
+
+
+
+
+</mapper>

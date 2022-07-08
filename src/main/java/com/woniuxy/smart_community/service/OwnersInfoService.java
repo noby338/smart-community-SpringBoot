@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface OwnersInfoService {
 //    主键查询
-    OwnersInfo getOwnameByOwid(int owid);
+    OwnersInfo getOwnameByOwid(int owId);
 //    业主名和电话查询
-    OwnersInfo getOwnerByOwnameAndOwphone(String owname,String owphone);
+    OwnersInfo getOwnerByOwnameAndOwphone(String owName,String owPhone);
 //    通过业主所有信息查询
     OwnersInfo getOwnerByOwnerinfo(OwnersInfo ownersInfo);
 //    查询所有
@@ -22,5 +22,5 @@ public interface OwnersInfoService {
     void changeOwnerinfoByOwnerinfo(OwnersInfo ownersInfo);
 
 //    删除用户 管理员
-    void removeOwnerByOwid(int owid);
+    void removeOwnerByOwid(int owId);
 }

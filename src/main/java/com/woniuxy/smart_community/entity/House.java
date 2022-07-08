@@ -14,13 +14,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class House {
     private Integer id;
     private Integer building;
     private Integer unit;
     private Integer floor;
-    private String house_num;
-    private Integer house_people_nums;
-    private Integer house_state;
+    private String  houseNum;
+    private Integer housePeopleNums;
+    private Integer houseState;
+    private String remark;
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniuxy.smart_community.dao.ElectricityDao">
+    <insert id="insert">
+        insert into electricity(house_id, month, now_month_nums, now_prices, state)
+        values (#{houseId}, #{month}, #{nowMonthNums}, #{nowPrices}, #{state})
+    </insert>
+
+    <select id="selectByElectricity" resultType="com.woniuxy.smart_community.entity.Electricity">
+        select * from electricity where id = #{id}
+    </select>
+</mapper>

@@ -9,15 +9,15 @@
 
 
 <!--查询-->
-    <select id="selectAllParkingLot" resultType="com.woniuxy.smart_community.entity.ParkingLot">
+    <select id="selectAllParkingLot" resultType="ParkingLot">
         select * from parking_lot
     </select>
     
-    <select id="selectParkingLotById" resultType="com.woniuxy.smart_community.entity.ParkingLot">
+    <select id="selectParkingLotById" resultType="ParkingLot">
         select * from parking_lot where id=#{id}
     </select>
     
-    <select id="selectParkingLotByName" resultType="com.woniuxy.smart_community.entity.ParkingLot">
+    <select id="selectParkingLotByName" resultType="ParkingLot">
         select * from parking_lot where parking_lot_name like '%' #{parkingName} '%'
     </select>
     
@@ -27,8 +27,8 @@
     
 <!--添加-->
     <insert id="insertParkingLot">
-        insert into parking_lot values(null,#{parkingLot.parking_lot_name},#{parkingLot.park_nums},
-        #{parkingLot.sell_park_nums},#{parkingLot.hire_park_nums},#{parkingLot.now_use_nums},1)
+        insert into parking_lot values(null,#{parkingLot.parkingLotName},#{parkingLot.parkNums},
+        #{parkingLot.sellParkNums},#{parkingLot.hireParkNums},#{parkingLot.nowUseNums},1)
     </insert>
 
 
