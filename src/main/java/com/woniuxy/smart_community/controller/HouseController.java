@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  * @ClassName -> HouseController
  * @Version 1.0
  **/
-//@CrossOrigin
+
 @ResponseBody
 @RestController
 @RequestMapping("/house")
@@ -51,6 +51,7 @@ public class HouseController {
      * @param house 实例对象
      * @return 影响行数
      */
+    @PostMapping("/updateHouse")
      public ResponseEntity updateHouse(@Param("house") House house){
          ResponseEntity response = houseService.updateHouse(house);
          System.out.println(response);
@@ -79,6 +80,7 @@ public class HouseController {
      * @param house 查询条件
      * @return 总行数
      */
+    @PostMapping("/countHouses")
     public ResponseEntity countHouses(@Param("house") House house){
         return houseService.countHouses(house);
     }

@@ -19,7 +19,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class HouseServiceTest {
 
     @Autowired
-    HouseService houseService = new HouseServiceImpl();
+    HouseServiceImpl houseService;
+
 
     @Test
     public void insertHouseTest(){
@@ -29,7 +30,7 @@ public class HouseServiceTest {
 
     @Test
     public void deleteHouseByIdTest(){
-        houseService.deleteHouseById(99);
+        houseService.deleteHouseById(6);
     }
 
     @Test
