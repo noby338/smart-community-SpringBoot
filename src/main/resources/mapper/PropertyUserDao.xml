@@ -95,9 +95,7 @@
     <update id="update">
         update property_user
         <set>
-            <if test="loginName != null and loginName != ''">
-                login_name = #{loginName},
-            </if>
+
             <if test="password != null and password != ''">
                 password = #{password},
             </if>
@@ -117,12 +115,12 @@
                 state = #{state},
             </if>
         </set>
-        where id = #{id}
+        where  login_name = #{loginName}
     </update>
 
     <!--通过主键删除-->
-    <delete id="deleteById">
-        delete from property_user where id = #{id}
+    <delete id="deleteByLoginName">
+        delete from property_user where login_name = #{loginName}
     </delete>
 
 </mapper>

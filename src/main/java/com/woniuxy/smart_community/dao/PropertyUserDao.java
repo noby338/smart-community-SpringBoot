@@ -21,5 +21,11 @@ public interface PropertyUserDao {
 
 
     List<PropertyUser> findAll();
+
+    boolean update(PropertyUser propertyUser);
+
+    boolean insert(PropertyUser propertyUser);
+
+    boolean deleteByLoginName(String loginName);
 }
 

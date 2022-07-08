@@ -15,7 +15,8 @@ import java.util.List;
 public interface PropertyUserService {
 
     ResponseEntity findAll(int currentPage,int pageSize);
-
+    //修改
+    ResponseEntity update(PropertyUser propertyUser);
     /**
      * 通过主键删除数据
      *
@@ -24,4 +25,7 @@ public interface PropertyUserService {
      */
     boolean deleteById(Integer id);
 
+    ResponseEntity insert(PropertyUser propertyUser);
+
+    ResponseEntity deleteByLoginName(String loginName);
 }

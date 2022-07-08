@@ -38,7 +38,37 @@ public class PropertyUserServiceImpl implements PropertyUserService {
     }
 
     @Override
+    public ResponseEntity update(PropertyUser propertyUser) {
+        boolean update = propertyUserDao.update(propertyUser);
+        if(update) {
+            return new ResponseEntity(200, "修改成功", null);
+        }else {
+            return new ResponseEntity(200, "修改失败", null);
+        }
+    }
+
+    @Override
     public boolean deleteById(Integer id) {
         return false;
+    }
+
+    @Override
+    public ResponseEntity insert(PropertyUser propertyUser) {
+        boolean update = propertyUserDao.insert(propertyUser);
+        if(update) {
+            return new ResponseEntity(200, "修改成功", null);
+        }else {
+            return new ResponseEntity(200, "修改失败", null);
+        }
+    }
+
+    @Override
+    public ResponseEntity deleteByLoginName(String loginName) {
+        boolean delete= propertyUserDao.deleteByLoginName(loginName);
+        if(delete) {
+            return new ResponseEntity(200, "删除成功", null);
+        }else {
+            return new ResponseEntity(200, "删除失败", null);
+        }
     }
 }

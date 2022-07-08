@@ -3,6 +3,7 @@ package com.woniuxy.smart_community.controller;
 import com.woniuxy.smart_community.entity.PropertyUser;
 import com.woniuxy.smart_community.entity.ResponseEntity;
 import com.woniuxy.smart_community.service.PropertyUserService;
+import lombok.experimental.Accessors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user")
+@CrossOrigin
 public class PropertyUserController {
     /**
      * 服务对象
@@ -28,7 +30,18 @@ public class PropertyUserController {
 
        return propertyUserService.findAll(currentPage, pageSize);
     }
-
+@RequestMapping("/update")
+    public ResponseEntity update(@RequestBody PropertyUser propertyUser){
+    return propertyUserService.update(propertyUser);
+}
+@RequestMapping("/insert")
+    public ResponseEntity insert(@RequestBody PropertyUser propertyUser){
+    return propertyUserService.insert(propertyUser);
+}
+@DeleteMapping("/delete/{loginName}")
+    public ResponseEntity deleteByLoginName(@PathVariable String loginName){
+return propertyUserService.deleteByLoginName(loginName);
+}
 
 }
 
