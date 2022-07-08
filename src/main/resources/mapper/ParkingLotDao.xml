@@ -9,15 +9,15 @@
 
 
 <!--查询-->
-    <select id="selectAllParkingLot" resultType="com.woniuxy.smart_community.entity.ParkingLot">
+    <select id="selectAllParkingLot" resultType="ParkingLot">
         select * from parking_lot
     </select>
     
-    <select id="selectParkingLotById" resultType="com.woniuxy.smart_community.entity.ParkingLot">
+    <select id="selectParkingLotById" resultType="ParkingLot">
         select * from parking_lot where id=#{id}
     </select>
     
-    <select id="selectParkingLotByName" resultType="com.woniuxy.smart_community.entity.ParkingLot">
+    <select id="selectParkingLotByName" resultType="ParkingLot">
         select * from parking_lot where parking_lot_name like '%' #{parkingName} '%'
     </select>
     

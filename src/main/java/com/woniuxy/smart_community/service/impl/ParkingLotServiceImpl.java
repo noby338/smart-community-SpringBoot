@@ -13,6 +13,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
 
     @Autowired
     ParkingLotDao parkingLotDao;
+
 //    查询
     @Override
     public List<ParkingLot> getAllParkingLot() {

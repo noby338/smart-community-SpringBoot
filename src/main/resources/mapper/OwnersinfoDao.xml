@@ -7,7 +7,7 @@
 <mapper namespace="com.woniuxy.smart_community.dao.OwnerInfoDao">
 <!--查询-->
     <select id="selectOwnerByOwnerinfo" resultMap="ownersInfoMapper">
-        select * from owners_info o,house h where o.id=h.id
+        select * from owners_info
         <include refid="selectOwnersinfo"/>
     </select>
 
@@ -35,7 +35,8 @@
 
     
 <!--添加-->
-    <insert id="insertOwnerinfo">
+    <insert id="insertOwnerinfo"  parameterType="ownersinfo"
+            useGeneratedKeys="true" keyProperty="owId" keyColumn="owid">
         insert into owners_info values(null,#{ownersInfo.owName},#{ownersInfo.owPhone},#{ownersInfo.id},#{ownersInfo.owType})
     </insert>
 
@@ -55,6 +56,10 @@
 <!--共用功能-->
     <!--联表查询-->
     <resultMap id="ownersInfoMapper" type="ownersInfo">
+        <id column="owid" property="owId"/>
+        <result column="owname" property="owName"/>
+        <result column="owphone" property="owPhone"/>
+        <result column="owtype" property="owType"/>
         <association property="house" javaType="house" column="id" select="selecctHouseById"/>
     </resultMap>
     <select id="selecctHouseById">

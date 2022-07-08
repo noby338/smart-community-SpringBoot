@@ -27,5 +27,5 @@ public class House {
     private String houseNum;
     private Integer housePeopleNums;
     private Integer houseState;
-
+    private String remark;
 }

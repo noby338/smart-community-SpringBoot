@@ -12,9 +12,8 @@
         values ( #{floorId}, #{houseNum}, #{housePeopleNums}, #{houseState})
     </insert>
 
-
     <!--通过主键删除房间信息数据-->
-    <delete id="deleteHouseById">
+    <delete id="deleteHouseById" >
         delete from house where id = #{id}
     </delete>
 

@@ -1,7 +1,9 @@
 package com.woniuxy.smart_community.service;
 
 import com.github.pagehelper.PageInfo;
+import com.woniuxy.smart_community.entity.OwnersInfo;
 import com.woniuxy.smart_community.entity.ParkingInfo;
+import com.woniuxy.smart_community.entity.ResponseEntity;
 
 import java.util.List;
 
@@ -21,5 +23,7 @@ public interface ParkingInfoService {
      * @return
      */
     PageInfo<ParkingInfo> getParkingInfoByPage(int pageIndex, int pageSize, ParkingInfo parkingInfo);
+
+    void addParkingOrderBusiness(OwnersInfo ownersInfo, ParkingInfo parkingInfo,int pTypeId);
 
 }
