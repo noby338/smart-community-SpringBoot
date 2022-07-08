@@ -16,6 +16,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class ParkingType {
-    private Integer pTypeId;
-    private String pType;
+    private Integer id;
+    private String name;
 }

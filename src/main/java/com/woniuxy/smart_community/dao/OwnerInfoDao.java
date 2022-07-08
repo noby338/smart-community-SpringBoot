@@ -9,24 +9,30 @@ import java.util.List;
 @Mapper
 public interface OwnerInfoDao {
 //  查询区
-    OwnersInfo selectOwnameByOwid(int owId);
+    OwnersInfo selectOwnerNameById(int id);
 
-    OwnersInfo selectOwnerByOwnameAndPhone(@Param("owName") String owname,
-                                           @Param("owPhone") String owphone);
+    OwnersInfo selectOwnerByNameAndTelephone(@Param("name") String name,
+                                           @Param("telephone") String telephone);
 
-    OwnersInfo selectOwnerByOwnerinfo(@Param("ownersInfo") OwnersInfo ownersInfo);
+    OwnersInfo selectOwnerByOwnerInfo(@Param("ownersInfo") OwnersInfo ownersInfo);
 
-    List<OwnersInfo> selectAll();
-
-
-//  insert添加
-    void insertOwnerinfo(@Param("ownersInfo") OwnersInfo ownersInfo);
+    List<OwnersInfo> selectAllOwners();
 
 
-//   update
-    void updateOwnerByOwnerinfo(@Param("ownersInfo") OwnersInfo ownersInfo);
+//  insert添加车主
+    //车主有房间信息就添加house_id
+    //车主无房间信息就为空
+    void insertOwnerInfo(@Param("ownersInfo") OwnersInfo ownersInfo);
+
+
+//   update修改车主
+    //车主有房间信息就添加house_id
+    //车主无房间信息就为空
+    void updateOwnerByOwnerInfo(@Param("ownersInfo") OwnersInfo ownersInfo);
 
 //    delete  管理员使用
-    void deleteOwnerByOwid(int owId);
+    //假删除
+    //将车主信息状态置为0s
+    void deleteOwnersById(int id);
 
 }
