@@ -6,7 +6,7 @@
     <select id="selectHouseHoldByHouseHoldInfo" resultType="houseHold">
         select
           *
-        from household
+        from house_hold
         <where>
             <if test="houseHold.id != null">
                 and id = #{houseHold.id}
@@ -37,14 +37,14 @@
 
     <!--新增房间数据-->
     <insert id="insert"   >
-        insert into household(id, name, age, gender, telephone, house_id, is_owner, state)
+        insert into house_hold(id, name, age, gender, telephone, house_id, is_owner, state)
         values (#{houseHold.id}, #{houseHold.name}, #{houseHold.age}, #{houseHold.gender}, #{houseHold.telephone}, #{houseHold.houseId}, #{houseHold.isOwner}, #{houseHold.state})
     </insert>
 
 
     <!--通过主键修改房间信息数据-->
     <update id="update">
-        update household
+        update house_hold
             <set>
                 <if test="houseHold.id != null">
                     id = #{houseHold.id},
@@ -76,18 +76,18 @@
 
     <!--通过主键删除房间信息数据-->
     <delete id="deleteById">
-        delete from household where id = #{houseHold.houseId}
+        delete from house_hold where id = #{houseHold.houseId}
     </delete>
 
     <!--通过主键删除房间信息数据-->
     <delete id="deleteByHouseId">
-        delete from household where house_id = #{id}
+        delete from house_hold where house_id = #{id}
     </delete>
 
     <!--根据人口信息统计总行数-->
     <select id="countByHouseInfo" resultType="integer">
         select count(*)
-        from household
+        from house_hold
         <where>
             <if test="houseHold.id != null">
                 and id = #{houseHold.id}
