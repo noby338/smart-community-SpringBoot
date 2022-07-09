@@ -13,8 +13,6 @@ import java.util.List;
  * @Date 2022/7/5 15:12 星期二
  * @Version 1.0
  **/
-@Mapper
-@Repository
 public interface HouseDao {
 
     /**
@@ -24,15 +22,15 @@ public interface HouseDao {
      * @return 影响行数
      */
 //    int insertHouse(@Param("house")House house);
-    int insertHouse(House house);
+    int insertHouse(@Param("house") House house);
 
     /**
      * 通过主键删除房间信息数据
      *
-     * @param id 主键
+     * @param house 实例对象
      * @return 影响行数
      */
-    int deleteHouseById(Integer id);
+    int deleteHouse(@Param("house") House house);
 
     /**
      * 通过主键修改房间信息数据
@@ -48,14 +46,6 @@ public interface HouseDao {
      * @param house 房间号
      * @return 实例对象
      */
-    List<House> selectHouseByHouseInfo(@Param("house") House house);
-
-    /**
-     * 根据房间信息统计总行数
-     *
-     * @param house 查询条件
-     * @return 总行数
-     */
-    Integer countHouses(@Param("house") House house);
+    List<House> selectHouse(@Param("house") House house);
 
 }

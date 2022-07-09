@@ -28,23 +28,25 @@ public class HouseServiceTest {
 //        houseService.insertHouse(house);
     }
 
-    @Test
-    public void deleteHouseByIdTest(){
-        houseService.deleteHouseById(6);
-    }
+//    @Test
+//    public void deleteHouseByIdTest(){
+//        House house = new House();
+//        house.setId(6);
+//        houseService.deleteHouse(house);
+//    }
 
     @Test
     public void updateHouseTest(){
 //        House house= new House(1,4,5,6,"789",10,1);
 //        houseService.updateHouse(house);
     }
-
-    @Test
-    public void selectHouseByHouseInfoTest(){
-        House house = new House();
-//        house.setFloor(1);
-        ResponseEntity response = houseService.selectHouseByHouseInfo(house,1,100);
-        System.out.println(response);
-    }
+//
+//    @Test
+//    public void selectHouseByHouseInfoTest(){
+//        House house = new House();
+////        house.setFloor(1);
+//        ResponseEntity response = houseService.selectHouse(house,1,100);
+//        System.out.println(response);
+//    }
 
 }

@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class houseBuilding {
+public class HouseBuilding {
     private int id;
     private String name;
 }

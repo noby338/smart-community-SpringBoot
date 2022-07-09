@@ -21,14 +21,33 @@ class HouseFloorDaoTest {
      * 插入数据到数据库
      */
     @Test
-    void testInsert() {
+    void insertHouseFloorTset() {
         HouseFloor houseFloor = new HouseFloor();
-        for (int i = 1; i <= 24; i++) {//楼
-            for (int i1 = 1; i1 <= 100; i1++) {//单元id
-                houseFloor.setName(i+"楼");
-                houseFloor.setUnitId(i1);
-                houseFloorDao.insert(houseFloor);
-            }
-        }
+        houseFloor.setUnitId(100);
+        houseFloor.setName("测试");
+        houseFloorDao.insertHouseFloor(houseFloor);
+    }
+
+    @Test
+    void deleteHouseFloorTset() {
+        HouseFloor houseFloor = new HouseFloor();
+        houseFloor.setId(2401);
+        houseFloorDao.deleteHouseFloor(houseFloor);
+    }
+
+    @Test
+    void updateHouseFloorTset() {
+        HouseFloor houseFloor = new HouseFloor();
+        houseFloor.setId(2402);
+        houseFloor.setUnitId(99);
+        houseFloor.setName("测试1");
+        houseFloorDao.updateHouseFloor(houseFloor);
+    }
+
+    @Test
+    void selectHouseFloorTset() {
+        HouseFloor houseFloor = new HouseFloor();
+        houseFloor.setUnitId(99);
+        houseFloorDao.selectHouseFloor(houseFloor);
     }
 }
