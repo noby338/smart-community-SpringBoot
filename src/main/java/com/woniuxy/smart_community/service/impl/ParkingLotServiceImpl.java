@@ -21,6 +21,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         return parkingLots;
     }
 
+    //使用
     @Override
     public ParkingLot getParkingLotById(int id) {
         ParkingLot parkingLot = parkingLotDao.selectParkingLotById(id);

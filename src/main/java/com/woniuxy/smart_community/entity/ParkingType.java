@@ -17,5 +17,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class ParkingType {
     private Integer id;
+    //1 自购 2 已出租 3 自由 4 注销
     private String name;
 }

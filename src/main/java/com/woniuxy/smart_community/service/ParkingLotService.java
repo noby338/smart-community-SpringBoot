@@ -7,7 +7,9 @@ import java.util.List;
 public interface ParkingLotService {
 //    查询
     List<ParkingLot> getAllParkingLot();
-    ParkingLot getParkingLotById(int id);
+
+
+    ParkingLot getParkingLotById(int id);//使用
     List<ParkingLot> getParkingLotByName(String parkingName);
 
 

@@ -57,21 +57,30 @@
 
 <!--修改-->
     <update id="updateOwnerByOwnerInfo">
-        update owners_info set <include refid="updateOwnersInfo"/> where id=#{ownersInfo.id}
+        update owners_info
+        <include refid="updateOwnersInfo"/>
+        where id=#{ownersInfo.id}
     </update>
 
     <!--对象属性修改-->
     <sql id="updateOwnersInfo">
-        <if test="ownersInfo.name!=null and ownersInfo.name!=''">
-            name=#{ownersInfo.name}
-        </if>
-        <if test="ownersInfo.telephone!=null and ownersInfo.telephone!=''">
-            ,telephone=#{ownersInfo.telephone}
-        </if>
-        <if test="ownersInfo.state==null and ownersInfo.state==''">
-            ,state=#{ownersInfo.state}
-        </if>
-        ,house_id=#{ownersInfo.house.id}
+        <set>
+            <if test="ownersInfo.id!=null and ownersInfo.id!=''">
+                id=#{ownersInfo.id}
+            </if>
+            <if test="ownersInfo.name!=null and ownersInfo.name!=''">
+                ,name=#{ownersInfo.name}
+            </if>
+            <if test="ownersInfo.telephone!=null and ownersInfo.telephone!=''">
+                ,telephone=#{ownersInfo.telephone}
+            </if>
+            <if test="ownersInfo.state==null and ownersInfo.state==''">
+                ,state=#{ownersInfo.state}
+            </if>
+            <if test="ownersInfo.house!=null">
+                ,house_id=#{ownersInfo.house.id}
+            </if>
+        </set>
     </sql>
 
 

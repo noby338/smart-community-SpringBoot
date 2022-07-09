@@ -1,11 +1,8 @@
 package com.woniuxy.smart_community.service;
 
 import com.github.pagehelper.PageInfo;
-import com.woniuxy.smart_community.entity.OwnersInfo;
 import com.woniuxy.smart_community.entity.ParkingInfo;
-import com.woniuxy.smart_community.entity.ResponseEntity;
 
-import java.util.List;
 
 /**
  * @Description 车位管理
@@ -13,17 +10,16 @@ import java.util.List;
  * @Date 2022/7/6 17:51
  */
 public interface ParkingInfoService {
-    List<ParkingInfo> getAllParkingInfo();
-
     /**
      * 分页查询车位信息
      * @param pageIndex
      * @param pageSize
      * @param parkingInfo
      * @return
-     */
+     */ //使用
     PageInfo<ParkingInfo> getParkingInfoByPage(int pageIndex, int pageSize, ParkingInfo parkingInfo);
-
-    void addParkingOrderBusiness(OwnersInfo ownersInfo, ParkingInfo parkingInfo,int pTypeId);
+    void addParkingInfo(ParkingInfo parkingInfo);
+    void removeParkingInfoByParkId(int parkId);
+    void changeParkingInfo(ParkingInfo parkingInfo);
 
 }

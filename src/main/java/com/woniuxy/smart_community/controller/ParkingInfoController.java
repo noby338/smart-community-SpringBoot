@@ -67,24 +67,46 @@ public class ParkingInfoController {
     }
 
     /**
-     * 变更车位所有人信息
-     * 变更前判断车位状态是否不为自由状态
+     * 管理员添加车位
+     * @param parkingInfo
      * @return
      */
-
-    public ResponseEntity changeParkingInfoByOwnersInfo(){
-        return null;
+    @PostMapping("/addParkingInfo")
+    public ResponseEntity addParkingInfo(@RequestBody ParkingInfo parkingInfo){
+        ResponseEntity responseEntity=null;
+        System.out.println("添加车位："+parkingInfo);
+        parkingInfoService.addParkingInfo(parkingInfo);
+        responseEntity=new ResponseEntity(200,"success",null);
+        return responseEntity;
     }
 
 
     /**
-     *
+     * 删除车位信息
+     * @param parkId
      * @return
      */
-
-    public ResponseEntity changeParkingInfo(){
-        return null;
+    @DeleteMapping("/deleteParkingInfoByParkId/{parkId}")
+    public ResponseEntity delParkingInfoByParkId(@PathVariable("parkId") int parkId){
+        ResponseEntity responseEntity=null;
+        System.out.println("删除操作 parkId="+parkId);
+        parkingInfoService.removeParkingInfoByParkId(parkId);
+        responseEntity=new ResponseEntity(200,"success",null);
+        return responseEntity;
     }
 
+    /**
+     * 管理员过更改车位基本信息
+     * @param parkingInfo
+     * @return
+     */
+    @PutMapping("/changeParkingInfo")
+    public ResponseEntity changeParkingInfo(@RequestBody ParkingInfo parkingInfo){
+        ResponseEntity responseEntity=null;
+        parkingInfoService.changeParkingInfo(parkingInfo);
+        System.out.println("更改车位信息："+parkingInfo);
+        responseEntity=new ResponseEntity(200,"success",null);
+        return responseEntity;
+    }
 
 }
