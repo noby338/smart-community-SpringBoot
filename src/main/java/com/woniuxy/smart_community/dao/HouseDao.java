@@ -23,7 +23,8 @@ public interface HouseDao {
      * @param house 实例对象
      * @return 影响行数
      */
-    int insertHouse(@Param("house")House house);
+//    int insertHouse(@Param("house")House house);
+    int insertHouse(House house);
 
     /**
      * 通过主键删除房间信息数据

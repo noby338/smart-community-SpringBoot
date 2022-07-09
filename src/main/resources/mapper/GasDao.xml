@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniuxy.smart_community.dao.GasDao">
+
+    <insert id="insert">
+        insert into gas (house_id, month, now_month_nums, now_prices, state)
+        value (#{houseId}, #{month}, #{nowMonthNums}, #{nowPrices}, #{state})
+    </insert>
+</mapper>

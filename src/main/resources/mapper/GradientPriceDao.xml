@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniuxy.smart_community.dao.GradientPriceDao">
+
+    <update id="updateByGradientPrice">
+        update gradient_price
+        set name=#{name},
+            beginning=#{beginning},
+            end=#{end},
+            price=#{price}
+            where id = #{id}
+    </update>
+    <select id="selectByUtilId" resultType="com.woniuxy.smart_community.entity.GradientPrice">
+        select * from gradient_price where util_id=#{utilId}
+    </select>
+</mapper>

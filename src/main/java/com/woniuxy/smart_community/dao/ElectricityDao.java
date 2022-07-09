@@ -14,5 +14,10 @@ public interface ElectricityDao {
      * @return Electricity 电费对象
      */
     Electricity selectByElectricity(int electricityId);
+
+    /**
+     * 插入电费月用量
+     * @param electricity 电费表
+     */
     void insert(Electricity electricity);
 }
