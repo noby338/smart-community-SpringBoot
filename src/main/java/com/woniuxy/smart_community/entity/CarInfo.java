@@ -15,15 +15,16 @@ import org.apache.ibatis.type.Alias;
 @Data
 @Alias("CarInfo")
 public class CarInfo {
-    private Integer carId;
-    private String carNo;   //车牌号 8位
+    private Integer id;
+    private String carNumber;   //车牌号 8位
     private String carJpg;  //照片 路径
 
-    private Integer parkId;     //外键 关联车位信息
+    //外键 关联车位信息
     private ParkingInfo parkingInfo;
 
-    private Integer owId;       //外键 关联车主信息
+    //外键 关联车主信息
     private OwnersInfo ownersInfo;
 
-    private Integer carState;      //车辆状态  0：失效  1：有效
+    //车辆状态  0：失效  1：有效
+    private Integer state;
 }

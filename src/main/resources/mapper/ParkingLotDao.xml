@@ -6,70 +6,8 @@
 <!-- mapper是映射文件的根节点 namespace属性：名称空间，命名空间.就是一个名字 现在可以任意，以后使用接口的全限定名 -->
 <mapper namespace="com.woniuxy.smart_community.dao.ParkingLotDao">
 
-
-
-<!--查询-->
-    <select id="selectAllParkingLot" resultType="ParkingLot">
-        select * from parking_lot
-    </select>
-    
+<!--    使用-->
     <select id="selectParkingLotById" resultType="ParkingLot">
         select * from parking_lot where id=#{id}
     </select>
-    
-    <select id="selectParkingLotByName" resultType="ParkingLot">
-        select * from parking_lot where parking_lot_name like '%' #{parkingName} '%'
-    </select>
-    
-    
-
-
-    
-<!--添加-->
-    <insert id="insertParkingLot">
-        insert into parking_lot values(null,#{parkingLot.parkingLotName},#{parkingLot.parkNums},
-        #{parkingLot.sellParkNums},#{parkingLot.hireParkNums},#{parkingLot.nowUseNums},1)
-    </insert>
-
-
-<!--修改-->
-    <update id="updateParkingLot">
-        update parking_lot set
-        <include refid="updateParkingLot"/>
-        where id=#{parkingLot.id}
-    </update>
-
-    <update id="updateParkingLotState">
-        update parking_lot  set state=#{state} where id=#{id}
-    </update>
-
-
-<!--删除-->
-
-
-
-<!--共用功能-->
-    <!--状态修改需要更高权限，单独方法-->
-    <!--对象属性修改-->
-    <sql id="updateParkingLot">
-            <if test="parkingLot.parking_lot_name!=null and parkingLot.parking_lot_name!=''">
-                parking_lot_name=#{parkingLot.parking_lot_name}
-            </if>
-            <if test="parkingLot.park_nums!=null and parkingLot.park_nums!=''">
-                ,park_nums=#{parkingLot.park_nums}
-            </if>
-            <if test="parkingLot.sell_park_nums!=null and parkingLot.sell_park_nums!=''">
-                ,sell_park_nums=#{parkingLot.sell_park_nums},
-            </if>
-            <if test="parkingLot.hire_park_nums!=null and parkingLot.hire_park_nums!=''">
-                ,hire_park_nums=#{parkingLot.hire_park_nums}
-            </if>
-            <if test="parkingLot.now_use_nums!=null and parkingLot.now_use_nums!=''">
-                ,now_use_nums=#{parkingLot.now_use_nums}
-            </if>
-<!--            <if test="parkingLot.state!=null">-->
-<!--                ,state=#{parkingLot.state}-->
-<!--            </if>-->
-    </sql>
-
 </mapper>

@@ -2,6 +2,7 @@ package com.woniuxy.smart_community.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.woniuxy.smart_community.dao.OwnerInfoDao;
 import com.woniuxy.smart_community.dao.ParkingInfoDao;
 import com.woniuxy.smart_community.entity.OwnersInfo;
 import com.woniuxy.smart_community.entity.ParkingInfo;
@@ -23,18 +24,9 @@ public class ParkingInfoServiceImpl implements ParkingInfoService {
 
     @Autowired
     ParkingInfoDao parkingInfoDao;
+
     @Autowired
-    OwnersInfoService ownersInfoService;
-
-
-
-    @Override
-    public List<ParkingInfo> getAllParkingInfo() {
-        List<ParkingInfo> parkingInfos = parkingInfoDao.selectAllParkingInfo();
-        return parkingInfos;
-    }
-
-
+    OwnerInfoDao ownerInfoDao;
     /**
      * 分页查询
      * @param pageNum
@@ -55,30 +47,44 @@ public class ParkingInfoServiceImpl implements ParkingInfoService {
     }
 
     /**
-     * 购买车位，数据库操作
-     * @param ownersInfo
+     * 管理员更改车位信息
      * @param parkingInfo
-     * @return
      */
     @Override
-    public void addParkingOrderBusiness(OwnersInfo ownersInfo, ParkingInfo parkingInfo,int pTypeId) {
-        System.out.println("前端传过来的用户信息："+ownersInfo);
-        System.out.println("前端传来的车位信息："+parkingInfo);
-        OwnersInfo findOwnersInfo = ownersInfoService.getOwnerByOwnameAndOwphone(ownersInfo.getOwName(), ownersInfo.getOwPhone());
-        if(findOwnersInfo!=null){
-            parkingInfoDao.updateParkingInfoByType(pTypeId,findOwnersInfo.getOwId(),parkingInfo.getParkId());
+    public void changeParkingInfo(ParkingInfo parkingInfo) {
+        //车位信息更改可能也是用户信息更改
+        System.out.println("修改车位信息--changeParkingInfo--impl");
+        if(parkingInfo.getOwnersInfo()!=null){
+            OwnersInfo ownersInfoUpdate=parkingInfo.getOwnersInfo();
+//            OwnersInfo ownersInfo = ownerInfoDao.selectOwnerNameById(parkingInfo.getOwnersInfo().getId());
+//            ownersInfoUpdate.setHouse(ownersInfo.getHouse());
+            ownerInfoDao.updateOwnerByOwnerInfo(ownersInfoUpdate);
         }
-            ownersInfoService.addOwnerinfo(ownersInfo);
-            int owId=ownersInfo.getOwId();
-        parkingInfoDao.updateParkingInfoByType(pTypeId,owId,parkingInfo.getParkId());
-            System.out.println("先添加用户信息获取主键="+ownersInfo.getOwId()+"-----owId="+owId);
-
-
-
-
-
-
+        parkingInfoDao.updateParkingInfo(parkingInfo);
     }
 
+    /**
+     * 管理员删除车位信息
+     * @param parkId
+     */
+    @Override
+    public void removeParkingInfoByParkId(int parkId) {
+        parkingInfoDao.deleteParkingInfoById(parkId);
+    }
 
+    /**
+     * 管理员添加车位信息
+     * @param parkingInfo
+     */
+    @Override
+    public void addParkingInfo(ParkingInfo parkingInfo) {
+
+        //判断没有必要，前端做传递验证不为空，
+        //parkingType==1时，必须要有OwnersInfo
+        //只有parkingType==3 or 4时，没有OwnersInfo
+        if(parkingInfo.getParkingType().getId()==1 && parkingInfo.getOwnersInfo()==null){
+            parkingInfo.getParkingType().setId(3);
+        }
+        parkingInfoDao.insertParkingInfo(parkingInfo);
+    }
 }

@@ -51,7 +51,11 @@ public class HouseServiceTest {
     public void countHousesTest(){
         House house = new House();
 //        house.setFloor(1);
-        Integer houses = houseService.countHouses(house);
-        System.out.println(houses);
+        ResponseEntity response = houseService.countHouses(house);
+        if(response.getCode()==200){
+            System.out.println(response.getData());
+        }else {
+            System.out.println(response.getMsg());
+        }
     }
 }
