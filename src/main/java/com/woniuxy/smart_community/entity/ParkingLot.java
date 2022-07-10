@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class ParkingLot {
     private Integer id;
-    private String parkingLotName;  //停车场名
+    private String name;  //停车场名
     private Integer parkNums;           //车位总数
     private Integer sellParkNums;   //已售车位数量
     private Integer hireParkNums;     //已租车位数量
