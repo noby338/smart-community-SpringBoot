@@ -21,14 +21,8 @@
     <update id="updateHouse">
         update house
         <set>
-            <if test="house.building != null and house.building != ''">
-                building = #{house.building},
-            </if>
-            <if test="house.unit != null and house.unit != ''">
-                unit = #{house.unit},
-            </if>
-            <if test="house.floor != null and house.floor != ''">
-                floor = #{house.floor},
+            <if test="house.floorId != null and house.floorId != ''">
+                floor_id = #{house.floorId},
             </if>
             <if test="house.houseNum != null and #{house.houseNum} != ''">
                 house_num = #{house.houseNum},
@@ -50,14 +44,8 @@
             <if test="house.id != null">
                 and id = #{house.id}
             </if>
-            <if test="house.building != null">
-                and building = #{house.building}
-            </if>
-            <if test="house.unit != null ">
-                and unit = #{house.unit}
-            </if>
-            <if test="house.floor != null">
-                and floor = #{house.floor}
+            <if test="house.floorId != null">
+                and floor_id = #{house.floorId}
             </if>
             <if test="house.houseNum != null and house.houseNum != ''">
                 and house_num = #{house.houseNum}
@@ -79,14 +67,8 @@
             <if test="house.id != null">
                 and id = #{house.id}
             </if>
-            <if test="house.building != null">
-                and building = #{house.building}
-            </if>
-            <if test="house.unit != null ">
-                and unit = #{house.unit}
-            </if>
-            <if test="house.floor != null">
-                and floor = #{house.floor}
+            <if test="house.floorId != null">
+                and floor_id = #{house.floorId}
             </if>
             <if test="house.houseNum != null and house.houseNum != ''">
                 and house_num = #{house.houseNum}
