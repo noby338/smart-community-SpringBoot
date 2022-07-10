@@ -34,10 +34,19 @@
     <select id="selectParkingTypeById" resultType="ParkingType">
         select * from parking_type where id=#{id}
     </select>
-    <select id="selectOwnersInfoById" resultType="OwnersInfo">
+    <select id="selectOwnersInfoById" resultMap="mapOwnersInfo">
         select * from owners_info where id=#{id}
     </select>
-
+    <resultMap id="mapOwnersInfo" type="OwnersInfo">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="telephone" column="telephone"/>
+        <result property="state" column="state"/>
+        <association property="house" column="house_id" javaType="House" select="selectHouseById"/>
+    </resultMap>
+    <select id="selectHouseById" resultType="House">
+        select * from house where id=#{id}
+    </select>
     <sql id="sqlParkingInfo">
         <where>
             <if test="parkingInfo.id!=null and parkingInfo.id!=''">
@@ -49,7 +58,7 @@
             <if test="parkingInfo.parkArea!=null and parkingInfo.parkArea!=''">
                 and park_area>=#{parkingInfo.parkArea}
             </if>
-            <if test="parkingInfo.parkingType!=null">
+            <if test="parkingInfo.parkingType!=null and parkingInfo.parkingType.id!=null">
                 and park_type_id=#{parkingInfo.parkingType.id}
             </if>
         </where>
@@ -59,7 +68,7 @@
     <insert id="insertParkingInfo">
         insert into parking_info
         values (null, #{parkingInfo.parkNumber},
-                #{parkingInfo.parkingLot.id}, #{parkingInfo.parkArea}, #{parkingInfo.parkingType.id}, #{parkingInfo.ownersInfo.id})
+                #{parkingInfo.parkingLot.id}, #{parkingInfo.parkArea}, #{parkingInfo.parkingType.id}, #{parkingInfo.ownersInfo.house.id})
     </insert>
 
     <update id="deleteParkingInfoById">
