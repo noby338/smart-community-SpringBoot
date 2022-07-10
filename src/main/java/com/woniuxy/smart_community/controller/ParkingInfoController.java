@@ -1,10 +1,7 @@
 package com.woniuxy.smart_community.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.woniuxy.smart_community.entity.OwnersInfo;
-import com.woniuxy.smart_community.entity.ParkingInfo;
-import com.woniuxy.smart_community.entity.ParkingLot;
-import com.woniuxy.smart_community.entity.ResponseEntity;
+import com.woniuxy.smart_community.entity.*;
 import com.woniuxy.smart_community.service.OwnersInfoService;
 import com.woniuxy.smart_community.service.ParkingInfoService;
 import com.woniuxy.smart_community.service.ParkingLotService;
@@ -54,16 +51,18 @@ public class ParkingInfoController {
 
 
     /**
-     * 车位购买功能
+     * 车位购买/租赁功能
      * @return
      */
     @PostMapping("buyParking")
-    public ResponseEntity buyParkingBusiness(OwnersInfo ownersInfo,ParkingInfo parkingInfo,int pTypeId){
+    public ResponseEntity buyParkingBusiness(@RequestBody ParkingBusiness parkingBusiness){
+        System.out.println("车位购买功能："+parkingBusiness);
         ResponseEntity responseEntity=null;
-
-
-
-        return null;
+        parkingInfoService.addParkingInfoByParkingBusiness(parkingBusiness.getParkingInfo(), parkingBusiness.getParkingPrice(),parkingBusiness.getPayType(),parkingBusiness.getExpireTime());
+        //交易完成---更新parkingLot表数据
+        parkingLotService.changeParkingLot(parkingBusiness.getParkingInfo().getParkingLot());
+        responseEntity=new ResponseEntity(200,"success",null);
+        return responseEntity;
     }
 
     /**
