@@ -47,15 +47,4 @@ public class HouseServiceTest {
         System.out.println(response);
     }
 
-    @Test
-    public void countHousesTest(){
-        House house = new House();
-//        house.setFloor(1);
-        ResponseEntity response = houseService.countHouses(house);
-        if(response.getCode()==200){
-            System.out.println(response.getData());
-        }else {
-            System.out.println(response.getMsg());
-        }
-    }
 }

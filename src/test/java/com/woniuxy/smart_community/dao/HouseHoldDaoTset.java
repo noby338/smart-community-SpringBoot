@@ -1,14 +1,11 @@
 package com.woniuxy.smart_community.dao;
 
-import com.woniuxy.smart_community.entity.House;
 import com.woniuxy.smart_community.entity.HouseHold;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
 /**
  * @ClassName -> HouseHoldDaoTset
@@ -21,49 +18,28 @@ import java.util.Scanner;
 public class HouseHoldDaoTset {
     @Autowired
     HouseHoldDao houseHoldDao;
-    @Autowired
-    HouseDao houseDao;
+    RandomUserInfo randomUserInfo = new RandomUserInfo();
+
     @Test
     public void insertTest(){
         HouseHold houseHold = new HouseHold();
-        RandomPhoneNum randomPhoneNum = new RandomPhoneNum();
-        RandomUserInfo randomUserInfo = new RandomUserInfo();
-        House house = new House();
-        for(int i =1;i<=1920;i++){
-            house.setId(i);
-            List<House> houses = houseDao.selectHouseByHouseInfo(house);
-            for(House house1: houses){
-                if(house1.getHousePeopleNums() != 0){
-                    for(int j = 1;j <= house1.getHousePeopleNums();j++){
-                        houseHold.setHouseId(house1.getId());
-                        houseHold.setAge(randomUserInfo.getAge());
-                        boolean sex = randomUserInfo.getSex();
-                        houseHold.setGender(sex);
-                        houseHold.setName(randomUserInfo.getFamilyName()+randomUserInfo.getNameAndSex(sex));
-                        houseHold.setTelephone(randomPhoneNum.getPhoneNum());
-                        houseHold.setOwner(randomUserInfo.getSex());
-                        houseHold.setState(new Random().nextInt(2)+1);
-                        houseHoldDao.insert(houseHold);
-                    }
-                }
-
-            }
-
+        for(int i =0;i<1000;i++){
+            boolean sex = randomUserInfo.getSex();
+            houseHold.setName(randomUserInfo.getFamilyName()+randomUserInfo.getName(sex));
+            houseHold.setAge(randomUserInfo.getAge());
+            houseHold.setGender(sex);
+            houseHold.setTelephone("189"+(int)(Math.random() * 100000000 + 1));
+            houseHold.setHouseId((int)(Math.random() * 1000 + 1));
+            houseHold.setOwner(randomUserInfo.getSex());
+            houseHold.setState((int) ((Math.random() * 10+1)%2));
+            houseHoldDao.insert(houseHold);
         }
-    }
-
-    @Test
-    public void select(){
-        House house = new House();
-        house.setId(2);
-        List<House> houses = houseDao.selectHouseByHouseInfo(house);
-        System.out.println(houses);
     }
 
     @Test
     public void updateTest(){
         HouseHold houseHold = new HouseHold();
-        for(int i =0;i<200;i++){
+        for(int i =0;i<100;i++){
             houseHold.setId(i);
             houseHold.setAge(i%12);
             houseHold.setHouseId(i%12);
@@ -97,8 +73,8 @@ public class HouseHoldDaoTset {
     @Test
     public void countByHouseInfoTest(){
         HouseHold houseHold = new HouseHold();
-        houseHold.setHouseId(2);
-        System.out.println(houseHoldDao.countByHouseInfo(houseHold));
+        houseHold.setHouseId(894);
+        System.out.println(houseHoldDao.countByHouseHouseInfo(houseHold));
     }
 
     @Test
@@ -109,10 +85,10 @@ public class HouseHoldDaoTset {
         System.out.println(sex);
         System.out.println(randomUserInfo.getFamilyName());
         System.out.println(randomUserInfo.getAge());
-        System.out.println(randomUserInfo.getNameAndSex(sex));
+        System.out.println(randomUserInfo.getName(sex));
     }
 
-    public static class RandomUserInfo{
+    public class RandomUserInfo{
         //随机信息
         String familyName1 = "赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜戚谢邹喻水云苏潘葛奚范彭郎鲁韦昌马苗凤花方俞任袁柳鲍史唐费岑薛雷贺倪汤滕殷罗毕郝安常乐于时傅齐康伍余元卜顾孟平黄和穆萧尹姚邵湛汪祁毛禹狄"
                 +"米贝明臧计成戴宋茅庞熊纪舒屈项祝董粱杜阮席季麻强贾路娄危江童颜郭梅盛林刁钟徐邱骆高夏蔡田胡凌霍万柯卢莫房缪干解应宗丁宣邓郁单杭洪包诸左石崔吉龚程邢滑裴陆荣翁荀羊甄家封芮储靳邴松井富乌焦巴弓牧隗山谷车侯";
@@ -139,7 +115,7 @@ public class HouseHoldDaoTset {
          * @param sex
          * @return
          */
-        public String getNameAndSex(boolean sex) {
+        public String getName(boolean sex) {
             String name = "";
             int randNum = new Random().nextInt(2) + 1;//1,2
             int strLen = (sex) ? boyName.length() : girlName.length();//判断男女名字
@@ -168,50 +144,6 @@ public class HouseHoldDaoTset {
         public boolean getSex() {
             int randNum = new Random().nextInt(2) + 1;
             return randNum == 1;
-        }
-    }
-
-        //中国移动
-        static String[] CHINA_MOBILE = {
-                "134", "135", "136", "137", "138", "139", "150", "151", "152", "157", "158", "159",
-                "182", "183", "184", "187", "188", "178", "147", "172", "198"
-        };
-        //中国联通
-        static String[] CHINA_UNICOM = {
-                "130", "131", "132", "145", "155", "156", "166", "171", "175", "176", "185", "186", "166"
-        };
-        //中国电信
-        static String[] CHINA_TELECOME = {
-                "133", "149", "153", "173", "177", "180", "181", "189", "199"
-        };
-
-
-    public static class RandomPhoneNum {
-
-        //定一个静态方法，专门生成单个的号码
-        public String getPhoneNum() {
-            //给予真实的初始号段，号段是在百度上面查找的真实号段
-            String[] start = {"133", "149", "153", "173", "177",
-                    "180", "181", "189", "199", "130", "131", "132",
-                    "145", "155", "156", "166", "171", "175", "176", "185", "186", "166", "134", "135",
-                    "136", "137", "138", "139", "147", "150", "151", "152", "157", "158", "159", "172",
-                    "178", "182", "183", "184", "187", "188", "198", "170", "171"};
-
-            //随机出真实号段  使用数组的length属性，获得数组长度，
-            //通过Math.random（）*数组长度获得数组下标，从而随机出前三位的号段
-            String phoneFirstNum = start[(int) (Math.random() * start.length)];
-            //随机出剩下的8位数
-            String phoneLastNum = "";
-            //定义尾号，尾号是8位
-            final int LENPHONE = 8;
-            //循环剩下的位数
-            for (int i = 0; i < LENPHONE; i++) {
-                //每次循环都从0~9挑选一个随机数
-                phoneLastNum += (int) (Math.random() * 10);
-            }
-            //最终将号段和尾数连接起来
-            String phoneNum = phoneFirstNum + phoneLastNum;
-            return phoneNum;
         }
     }
 }
