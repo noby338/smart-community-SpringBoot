@@ -1,6 +1,7 @@
 package com.woniuxy.smart_community.service;
 
 import com.github.pagehelper.PageInfo;
+import com.woniuxy.smart_community.entity.ParkingBusiness;
 import com.woniuxy.smart_community.entity.ParkingInfo;
 
 
@@ -19,6 +20,7 @@ public interface ParkingInfoService {
      */ //使用
     PageInfo<ParkingInfo> getParkingInfoByPage(int pageIndex, int pageSize, ParkingInfo parkingInfo);
     void addParkingInfo(ParkingInfo parkingInfo);
+    void addParkingInfoByParkingBusiness(ParkingInfo parkingInfo,String parkingPrice,String payType,int expireTime);
     void removeParkingInfoByParkId(int parkId);
     void changeParkingInfo(ParkingInfo parkingInfo);
 

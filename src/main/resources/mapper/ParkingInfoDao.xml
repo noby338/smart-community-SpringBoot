@@ -20,6 +20,7 @@
             <include refid="sqlParkingInfo"/>
         </if>
     </select>
+
     <resultMap id="mapperParkingInfo" type="ParkingInfo">
         <id property="id" column="id"/>
         <result property="parkNumber" column="park_number"/>
@@ -58,8 +59,11 @@
             <if test="parkingInfo.parkArea!=null and parkingInfo.parkArea!=''">
                 and park_area>=#{parkingInfo.parkArea}
             </if>
-            <if test="parkingInfo.parkingType!=null and parkingInfo.parkingType.id!=null">
+            <if test="parkingInfo.parkingType.id!=null and parkingInfo.parkingType.id!=null">
                 and park_type_id=#{parkingInfo.parkingType.id}
+            </if>
+            <if test="parkingInfo.parkingType.id==null">
+                and park_type_id !=4
             </if>
         </where>
     </sql>
@@ -68,7 +72,7 @@
     <insert id="insertParkingInfo">
         insert into parking_info
         values (null, #{parkingInfo.parkNumber},
-                #{parkingInfo.parkingLot.id}, #{parkingInfo.parkArea}, #{parkingInfo.parkingType.id}, #{parkingInfo.ownersInfo.house.id})
+                #{parkingInfo.parkingLot.id}, #{parkingInfo.parkArea}, #{parkingInfo.parkingType.id}, #{parkingInfo.ownersInfo.id},1)
     </insert>
 
     <update id="deleteParkingInfoById">
@@ -89,16 +93,16 @@
         <if test="parkingInfo.parkNumber!=null and parkingInfo.parkNumber!=''">
             ,park_number=#{parkingInfo.parkNumber}
         </if>
-        <if test="parkingInfo.parkingLot!=null">
+        <if test="parkingInfo.parkingLot.id!=null">
             ,park_lot_id=#{parkingInfo.parkingLot.id}
         </if>
         <if test="parkingInfo.parkArea!=null">
             ,park_area=#{parkingInfo.parkArea}
         </if>
-        <if test="parkingInfo.parkingType!=null">
+        <if test="parkingInfo.parkingType.id!=null">
             ,park_type_id=#{parkingInfo.parkingType.id}
         </if>
-        <if test="parkingInfo.ownersInfo!=null">
+        <if test="parkingInfo.ownersInfo.id!=null">
             ,owner_id=#{parkingInfo.ownersInfo.id}
         </if>
     </sql>

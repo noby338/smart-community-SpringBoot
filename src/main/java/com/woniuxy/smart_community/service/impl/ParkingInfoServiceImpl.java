@@ -4,14 +4,17 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.woniuxy.smart_community.dao.OwnerInfoDao;
 import com.woniuxy.smart_community.dao.ParkingInfoDao;
-import com.woniuxy.smart_community.entity.OwnersInfo;
-import com.woniuxy.smart_community.entity.ParkingInfo;
-import com.woniuxy.smart_community.entity.ResponseEntity;
+import com.woniuxy.smart_community.dao.ParkingOrderListDao;
+import com.woniuxy.smart_community.entity.*;
 import com.woniuxy.smart_community.service.OwnersInfoService;
 import com.woniuxy.smart_community.service.ParkingInfoService;
+import com.woniuxy.smart_community.util.GetUUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,6 +30,9 @@ public class ParkingInfoServiceImpl implements ParkingInfoService {
 
     @Autowired
     OwnerInfoDao ownerInfoDao;
+    @Autowired
+    ParkingOrderListDao parkingOrderListDao;
+
     /**
      * 分页查询
      * @param pageNum
@@ -86,5 +92,45 @@ public class ParkingInfoServiceImpl implements ParkingInfoService {
             parkingInfo.getParkingType().setId(3);
         }
         parkingInfoDao.insertParkingInfo(parkingInfo);
+    }
+
+
+    /**
+     * 添加车位交易订单信息
+     * @param parkingInfo
+     * @param parkingPrice
+     * @param payType
+     * @param expireTime
+     */
+    @Override
+    public void addParkingInfoByParkingBusiness(ParkingInfo parkingInfo,String parkingPrice,String payType,int expireTime) {
+        //1.将用户添加
+        OwnersInfo ownersInfo=new OwnersInfo();
+        ownersInfo=parkingInfo.getOwnersInfo();
+        ownersInfo.setState(1);  //ownersInfo中用户类型不能为空，购买车位的都是小区业主=1
+        ownerInfoDao.insertOwnerInfo(ownersInfo);
+        int owId=ownersInfo.getId();
+        //2.用户id和车位状态id--》更改车位信息
+        //parkingInfoDao.updateParkingInfo(parkingInfo.getPTypeId(),owId,parkingInfo.getParkId());
+        parkingInfoDao.updateParkingInfo(parkingInfo);
+        //3.创建订单表信息
+        String orderNo= GetUUID.UUID();
+        BigDecimal price=new BigDecimal(parkingPrice);
+        System.out.println("工具类中获取UUID编码"+orderNo+"----size="+orderNo.length());
+
+        //判断是购买还是租用
+        Calendar calendarEndTime=Calendar.getInstance();
+        if(parkingInfo.getParkingType().getId()==1){
+            calendarEndTime.add(calendarEndTime.YEAR,expireTime);
+            System.out.println("车位有效期截至时间："+calendarEndTime);
+        }else if(parkingInfo.getParkingType().getId()==2){
+            calendarEndTime.add(calendarEndTime.MONTH, expireTime+1);
+            System.out.println("车位有效期截至时间："+calendarEndTime);
+        }
+        Date date=calendarEndTime.getTime();
+        ParkingOrderList parkingOrderList = new ParkingOrderList(null, orderNo, parkingInfo, new Date(), date, price, ownersInfo, parkingInfo.getParkingType(), payType, 1, null);
+        //ParkingOrderList parkingOrderList = new ParkingOrderList(null,orderNo,parkingInfo.getId(),null,new Date(),date,price,owId,null,parkingInfo.getParkingType().getId(),null,payType,1,null);
+        parkingOrderListDao.insertParkingOrderInfo(parkingOrderList);
+
     }
 }

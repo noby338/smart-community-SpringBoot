@@ -1,5 +1,6 @@
 package com.woniuxy.smart_community.dao;
 
+import com.woniuxy.smart_community.entity.ParkingOrderList;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @Date 2022/7/7 23:15
  */
 @Mapper
-public interface ParkingOrderList {
+public interface ParkingOrderListDao {
     List<ParkingOrderList> selectParkingOrderListByOrderInfo(
             @Param("parkingOrder")ParkingOrderList parkingOrder);
 

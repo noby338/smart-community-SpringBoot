@@ -4,7 +4,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- mapper是映射文件的根节点 namespace属性：名称空间，命名空间.就是一个名字 现在可以任意，以后使用接口的全限定名 -->
-<mapper namespace="com.woniuxy.smart_community.dao.ParkingOrderList">
+<mapper namespace="com.woniuxy.smart_community.dao.ParkingOrderListDao">
 <!--查询-->
     <select id="selectParkingOrderListByOrderInfo" resultMap="parkingOrderListMapper">
         select * from parking_order_list
