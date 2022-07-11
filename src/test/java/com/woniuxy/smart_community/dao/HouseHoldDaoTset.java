@@ -109,10 +109,10 @@ public class HouseHoldDaoTset {
         System.out.println(sex);
         System.out.println(randomUserInfo.getFamilyName());
         System.out.println(randomUserInfo.getAge());
-        System.out.println(randomUserInfo.getNameAndSex(sex));
+        System.out.println(randomUserInfo.getName(sex));
     }
 
-    public static class RandomUserInfo{
+    public class RandomUserInfo{
         //随机信息
         String familyName1 = "赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜戚谢邹喻水云苏潘葛奚范彭郎鲁韦昌马苗凤花方俞任袁柳鲍史唐费岑薛雷贺倪汤滕殷罗毕郝安常乐于时傅齐康伍余元卜顾孟平黄和穆萧尹姚邵湛汪祁毛禹狄"
                 +"米贝明臧计成戴宋茅庞熊纪舒屈项祝董粱杜阮席季麻强贾路娄危江童颜郭梅盛林刁钟徐邱骆高夏蔡田胡凌霍万柯卢莫房缪干解应宗丁宣邓郁单杭洪包诸左石崔吉龚程邢滑裴陆荣翁荀羊甄家封芮储靳邴松井富乌焦巴弓牧隗山谷车侯";
@@ -139,7 +139,7 @@ public class HouseHoldDaoTset {
          * @param sex
          * @return
          */
-        public String getNameAndSex(boolean sex) {
+        public String getName(boolean sex) {
             String name = "";
             int randNum = new Random().nextInt(2) + 1;//1,2
             int strLen = (sex) ? boyName.length() : girlName.length();//判断男女名字

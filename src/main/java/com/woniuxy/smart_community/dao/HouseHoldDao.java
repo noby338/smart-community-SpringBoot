@@ -62,5 +62,5 @@ public interface HouseHoldDao {
      * @param houseHold 查询条件
      * @return 总行数
      */
-    int countByHouseInfo(@Param("houseHold") HouseHold houseHold);
+    int countByHouseHouseInfo(@Param("houseHold") HouseHold houseHold);
 }

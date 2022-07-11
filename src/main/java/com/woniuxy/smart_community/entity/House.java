@@ -15,17 +15,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class House {
-    //    private Integer id;
-//    private Integer building;
-//    private Integer unit;
-//    private Integer floor;
-//    private String  houseNum;
-//    private Integer housePeopleNums;
-//    private Integer houseState;
+
     private Integer id;
     private Integer floorId;
-    private String houseNum;
+    private String  houseNum;
     private Integer housePeopleNums;
     private Integer houseState;
-    private String remark;
+    private String  remark;
 }
