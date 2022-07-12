@@ -4,18 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
- * @Author :  Fiver_Hu
- * @Date : 2022/7/8 19:59 星期五
- * @Project_Name -> smart-community
- * @Package_Name -> com.woniuxy.smart_community.entity
- * @ClassName -> houseBuilding
- * @Version 1.0
- **/
+ * @Description
+ * @Author noby
+ * @Date 2022/7/8 17:53
+ */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class HouseBuilding {
-    private int id;
+    private Integer id;
     private String name;
+    private List<HouseUnit> houseUnitList;
 }

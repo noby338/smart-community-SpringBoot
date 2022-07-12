@@ -3,28 +3,25 @@ package com.woniuxy.smart_community.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 /**
  * @Author :  Fiver_Hu
- * @Date : 2022/7/9 16:21 星期六
+ * @Date : 2022/7/11 16:42 星期一
  * @Project_Name -> smart-community
  * @Package_Name -> com.woniuxy.smart_community.entity
- * @ClassName -> HouseInfo
+ * @ClassName -> HouseParam
  * @Version 1.0
  **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class HouseInfo {
+
+public class HouseParam {
 
     private Integer buildingId;
-    private Integer unitId;
+    private Integer utilId;
     private Integer floorId;
-    private Integer houseId;
-    private Integer housePeopleNums;
-    private Integer houseState;
-    private String remark;
+
 }

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * @Description
  * @Author noby
@@ -16,4 +18,5 @@ public class HouseFloor {
     private Integer id;
     private String name;
     private Integer unitId;
+    private List<House> houseList;
 }

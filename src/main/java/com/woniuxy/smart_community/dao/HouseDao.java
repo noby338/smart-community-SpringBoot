@@ -1,9 +1,9 @@
 package com.woniuxy.smart_community.dao;
 
 import com.woniuxy.smart_community.entity.House;
-import org.apache.ibatis.annotations.Mapper;
+import com.woniuxy.smart_community.entity.HouseBuilding;
+import com.woniuxy.smart_community.entity.HouseFloor;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -15,22 +15,6 @@ import java.util.List;
  **/
 public interface HouseDao {
 
-    /**
-     * 新增房间数据
-     *
-     * @param house 实例对象
-     * @return 影响行数
-     */
-//    int insertHouse(@Param("house")House house);
-    int insertHouse(@Param("house") House house);
-
-    /**
-     * 通过主键删除房间信息数据
-     *
-     * @param house 实例对象
-     * @return 影响行数
-     */
-    int deleteHouse(@Param("house") House house);
 
     /**
      * 通过主键修改房间信息数据
@@ -43,9 +27,24 @@ public interface HouseDao {
     /**
      * 通过房间信息查询相关数据
      *
-     * @param house 房间号
+     * @param buildingId 楼栋号
      * @return 实例对象
      */
-    List<House> selectHouse(@Param("house") House house);
+    List<HouseBuilding> selectHouseByBuildingId(Integer buildingId);
 
+    /**
+     * 通过房间信息查询相关数据
+     *
+     * @param unitId 楼栋号
+     * @return 实例对象
+     */
+    List<HouseFloor> selectHouseByUnitId(Integer unitId);
+
+    /**
+     * 通过房间信息查询相关数据
+     *
+     * @param floorId 楼栋号
+     * @return 实例对象
+     */
+    List<House> selectHouseByFloorId(Integer floorId);
 }

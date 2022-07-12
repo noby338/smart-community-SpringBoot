@@ -2,67 +2,63 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.woniuxy.smart_community.dao.HouseDao">
 
-    <!--新增房间数据-->
-<!--    <insert id="insertHouse">-->
-<!--        insert into house(id, building_id, unit_id, floor_id, house_num, house_people_nums, house_state)-->
-<!--        values (#{house.id}, #{house.building}, #{house.unit}, #{house.floor}, #{house.houseNum}, #{house.housePeopleNums}, #{house.houseState})-->
-<!--    </insert>-->
-    <insert id="insertHouse">
-        insert into house( floor_id, house_num, house_people_nums, house_state)
-        values ( #{house.floorId}, #{house.houseNum}, #{house.housePeopleNums}, #{house.houseState})
-    </insert>
-
-    <!--通过主键删除房间信息数据-->
-    <delete id="deleteHouse" >
-        delete from house where id = #{house.id}
-    </delete>
-
-    <!--通过主键修改房间信息数据-->
     <update id="updateHouse">
-        update house
-            <set>
-                <if test="house.floorId != null and house.floorId != ''">
-                    floor_id = #{house.floorId},
-                </if>
-                <if test="house.houseNum != null and #{house.houseNum} != ''">
-                    house_num = #{house.houseNum},
-                </if>
-                <if test="house.housePeopleNums != null and house.housePeopleNums != ''">
-                    house_people_nums = #{house.housePeopleNums},
-                </if>
-                <if test="house.houseState != null and house.houseState != ''">
-                    house_state = #{house.houseState}
-                </if>
-                <if test="house.remark != null and house.remark != ''">
-                    house_remark = #{house.remark}
-                </if>
-            </set>
-        where id = #{house.id}
+        update house set house_num = #{house.housePeopleNums}, house_state = #{house.houseState}, remark = #{house.remark} where id = #{house.id}
     </update>
 
-    <!--通过房间信息查询相关数据-->
-    <select id="selectHouse" resultType="house">
-        select * from house
+    <select id="selectHouseByBuildingId" resultMap="buiding_map">
+        select * from house_building
+        <where>
+            <if test="buildingId != null">
+                and id=#{buildingId}
+            </if>
+        </where>
+    </select>
+    <resultMap id="buiding_map" type="houseBuilding">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <collection column="id" property="houseUnitList" ofType="houseUnit" select="selectHouseUnitByBuildingId"/>
+    </resultMap>
+
+    <select id="selectHouseUnitByBuildingId" resultMap="unit_map">
+        select * from house_unit where building_id= #{id}
+    </select>
+    <resultMap id="unit_map" type="houseUnit">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <collection column="id" property="houseFloorList" ofType="houseFloor" select="selectFloorByUnitId"/>
+    </resultMap>
+
+    <select id="selectFloorByUnitId" resultMap="floor_map">
+        select * from house_floor where unit_id= #{id}
+    </select>
+    <resultMap id="floor_map" type="houseFloor">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <collection column="id" property="houseList" ofType="house" select="selectByFloorId"/>
+    </resultMap>
+
+    <select id="selectByFloorId" resultType="com.woniuxy.smart_community.entity.House">
+        select * from house where floor_id= #{id}
+    </select>
+
+    <select id="selectHouseByUnitId" resultMap="unit_map">
+        select * from house_unit
             <where>
-                <if test="house.id != null">
-                    and id = #{house.id}
-                </if>
-                <if test="house.floorId != null">
-                    and floor_id = #{house.floorId}
-                </if>
-                <if test="house.houseNum != null and house.houseNum != ''">
-                    and house_num = #{house.houseNum}
-                </if>
-                <if test="house.housePeopleNums != null">
-                    and house_people_nums = #{house.housePeopleNums}
-                </if>
-                <if test="house.houseState != null">
-                    and house_state = #{house.houseState}
-                </if>
-                <if test="house.remark != null and house.remark != ''">
-                    and house_remark = % #{house.remark} %
+                <if test="floorId != unitId">
+                    and id = #{unitId}
                 </if>
             </where>
     </select>
+
+    <select id="selectHouseByFloorId" resultMap="floor_map">
+        select * from house_floor
+            <where>
+                <if test="floorId != null">
+                    and id=#{floorId}
+                </if>
+            </where>
+    </select>
+
 </mapper>
 

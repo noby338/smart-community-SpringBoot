@@ -2,8 +2,11 @@ package com.woniuxy.smart_community.service;
 
 import com.woniuxy.smart_community.entity.House;
 import com.woniuxy.smart_community.entity.HouseInfo;
+import com.woniuxy.smart_community.entity.HouseParam;
 import com.woniuxy.smart_community.entity.ResponseEntity;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @Author Fiver_Hu
@@ -17,20 +20,20 @@ import org.apache.ibatis.annotations.Param;
 public interface HouseService {
 
     /**
-     * 通过主键修改房间信息数据
-     *
-     * @param houseInfo 实例对象
-     * @return 影响行数
-     */
-    ResponseEntity updateHouse(HouseInfo houseInfo);
-
-    /**
      * 通过房间信息查询相关数据
      *
      * @param houseInfo 房间号
      * @return 实例对象
      */
     ResponseEntity selectHouse(HouseInfo houseInfo, int pageNum, int pageSize);
+
+    /**
+     * 通过主键修改房间信息数据
+     *
+     * @param houseInfo 实例对象
+     * @return 影响行数
+     */
+    ResponseEntity updateHouse(HouseInfo houseInfo);
 
 
 }

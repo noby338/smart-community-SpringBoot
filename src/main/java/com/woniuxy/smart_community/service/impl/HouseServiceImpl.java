@@ -31,23 +31,36 @@ public class HouseServiceImpl implements HouseService {
     HouseFloorDao houseFloorDao;
     @Autowired
     HouseDao houseDao;
-    @Autowired
-    HouseBuilding houseBuilding;
-    @Autowired
-    HouseUnit houseUnit;
-    @Autowired
-    HouseFloor houseFloor;
-    @Autowired
-    House house;
 
 
-    @Override
-    public ResponseEntity updateHouse(HouseInfo houseInfo) {
-        return null;
-    }
 
     @Override
     public ResponseEntity selectHouse(HouseInfo houseInfo, int pageNum, int pageSize) {
+
+        ResponseEntity<List<House>> responseEntityHouse = null;
+        ResponseEntity<List<HouseFloor>> responseEntityFloor = null;
+        ResponseEntity<List<HouseBuilding>> responseEntityBuilding = null;
+        if (houseInfo.getFloorId() != null) {
+            List<House> houses = houseDao.selectHouseByFloorId(houseInfo.getFloorId());
+            responseEntityHouse = new ResponseEntity<List<House>>(200, "获取成功！", houses);
+            return responseEntityHouse;
+        }
+        if(houseInfo.getUnitId() != null){
+            List<HouseFloor> floors = houseDao.selectHouseByUnitId(houseInfo.getUnitId());
+            responseEntityFloor = new ResponseEntity<List<HouseFloor>>(200, "获取成功！", floors);
+            return responseEntityFloor;
+        }
+        if(houseInfo.getBuildingId() != null){
+            List<HouseBuilding> buildings = houseDao.selectHouseByBuildingId(houseInfo.getBuildingId());
+            responseEntityBuilding = new ResponseEntity<List<HouseBuilding>>(200, "获取成功！", buildings);
+            return responseEntityBuilding;
+        }
+        return responseEntityHouse = new ResponseEntity<>(200,"获取失败！",null);
+
+    }
+
+    @Override
+    public ResponseEntity updateHouse(HouseInfo houseInfo) {
         return null;
     }
 }
