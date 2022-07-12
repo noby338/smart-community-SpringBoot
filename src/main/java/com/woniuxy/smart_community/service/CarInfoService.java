@@ -17,4 +17,6 @@ public interface CarInfoService {
     List<ForSelect> getALLParkingInfoIdAndParkNumber(int id);
 
     void addImgAddress(String carNumber, String imgAddress);
+
+    List<ForSelect> getAllCarOwnersIdAndName(int id);
 }

@@ -37,19 +37,9 @@ public class CarInfoController {
         return responseEntity;
     }
 
-    public ResponseEntity getJpg(){
-        ResponseEntity responseEntity=null;
-        try{
-
-        }catch (Exception e){
-
-        }
-        return responseEntity;
-    }
 
     @PostMapping("/parkNumbersSelect/{id}")
     public ResponseEntity getParkingInfoParkNumbers(@PathVariable int id){
-        System.out.println(id);
         ResponseEntity responseEntity=null;
         try{
             List<ForSelect> forSelects=carInfoService.getALLParkingInfoIdAndParkNumber(id);
@@ -59,6 +49,31 @@ public class CarInfoController {
         }
         return responseEntity;
     }
+
+    @PostMapping("/carOwnersName/{id}")
+    public ResponseEntity getAllCarOwnersName(@PathVariable int id){
+        ResponseEntity responseEntity=null;
+        try{
+            List<ForSelect> forSelects=carInfoService.getAllCarOwnersIdAndName(id);
+            responseEntity=new ResponseEntity(200,"ok",forSelects);
+        }catch (Exception e){
+            responseEntity=new ResponseEntity(401,"无车主信息",null);
+        }
+        return responseEntity;
+    }
+
+    @PostMapping("/getAllHouse")
+    public ResponseEntity getAllHouse(){
+        ResponseEntity responseEntity=null;
+        try{
+
+            responseEntity=new ResponseEntity(200,"ok",null);
+        }catch (Exception e){
+            responseEntity=new ResponseEntity(401,"无车主信息",null);
+        }
+        return responseEntity;
+    }
+
 
     @PostMapping("/uploadImages/{carNumber}")
     public ResponseEntity uploadImages(MultipartFile img,@PathVariable String carNumber){
@@ -76,4 +91,5 @@ public class CarInfoController {
         }
         return responseEntity;
     }
+
 }
