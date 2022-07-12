@@ -61,29 +61,26 @@ public class HouseHoldServiceImpl implements HouseHoldService {
     public List<Integer> selectHouseIdListByHouseParam(HouseParam houseParam) {
         List<Integer> houseIdList = new ArrayList<>();
         if(houseParam.getBuildingId() != null){
-            List<HouseBuilding> houseBuildings = houseDao.selectHouseByBuildingId(houseParam.getBuildingId());
-            for(HouseBuilding houseBuilding: houseBuildings){
-                List<HouseFloor> houseFloors = houseDao.selectHouseByUnitId(houseBuilding.getId());
-                for(HouseFloor houseFloor: houseFloors){
-                    List<House> houses = houseDao.selectHouseByFloorId(houseFloor.getId());
-                    for(House house: houses){
+            HouseBuilding houseBuilding = houseDao.selectHouseByBuildingId(houseParam.getBuildingId());
+            for(HouseUnit houseUnit: houseBuilding.getHouseUnitList()){
+                for(HouseFloor houseFloor: houseUnit.getHouseFloorList()){
+                    for(House house: houseFloor.getHouseList()){
                         houseIdList.add(house.getId());
                     }
                 }
             }
         }else {
             if(houseParam.getUtilId() != null){
-                List<HouseFloor> houseFloors = houseDao.selectHouseByUnitId(houseParam.getUtilId());
-                for(HouseFloor houseFloor: houseFloors){
-                    List<House> houses = houseDao.selectHouseByFloorId(houseFloor.getId());
-                    for(House house: houses){
+                HouseUnit houseUnit = houseDao.selectHouseByUnitId(houseParam.getUtilId());
+                for(HouseFloor houseFloor: houseUnit.getHouseFloorList()){
+                    for(House house: houseFloor.getHouseList()){
                         houseIdList.add(house.getId());
                     }
                 }
             }else {
                 if(houseParam.getFloorId() != null){
-                    List<House> houses = houseDao.selectHouseByFloorId(houseParam.getFloorId());
-                    for(House house: houses){
+                    HouseFloor houseFloor = houseDao.selectHouseByFloorId(houseParam.getFloorId());
+                    for(House house: houseFloor.getHouseList()){
                         houseIdList.add(house.getId());
                     }
                 }

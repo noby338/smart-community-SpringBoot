@@ -1,36 +1,36 @@
-//package com.woniuxy.smart_community.dao;
-//
-//import com.woniuxy.smart_community.entity.House;
-//import com.woniuxy.smart_community.entity.HouseFloor;
-//import com.woniuxy.smart_community.entity.HouseUnit;
-//import com.woniuxy.smart_community.entity.*;
-//import org.junit.jupiter.api.Test;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
-//
-//import java.util.List;
-//import java.util.Random;
-//import java.util.List;
-//import java.util.Stack;
-//
-///**
-// * @ClassName -> HouseDaoTest
-// * @Author Fiver_Hu
-// * @Date 2022/7/5 16:43 星期二
-// * @Version 1.0
-// **/
-//
-//
-//@SpringBootTest
-//public class HouseDaoTest {
-//    @Autowired
-//    HouseDao houseDao;
-//    @Autowired
-//    HouseUnitDao houseUnitDao;
-//    @Autowired
-//    HouseFloorDao houseFloorDao;
-//    @Autowired
-//    HouseHoldDao houseHoldDao;
+package com.woniuxy.smart_community.dao;
+
+import com.woniuxy.smart_community.entity.House;
+import com.woniuxy.smart_community.entity.HouseFloor;
+import com.woniuxy.smart_community.entity.HouseUnit;
+import com.woniuxy.smart_community.entity.*;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
+import java.util.Random;
+import java.util.List;
+import java.util.Stack;
+
+/**
+ * @ClassName -> HouseDaoTest
+ * @Author Fiver_Hu
+ * @Date 2022/7/5 16:43 星期二
+ * @Version 1.0
+ **/
+
+
+@SpringBootTest
+public class HouseDaoTest {
+    @Autowired
+    HouseDao houseDao;
+    @Autowired
+    HouseUnitDao houseUnitDao;
+    @Autowired
+    HouseFloorDao houseFloorDao;
+    @Autowired
+    HouseHoldDao houseHoldDao;
 //
 //    @Test
 //    public void insertHouse(){
@@ -102,4 +102,9 @@
 //
 //        return stack.stream().mapToInt(s-> s).sum();
 //    }
-//}
+    @Test
+    public void test(){
+
+        System.out.println(houseDao.selectHouseByFloorId(1));
+    }
+}

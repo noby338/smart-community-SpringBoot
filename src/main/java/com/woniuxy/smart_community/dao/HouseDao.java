@@ -3,6 +3,7 @@ package com.woniuxy.smart_community.dao;
 import com.woniuxy.smart_community.entity.House;
 import com.woniuxy.smart_community.entity.HouseBuilding;
 import com.woniuxy.smart_community.entity.HouseFloor;
+import com.woniuxy.smart_community.entity.HouseUnit;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public interface HouseDao {
      * @param buildingId 楼栋号
      * @return 实例对象
      */
-    List<HouseBuilding> selectHouseByBuildingId(Integer buildingId);
+    HouseBuilding selectHouseByBuildingId(Integer buildingId);
 
     /**
      * 通过房间信息查询相关数据
@@ -38,7 +39,7 @@ public interface HouseDao {
      * @param unitId 楼栋号
      * @return 实例对象
      */
-    List<HouseFloor> selectHouseByUnitId(Integer unitId);
+    HouseUnit selectHouseByUnitId(Integer unitId);
 
     /**
      * 通过房间信息查询相关数据
@@ -46,5 +47,7 @@ public interface HouseDao {
      * @param floorId 楼栋号
      * @return 实例对象
      */
-    List<House> selectHouseByFloorId(Integer floorId);
+    HouseFloor selectHouseByFloorId(Integer floorId);
+
+
 }

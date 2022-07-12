@@ -1,6 +1,7 @@
 package com.woniuxy.smart_community.dao;
 
 import com.woniuxy.smart_community.entity.House;
+import com.woniuxy.smart_community.entity.HouseFloor;
 import com.woniuxy.smart_community.entity.HouseHold;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,8 @@ public class HouseHoldDaoTset {
         House house = new House();
         for(int i =1;i<=1920;i++){
             house.setId(i);
-            List<House> houses = houseDao.selectHouseByFloorId(1);
-            for(House house1: houses){
+            HouseFloor houseFloor = houseDao.selectHouseByFloorId(1);
+            for(House house1: houseFloor.getHouseList()){
                 if(house1.getHousePeopleNums() != 0){
                     for(int j = 1;j <= house1.getHousePeopleNums();j++){
                         houseHold.setHouseId(house1.getId());
@@ -56,8 +57,8 @@ public class HouseHoldDaoTset {
     public void select(){
         House house = new House();
         house.setId(2);
-        List<House> houses = houseDao.selectHouseByFloorId(1);
-        System.out.println(houses);
+        HouseFloor houseFloor = houseDao.selectHouseByFloorId(1);
+        System.out.println(houseFloor);
     }
 
     @Test

@@ -45,7 +45,7 @@
     <select id="selectHouseByUnitId" resultMap="unit_map">
         select * from house_unit
             <where>
-                <if test="floorId != unitId">
+                <if test="unitId != null">
                     and id = #{unitId}
                 </if>
             </where>

@@ -1,11 +1,14 @@
 package com.woniuxy.smart_community.service;
 
 import com.woniuxy.smart_community.entity.House;
+import com.woniuxy.smart_community.entity.HouseInfo;
 import com.woniuxy.smart_community.entity.ResponseEntity;
 import com.woniuxy.smart_community.service.impl.HouseServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.ArrayList;
 
 /**
  * @Author :  Fiver_Hu
@@ -18,10 +21,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class HouseServiceTest {
 
-//    @Autowired
-//    HouseServiceImpl houseService;
-//
-//
+    @Autowired
+    HouseServiceImpl houseService;
+
+
 //    @Test
 //    public void insertHouseTest(){
 ////        House house= new House(99,4,5,6,"789",10,1);
@@ -58,4 +61,11 @@ public class HouseServiceTest {
 //            System.out.println(response.getMsg());
 //        }
 //    }
+    @Test
+    public void houseId(){
+        HouseInfo  houseInfo = new HouseInfo();
+        houseInfo.setUnitId(1);
+        ArrayList<Integer> integers = houseService.selectHouseId(houseInfo);
+        System.out.println(integers);
+    }
 }
