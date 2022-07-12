@@ -1,5 +1,8 @@
 package com.woniuxy.smart_community.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.woniuxy.smart_community.entity.HouseHold;
 import com.woniuxy.smart_community.entity.ResponseEntity;
 import com.woniuxy.smart_community.service.HouseHoldService;
@@ -7,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,11 +35,11 @@ public class HouseHoldController {
             @Param("pageNum") int pageNum,
             @Param("pageSize") int pageSize){
         ResponseEntity responseEntity;
-        List<HouseHold> houseHolds = houseHoldService.selectHouseHoldByHouseHoldInfo(houseHold,pageNum,pageSize);
-        if(houseHolds != null){
-            responseEntity = new ResponseEntity(200,"获取成功！",houseHolds);
-        }else {
+        PageInfo<HouseHold> pageInfo = houseHoldService.selectHouseHoldByHouseHoldInfo(houseHold, pageNum, pageSize);
+        if (pageInfo.getList() == null) {
             responseEntity = new ResponseEntity(401,"获取失败！",null);
+        } else {
+            responseEntity = new ResponseEntity(200,"获取成功！",pageInfo);
         }
         return  responseEntity;
     }

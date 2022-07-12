@@ -1,5 +1,6 @@
 package com.woniuxy.smart_community.service;
 
+import com.github.pagehelper.PageInfo;
 import com.woniuxy.smart_community.entity.HouseHold;
 import com.woniuxy.smart_community.entity.HouseParam;
 import org.apache.ibatis.annotations.Param;
@@ -23,7 +24,7 @@ public interface HouseHoldService {
      * @param houseHold 实例对象
      * @return 影响行数
      */
-    List<HouseHold> selectHouseHoldByHouseHoldInfo(
+    PageInfo<HouseHold> selectHouseHoldByHouseHoldInfo(
             @Param("houseHold") HouseHold houseHold
             ,@Param("pageNum") int pageNum
             ,@Param("pageSize") int pageSize);
