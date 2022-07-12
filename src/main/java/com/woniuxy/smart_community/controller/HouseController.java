@@ -31,12 +31,26 @@ public class HouseController {
      * @param houseInfo 房间号
      * @return 实例对象
      */
-    @GetMapping("/selectAllHouse")
-    public ResponseEntity selectHouseByHouseInfo(
+    @GetMapping("/selectHouse")
+    public ResponseEntity selectHouse(
             @Param("houseInfo") HouseInfo houseInfo,
             @Param("pageNum")  int pageNum,
             @Param("pageSize")  int pageSize){
         ResponseEntity response = houseService.selectHouse(houseInfo, pageNum, pageSize);
+        System.out.println(response);
+        return response;
+    }
+
+    /**
+     * 通过房间信息查询相关数据
+     *
+     * @param houseInfo 房间号
+     * @return 实例对象
+     */
+    @GetMapping("/selectAllHouse")
+    public ResponseEntity selectAllHouse(
+            @Param("houseInfo") HouseInfo houseInfo){
+        ResponseEntity response = houseService.selectAllHouse(houseInfo);
         System.out.println(response);
         return response;
     }
