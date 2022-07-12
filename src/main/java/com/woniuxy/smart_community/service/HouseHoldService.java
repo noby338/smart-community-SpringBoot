@@ -1,17 +1,21 @@
-package com.woniuxy.smart_community.dao;
+package com.woniuxy.smart_community.service;
 
 import com.woniuxy.smart_community.entity.HouseHold;
+import com.woniuxy.smart_community.entity.HouseParam;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
- * @ClassName -> HouseHoldDao
- * @Author Fiver_Hu
- * @Date 2022/7/5 15:12 星期二
+ * @Author :  Fiver_Hu
+ * @Date : 2022/7/11 16:44 星期一
+ * @Project_Name -> smart-community
+ * @Package_Name -> com.woniuxy.smart_community.service
+ * @ClassName -> HouseHoldService
  * @Version 1.0
  **/
-public interface HouseHoldDao {
+public interface HouseHoldService {
 
     /**
      * 查询人口信息
@@ -20,7 +24,9 @@ public interface HouseHoldDao {
      * @return 影响行数
      */
     List<HouseHold> selectHouseHoldByHouseHoldInfo(
-            @Param("houseHold") HouseHold houseHold);
+            @Param("houseHold") HouseHold houseHold
+            ,@Param("pageNum") int pageNum
+            ,@Param("pageSize") int pageSize);
 
 
     /**
@@ -63,4 +69,14 @@ public interface HouseHoldDao {
      * @return 总行数
      */
     int countByHouseHouseInfo(@Param("houseHold") HouseHold houseHold);
+
+    /**
+     * 根据信息统计总行数
+     *
+     * @param houseParam 查询条件
+     * @return 总行数
+     */
+    List<Integer> selectHouseIdListByHouseParam(HouseParam houseParam);
+
+
 }

@@ -36,7 +36,7 @@
     </select>
 
     <!--新增房间数据-->
-    <insert id="insert"   >
+    <insert id="insert" >
         insert into house_hold(id, name, age, gender, telephone, house_id, is_owner, state)
         values (#{houseHold.id}, #{houseHold.name}, #{houseHold.age}, #{houseHold.gender}, #{houseHold.telephone}, #{houseHold.houseId}, #{houseHold.isOwner}, #{houseHold.state})
     </insert>
@@ -85,7 +85,7 @@
     </delete>
 
     <!--根据人口信息统计总行数-->
-    <select id="countByHouseInfo" resultType="integer">
+    <select id="countByHouseHouseInfo" resultType="integer">
         select count(*)
         from house_hold
         <where>

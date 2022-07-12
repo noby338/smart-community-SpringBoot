@@ -1,6 +1,7 @@
 package com.woniuxy.smart_community.dao;
 
 import com.woniuxy.smart_community.entity.House;
+import com.woniuxy.smart_community.entity.HouseFloor;
 import com.woniuxy.smart_community.entity.HouseHold;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,15 +32,15 @@ public class HouseHoldDaoTset {
         House house = new House();
         for(int i =1;i<=1920;i++){
             house.setId(i);
-            List<House> houses = houseDao.selectHouseByHouseInfo(house);
-            for(House house1: houses){
+            HouseFloor houseFloor = houseDao.selectHouseByFloorId(1);
+            for(House house1: houseFloor.getHouseList()){
                 if(house1.getHousePeopleNums() != 0){
                     for(int j = 1;j <= house1.getHousePeopleNums();j++){
                         houseHold.setHouseId(house1.getId());
                         houseHold.setAge(randomUserInfo.getAge());
                         boolean sex = randomUserInfo.getSex();
                         houseHold.setGender(sex);
-                        houseHold.setName(randomUserInfo.getFamilyName()+randomUserInfo.getNameAndSex(sex));
+                        houseHold.setName(randomUserInfo.getFamilyName()+randomUserInfo.getFamilyName());
                         houseHold.setTelephone(randomPhoneNum.getPhoneNum());
                         houseHold.setOwner(randomUserInfo.getSex());
                         houseHold.setState(new Random().nextInt(2)+1);
@@ -56,8 +57,8 @@ public class HouseHoldDaoTset {
     public void select(){
         House house = new House();
         house.setId(2);
-        List<House> houses = houseDao.selectHouseByHouseInfo(house);
-        System.out.println(houses);
+        HouseFloor houseFloor = houseDao.selectHouseByFloorId(1);
+        System.out.println(houseFloor);
     }
 
     @Test
@@ -98,7 +99,7 @@ public class HouseHoldDaoTset {
     public void countByHouseInfoTest(){
         HouseHold houseHold = new HouseHold();
         houseHold.setHouseId(2);
-        System.out.println(houseHoldDao.countByHouseInfo(houseHold));
+        System.out.println(houseHoldDao.selectHouseHoldByHouseHoldInfo(houseHold));
     }
 
     @Test
@@ -109,10 +110,10 @@ public class HouseHoldDaoTset {
         System.out.println(sex);
         System.out.println(randomUserInfo.getFamilyName());
         System.out.println(randomUserInfo.getAge());
-        System.out.println(randomUserInfo.getNameAndSex(sex));
+        System.out.println(randomUserInfo.getName(sex));
     }
 
-    public static class RandomUserInfo{
+    public class RandomUserInfo{
         //随机信息
         String familyName1 = "赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜戚谢邹喻水云苏潘葛奚范彭郎鲁韦昌马苗凤花方俞任袁柳鲍史唐费岑薛雷贺倪汤滕殷罗毕郝安常乐于时傅齐康伍余元卜顾孟平黄和穆萧尹姚邵湛汪祁毛禹狄"
                 +"米贝明臧计成戴宋茅庞熊纪舒屈项祝董粱杜阮席季麻强贾路娄危江童颜郭梅盛林刁钟徐邱骆高夏蔡田胡凌霍万柯卢莫房缪干解应宗丁宣邓郁单杭洪包诸左石崔吉龚程邢滑裴陆荣翁荀羊甄家封芮储靳邴松井富乌焦巴弓牧隗山谷车侯";
@@ -139,7 +140,7 @@ public class HouseHoldDaoTset {
          * @param sex
          * @return
          */
-        public String getNameAndSex(boolean sex) {
+        public String getName(boolean sex) {
             String name = "";
             int randNum = new Random().nextInt(2) + 1;//1,2
             int strLen = (sex) ? boyName.length() : girlName.length();//判断男女名字
