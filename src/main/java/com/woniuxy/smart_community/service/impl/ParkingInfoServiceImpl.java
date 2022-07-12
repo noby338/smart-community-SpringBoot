@@ -5,8 +5,9 @@ import com.github.pagehelper.PageInfo;
 import com.woniuxy.smart_community.dao.OwnerInfoDao;
 import com.woniuxy.smart_community.dao.ParkingInfoDao;
 import com.woniuxy.smart_community.dao.ParkingOrderListDao;
-import com.woniuxy.smart_community.entity.*;
-import com.woniuxy.smart_community.service.OwnersInfoService;
+import com.woniuxy.smart_community.entity.OwnersInfo;
+import com.woniuxy.smart_community.entity.ParkingInfo;
+import com.woniuxy.smart_community.entity.ParkingOrderList;
 import com.woniuxy.smart_community.service.ParkingInfoService;
 import com.woniuxy.smart_community.util.GetUUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,6 @@ public class ParkingInfoServiceImpl implements ParkingInfoService {
 
     @Autowired
     ParkingInfoDao parkingInfoDao;
-
     @Autowired
     OwnerInfoDao ownerInfoDao;
     @Autowired
@@ -59,22 +59,12 @@ public class ParkingInfoServiceImpl implements ParkingInfoService {
     @Override
     public void changeParkingInfo(ParkingInfo parkingInfo) {
         //车位信息更改可能也是用户信息更改
-        System.out.println("修改车位信息--changeParkingInfo--impl");
+        System.out.println("修改车位信息--changeParkingInfo--impl"+parkingInfo);
         if(parkingInfo.getOwnersInfo().getId()!=null){
             OwnersInfo ownersInfoUpdate=parkingInfo.getOwnersInfo();
 //            OwnersInfo ownersInfo = ownerInfoDao.selectOwnerNameById(parkingInfo.getOwnersInfo().getId());
 //            ownersInfoUpdate.setHouse(ownersInfo.getHouse());
             ownerInfoDao.updateOwnerByOwnerInfo(ownersInfoUpdate);
-        }else {
-            if(!parkingInfo.getOwnersInfo().getName().equals("无") && !parkingInfo.getOwnersInfo().getTelephone().equals("无")){
-                OwnersInfo ownersInfo = parkingInfo.getOwnersInfo();
-                ownersInfo.setState(1);
-                ownerInfoDao.insertOwnerInfo(ownersInfo);
-                OwnersInfo queryOwner = ownerInfoDao.selectOwnerByOwnerInfo(ownersInfo);
-                ownersInfo.setId(queryOwner.getId());
-                parkingInfo.setOwnersInfo(ownersInfo);
-
-            }
         }
         parkingInfoDao.updateParkingInfo(parkingInfo);
     }

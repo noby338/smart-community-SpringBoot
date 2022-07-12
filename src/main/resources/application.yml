@@ -13,6 +13,8 @@ spring:
     servlet:
       load-on-startup: 1
 
+
+
 # Mybatis配置
 mybatis:
   mapper-locations: classpath:mapper/*.xml
@@ -25,6 +27,8 @@ mybatis:
 logging:
   level:
     com.woniuxy.smart_community.dao: debug
+
+
 
 #PageHelper分页插件配置
 #pagehelper:

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author :  Fiver_Hu
@@ -101,6 +102,18 @@ public class HouseServiceImpl implements HouseService {
         ResponseEntity<HouseBuilding> responseEntityBuilding = null;
         HouseBuilding houseBuilding = houseDao.selectHouseByBuildingId(null);
         return responseEntityBuilding = new ResponseEntity<>(200,"获取失败！",houseBuilding);
+    }
+
+    /**
+     * 获取小区楼栋信息
+     * @return
+     */
+    @Override
+    public ResponseEntity<List<HouseBuilding>> selectAllHouseByBuilding() {
+        ResponseEntity<List<HouseBuilding>> responseEntityBuilding = null;
+        List<HouseBuilding> houseBuildings = houseDao.selectHouseByBuildingId();
+        //return responseEntityBuilding = new ResponseEntity<>(200,"获取失败！",houseBuildings)
+        return responseEntityBuilding=new ResponseEntity<>(200,"获取成功",houseBuildings);
     }
 
     @Override

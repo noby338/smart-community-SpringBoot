@@ -23,8 +23,8 @@
     <insert id="insertParkingOrderInfo" parameterType="parkingOrderList"
             useGeneratedKeys="true" keyProperty="orderId" keyColumn="orderid" >
         insert into parking_order_list values(null,#{parkingOrder.orderNo},
-        #{parkingOrder.parkId},#{parkingOrder.orderTime},#{parkingOrder.orderEndTime},
-        #{parkingOrder.orderCost},#{parkingOrder.owId},#{parkingOrder.pTypeId},
+        #{parkingOrder.parkingInfo.id},#{parkingOrder.orderTime},#{parkingOrder.orderEndTime},
+        #{parkingOrder.orderCost},#{parkingOrder.ownersInfo.id},#{parkingOrder.parkingType.id},
         #{parkingOrder.payType},1,#{parkingOrder.ordeRemark})
     </insert>
 
@@ -36,7 +36,7 @@
             <if test="orderId!=null">
                 and orderid=#{orderId}
             </if>
-            <if test="orderNo!=null adn noderNo!=''">
+            <if test="orderNo!=null and orderNo!=''">
                 and orderno=#{orderNo}
             </if>
 
@@ -44,9 +44,34 @@
     </update>
 
 
+    <update id="updateParkingOrderInfoByRemark">
+        update  parking_order_list set orderemark=#{ordeRemark}
+        <where>
+            <if test="orderId!=null">
+                and orderid=#{orderId}
+            </if>
+            <if test="orderNo!=null and orderNo!=''">
+                and orderno=#{orderNo}
+            </if>
+        </where>
+    </update>
+
+
+
+
 
 <!--删除-->
-
+    <delete id="deleteParkingOrderInfoByOrder">
+        delete from parking_order_list
+        <where>
+            <if test="orderId!=null">
+                and orderid=#{orderId}
+            </if>
+            <if test="orderNo!=null and orderNo!=''">
+                and orderno=#{orderNo}
+            </if>
+        </where>
+    </delete>
 
 
 <!--共用功能-->
@@ -64,13 +89,13 @@
         <association property="parkingType" javaType="ParkingType" column="ptypeid" select="selectParkingTypeByPtypeid"/>
     </resultMap>
     <select id="selectParkingInfoByParkId" resultType="parkingInfo">
-        select * from parking_info where parkid=#{parkid}
+        select * from parking_info where id=#{parkid}
     </select>
     <select id="selectOwnersInfoByOwid" resultType="ownersInfo">
-        select * from owners_info where owid=#{owid}
+        select * from owners_info where id=#{owid}
     </select>
     <select id="selectParkingTypeByPtypeid" resultType="parkingType">
-        select * from parking_type where ptypeid=#{ptypeid}
+        select * from parking_type where id=#{ptypeid}
     </select>
 
 
@@ -82,8 +107,10 @@
             <if test="parkingOrder.orderNo!=null and parkingOrder.orderNo!=''">
                 and orderno=#{parkingOrder.orderNo}
             </if>
-            <if test="parkingOrder.parkId!=null">
-                and parkid=#{parkingOrder.parkId}
+            <if test="parkingOrder.parkingInfo!=null">
+                <if test="parkingOrder.parkingInfo.id!=null">
+                    and parkid=#{parkingOrder.parkingInfo.id}
+                </if>
             </if>
             <if test="parkingOrder.orderTime!=null">
                 and ordertime <![CDATA[>=]]> #{parkingOrder.orderTime}
@@ -91,20 +118,32 @@
             <if test="parkingOrder.orderEndTime!=null">
                 and orderendtime <![CDATA[<=]]> #{parkingOrder.orderEndTime}
             </if>
-            <if test="parkingOrder.owId!=null">
-                and owid=#{parkingOrder.owId}
+            <if test="parkingOrder.ownersInfo!=null">
+                <if test="parkingOrder.ownersInfo.id!=null">
+                    and owid=#{parkingOrder.ownersInfo.id}
+                </if>
             </if>
-            <if test="parkingOrder.pTypeId!=null">
-                and ptypeid=#{parkingOrder.pTypeId}
+            <if test="parkingOrder.parkingType!=null">
+                <if test="parkingOrder.parkingType.id!=null">
+                    and ptypeid=#{parkingOrder.parkingType.id}
+                </if>
+            </if>
+            <if test="parkingOrder.payType!=null and parkingOrder.payType!=''">
+                and paytype=#{parkingOrder.payType}
             </if>
             <if test="parkingOrder.orderState!=null">
                 and orderstate=#{parkingOrder.orderState}
             </if>
+<!--            <if test="parkingOrder.orderState==null">-->
+<!--                and orderstate!=0-->
+<!--            </if>-->
             <if test="parkingOrder.ordeRemark!=null and parkingOrder.ordeRmark!=''">
                 and ordermark like '%' #{parkingOrder.ordeRmark} '%'
             </if>
         </where>
     </sql>
+
+
 
 
 

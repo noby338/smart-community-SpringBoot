@@ -10,4 +10,28 @@
     <select id="selectParkingLotById" resultType="ParkingLot">
         select * from parking_lot where id=#{id}
     </select>
+
+    <update id="updateParkingLot">
+        update parking_lot set <include refid="updateParkingLot"/>
+        where id=#{parkingLot.id}
+    </update>
+
+    <sql id="updateParkingLot">
+        <if test="parkingLot.name!=null and parkingLot.name!=''">
+            name=#{parkingLot.name}
+        </if>
+        <if test="parkingLot.parkNums!=null">
+            ,park_nums=#{parkingLot.parkNums}
+        </if>
+        <if test="parkingLot.sellParkNums!=null">
+            ,sell_park_nums=#{parkingLot.sellParkNums}
+        </if>
+        <if test="parkingLot.hireParkNums!=null">
+            ,hire_park_nums=#{parkingLot.hireParkNums}
+        </if>
+        <if test="parkingLot.nowUseNums!=null">
+            ,now_use_nums=#{parkingLot.nowUseNums}
+        </if>
+    </sql>
+
 </mapper>

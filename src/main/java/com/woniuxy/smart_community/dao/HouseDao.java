@@ -33,6 +33,8 @@ public interface HouseDao {
      */
     HouseBuilding selectHouseByBuildingId(Integer buildingId);
 
+    List<HouseBuilding> selectHouseByBuildingId();
+
     /**
      * 通过房间信息查询相关数据
      *

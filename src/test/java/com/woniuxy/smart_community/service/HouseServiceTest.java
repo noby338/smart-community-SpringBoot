@@ -1,8 +1,6 @@
 package com.woniuxy.smart_community.service;
 
-import com.woniuxy.smart_community.entity.House;
 import com.woniuxy.smart_community.entity.HouseInfo;
-import com.woniuxy.smart_community.entity.ResponseEntity;
 import com.woniuxy.smart_community.service.impl.HouseServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +21,8 @@ public class HouseServiceTest {
 
     @Autowired
     HouseServiceImpl houseService;
+
+
 
 
 //    @Test
@@ -68,4 +68,8 @@ public class HouseServiceTest {
         ArrayList<Integer> integers = houseService.selectHouseId(houseInfo);
         System.out.println(integers);
     }
+
+
+
+
 }

@@ -50,7 +50,9 @@ public class HouseController {
     @GetMapping("/selectAllHouse")
     public ResponseEntity selectAllHouse(
             @Param("houseInfo") HouseInfo houseInfo){
-        ResponseEntity response = houseService.selectAllHouse(houseInfo);
+        System.out.println("查询楼栋信息"+houseInfo);
+        ResponseEntity response = houseService.selectAllHouseByBuilding();
+
         System.out.println(response);
         return response;
     }

@@ -1,10 +1,8 @@
 package com.woniuxy.smart_community.service;
 
-import com.woniuxy.smart_community.entity.House;
+import com.woniuxy.smart_community.entity.HouseBuilding;
 import com.woniuxy.smart_community.entity.HouseInfo;
-import com.woniuxy.smart_community.entity.HouseParam;
 import com.woniuxy.smart_community.entity.ResponseEntity;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +43,7 @@ public interface HouseService {
      */
     ResponseEntity selectAllHouse(HouseInfo houseInfo);
 
+    ResponseEntity<List<HouseBuilding>> selectAllHouseByBuilding();
     /**
      * 通过主键修改房间信息数据
      *
