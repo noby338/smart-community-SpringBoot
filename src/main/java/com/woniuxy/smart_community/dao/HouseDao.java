@@ -46,5 +46,6 @@ public interface HouseDao {
      */
     List<HouseFloor> selectHouseByFloorId(@Param("houseInfo") HouseInfo houseInfo);
 
-
+    //孙浚钦使用---car页面
+    List<House> selectAllHouseForCarShow();
 }

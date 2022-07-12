@@ -3,14 +3,15 @@ package com.woniuxy.smart_community.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.woniuxy.smart_community.dao.CarInfoDao;
+import com.woniuxy.smart_community.dao.HouseDao;
+import com.woniuxy.smart_community.dao.OwnerInfoDao;
 import com.woniuxy.smart_community.dao.ParkingInfoDao;
-import com.woniuxy.smart_community.entity.CarInfo;
-import com.woniuxy.smart_community.entity.ForSelect;
-import com.woniuxy.smart_community.entity.ParkingInfo;
+import com.woniuxy.smart_community.entity.*;
 import com.woniuxy.smart_community.service.CarInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,10 @@ public class CarInfoServiceImpl implements CarInfoService {
 
     @Autowired
     ParkingInfoDao parkingInfoDao;
+    @Autowired
+    OwnerInfoDao ownerInfoDao;
+    @Autowired
+    HouseDao houseDao;
 
     @Override
     public PageInfo<CarInfo> getAllCarInfo(int pageIndex,int pageSize) {
@@ -65,9 +70,40 @@ public class CarInfoServiceImpl implements CarInfoService {
         }
         return forSelects;
     }
+    @Override
+    public List<ForSelect> getAllCarOwnersIdAndName(int id) {
+        List<ForSelect> forSelects=new ArrayList<ForSelect>();
+        List<OwnersInfo> ownersInfos=ownerInfoDao.selectAllOwners();
+        for(OwnersInfo ownersInfo:ownersInfos){
+            ForSelect forSelect=new ForSelect();
+            forSelect.setValue(ownersInfo.getId());
+            forSelect.setLabel(ownersInfo.getName()+"("+ownersInfo.getTelephone()+")");
+            if(ownersInfo.getId()==id){
+                forSelect.setLabel(ownersInfo.getName()+"(当前使用)");
+                forSelect.setDisabled(true);
+            }
+            forSelects.add(forSelect);
+        }
+        return forSelects;
+    }
+
+    @Override
+    public List<ForSelect> getAllHouse() {
+        List<ForSelect> forSelects=new ArrayList<ForSelect>();
+        List<House> houseList=houseDao.selectAllHouseForCarShow();
+        for(House house:houseList){
+            ForSelect forSelect=new ForSelect();
+            forSelect.setValue(house.getId());
+            forSelect.setLabel(house.getHouseNum());
+            forSelects.add(forSelect);
+        }
+        return forSelects;
+    }
+
 
     @Override
     public void addImgAddress(String carNumber, String imgAddress) {
         carInfoDao.updateImgByCarNumber(carNumber,imgAddress);
     }
+
 }
