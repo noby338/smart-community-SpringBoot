@@ -64,8 +64,8 @@ public class HouseServiceTest {
     @Test
     public void houseId(){
         HouseInfo  houseInfo = new HouseInfo();
-        houseInfo.setUnitId(1);
-        ArrayList<Integer> integers = houseService.selectHouseId(houseInfo);
+        houseInfo.setBuildingId(1);
+        ArrayList<Integer> integers = houseService.selectHouseById(houseInfo);
         System.out.println(integers);
     }
 

@@ -2,9 +2,8 @@ package com.woniuxy.smart_community.service;
 
 import com.github.pagehelper.PageInfo;
 import com.woniuxy.smart_community.entity.HouseHold;
-import com.woniuxy.smart_community.entity.HouseParam;
+import com.woniuxy.smart_community.entity.HouseInfo;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -74,10 +73,10 @@ public interface HouseHoldService {
     /**
      * 根据信息统计总行数
      *
-     * @param houseParam 查询条件
+     * @param houseInfo 查询条件
      * @return 总行数
      */
-    List<Integer> selectHouseIdListByHouseParam(HouseParam houseParam);
+    List<Integer> selectHouseIdListByHouseInfo(HouseInfo houseInfo);
 
 
 }

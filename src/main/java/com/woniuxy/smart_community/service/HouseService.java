@@ -5,7 +5,6 @@ import com.woniuxy.smart_community.entity.HouseInfo;
 import com.woniuxy.smart_community.entity.ResponseEntity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @Author Fiver_Hu
@@ -24,7 +23,8 @@ public interface HouseService {
      * @param houseInfo 房间号
      * @return 实例对象
      */
-    ArrayList<Integer> selectHouseId(HouseInfo houseInfo);
+    ArrayList<Integer> selectHouseById(HouseInfo houseInfo);
+
 
     /**
      * 通过房间信息查询相关数据

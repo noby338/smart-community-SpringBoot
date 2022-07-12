@@ -121,4 +121,9 @@
         </if>
     </sql>
 
+
+    <!-- 使用中:::孙   -->
+    <select id="selectParkingListByOwnerId" resultMap="mapperParkingInfo">
+        select * from parking_info where owner_id=#{id}
+    </select>
 </mapper>

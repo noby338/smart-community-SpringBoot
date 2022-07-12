@@ -98,8 +98,9 @@ public class HouseDaoTest {
 //    }
     @Test
     public void test(){
-
-        System.out.println(houseDao.selectHouseByFloorId(1));
+        HouseInfo houseInfo = new HouseInfo();
+        houseInfo.setBuildingId(1);
+        System.out.println(houseDao.selectHouseByBuildingId(houseInfo));
     }
 
     @Test

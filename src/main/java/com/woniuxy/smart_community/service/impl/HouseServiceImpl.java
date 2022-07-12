@@ -35,62 +35,75 @@ public class HouseServiceImpl implements HouseService {
 
 
     @Override
-    public ArrayList<Integer> selectHouseId(HouseInfo houseInfo) {
+    public ArrayList<Integer> selectHouseById(HouseInfo houseInfo) {
         ArrayList<Integer> houseId = new ArrayList<>();
-        ResponseEntity<ArrayList<Integer>> responseEntityHouse = null;
-        if (houseInfo.getFloorId() != null) {
-            HouseFloor houseFloor = houseDao.selectHouseByFloorId(houseInfo.getFloorId());
-            for(House house : houseFloor.getHouseList()){
-                    houseId.add(house.getId());
-            }
 
-            return houseId;
-        }
-        if(houseInfo.getUnitId() != null){
-            HouseUnit houseUnit = houseDao.selectHouseByUnitId(houseInfo.getUnitId());
-            for(HouseFloor houseFloor : houseUnit.getHouseFloorList()){
-                    for(House house : houseFloor.getHouseList()){
-                        houseId.add(house.getId());
-                    }
-                }
-            return houseId;
-        }
-
-        if(houseInfo.getBuildingId() != null){
-            HouseBuilding houseBuilding = houseDao.selectHouseByBuildingId(houseInfo.getBuildingId());
-            for(HouseUnit houseUnit : houseBuilding.getHouseUnitList()){
-                    for(HouseFloor houseFloor : houseUnit.getHouseFloorList()){
-                        for(House house : houseFloor.getHouseList()){
+        if (houseInfo.getBuildingId() == null && houseInfo.getUnitId() == null && houseInfo.getFloorId() == null) {
+            List<HouseBuilding> buildings = houseDao.selectHouseByBuildingId(houseInfo);
+            for (HouseBuilding houseBuilding : buildings) {
+                for (HouseUnit houseUnit : houseBuilding.getHouseUnitList()) {
+                    for (HouseFloor houseFloor : houseUnit.getHouseFloorList()) {
+                        for (House house : houseFloor.getHouseList()) {
                             houseId.add(house.getId());
                         }
                     }
                 }
-
-            responseEntityHouse = new ResponseEntity<ArrayList<Integer>>(200, "获取成功！", houseId);
+            }
             return houseId;
+        }else {
+            if(houseInfo.getBuildingId() != null){
+                List<HouseBuilding> buildings = houseDao.selectHouseByBuildingId(houseInfo);
+                for (HouseBuilding houseBuilding : buildings) {
+                    for (HouseUnit houseUnit : houseBuilding.getHouseUnitList()) {
+                        for (HouseFloor houseFloor : houseUnit.getHouseFloorList()) {
+                            for (House house : houseFloor.getHouseList()) {
+                                houseId.add(house.getId());
+                            }
+                        }
+                    }
+                }
+                return houseId;
+            }else if(houseInfo.getUnitId() != null){
+                List<HouseUnit> houseUnits = houseDao.selectHouseByUnitId(houseInfo);
+                for (HouseUnit houseUnit : houseUnits) {
+                    for (HouseFloor houseFloor : houseUnit.getHouseFloorList()) {
+                        for (House house : houseFloor.getHouseList()) {
+                            houseId.add(house.getId());
+                        }
+                    }
+                }
+                return houseId;
+            }else{
+                List<HouseFloor> houseFloors = houseDao.selectHouseByFloorId(houseInfo);
+                for (HouseFloor houseFloor : houseFloors) {
+                    for (House house : houseFloor.getHouseList()) {
+                        houseId.add(house.getId());
+                    }
+                }
+                return houseId;
+            }
         }
-        return houseId;
     }
 
     @Override
     public ResponseEntity selectHouse(HouseInfo houseInfo, int pageNum, int pageSize) {
 
-        ResponseEntity<HouseFloor> responseEntityHouse = null;
-        ResponseEntity<HouseUnit> responseEntityFloor = null;
-        ResponseEntity<HouseBuilding> responseEntityBuilding = null;
+        ResponseEntity<List<HouseFloor>> responseEntityHouse = null;
+        ResponseEntity<List<HouseUnit>> responseEntityFloor = null;
+        ResponseEntity<List<HouseBuilding>> responseEntityBuilding = null;
         if (houseInfo.getFloorId() != null) {
-            HouseFloor houseFloor = houseDao.selectHouseByFloorId(houseInfo.getFloorId());
-            responseEntityHouse = new ResponseEntity<HouseFloor>(200, "获取成功！", houseFloor);
+            List<HouseFloor> houseFloors = houseDao.selectHouseByFloorId(houseInfo);
+            responseEntityHouse = new ResponseEntity<List<HouseFloor>>(200, "获取成功！", houseFloors);
             return responseEntityHouse;
         }
         if(houseInfo.getUnitId() != null){
-            HouseUnit houseUnit = houseDao.selectHouseByUnitId(houseInfo.getUnitId());
-            responseEntityFloor = new ResponseEntity<HouseUnit>(200, "获取成功！", houseUnit);
+            List<HouseUnit> houseUnits = houseDao.selectHouseByUnitId(houseInfo);
+            responseEntityFloor = new ResponseEntity<List<HouseUnit>>(200, "获取成功！", houseUnits);
             return responseEntityFloor;
         }
         if(houseInfo.getBuildingId() != null){
-            HouseBuilding houseBuilding = houseDao.selectHouseByBuildingId(houseInfo.getBuildingId());
-            responseEntityBuilding = new ResponseEntity<HouseBuilding>(200, "获取成功！", houseBuilding);
+            List<HouseBuilding> buildings = houseDao.selectHouseByBuildingId(houseInfo);
+            responseEntityBuilding = new ResponseEntity<List<HouseBuilding>>(200, "获取成功！", buildings);
             return responseEntityBuilding;
         }
         return responseEntityHouse = new ResponseEntity<>(200,"获取失败！",null);
@@ -99,9 +112,9 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public ResponseEntity selectAllHouse(HouseInfo houseInfo) {
-        ResponseEntity<HouseBuilding> responseEntityBuilding = null;
-        HouseBuilding houseBuilding = houseDao.selectHouseByBuildingId(null);
-        return responseEntityBuilding = new ResponseEntity<>(200,"获取失败！",houseBuilding);
+        ResponseEntity<List<HouseBuilding>> responseEntityBuilding = null;
+        List<HouseBuilding> buildings = houseDao.selectHouseByBuildingId(null);
+        return responseEntityBuilding = new ResponseEntity<List<HouseBuilding>>(200,"获取失败！",buildings);
     }
 
     /**
