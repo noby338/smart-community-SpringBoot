@@ -36,6 +36,15 @@ public interface HouseService {
      */
     ResponseEntity selectHouse(HouseInfo houseInfo, int pageNum, int pageSize);
 
+
+    /**
+     * 通过房间信息查询相关数据
+     *
+     * @param houseInfo 房间号
+     * @return 实例对象
+     */
+    ResponseEntity selectAllHouse(HouseInfo houseInfo);
+
     /**
      * 通过主键修改房间信息数据
      *

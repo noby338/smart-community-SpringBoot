@@ -97,6 +97,13 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
+    public ResponseEntity selectAllHouse(HouseInfo houseInfo) {
+        ResponseEntity<HouseBuilding> responseEntityBuilding = null;
+        HouseBuilding houseBuilding = houseDao.selectHouseByBuildingId(null);
+        return responseEntityBuilding = new ResponseEntity<>(200,"获取失败！",houseBuilding);
+    }
+
+    @Override
     public ResponseEntity updateHouse(HouseInfo houseInfo) {
         return null;
     }

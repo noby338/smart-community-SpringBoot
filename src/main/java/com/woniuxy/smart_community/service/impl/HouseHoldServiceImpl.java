@@ -1,5 +1,7 @@
 package com.woniuxy.smart_community.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.woniuxy.smart_community.dao.HouseDao;
 import com.woniuxy.smart_community.dao.HouseHoldDao;
 import com.woniuxy.smart_community.entity.*;
@@ -27,8 +29,10 @@ public class HouseHoldServiceImpl implements HouseHoldService {
     HouseHoldDao houseHoldDao;
 
     @Override
-    public List<HouseHold> selectHouseHoldByHouseHoldInfo(HouseHold houseHold ,int pageNum,int pageSize) {
-        return houseHoldDao.selectHouseHoldByHouseHoldInfo(houseHold);
+    public PageInfo<HouseHold> selectHouseHoldByHouseHoldInfo(HouseHold houseHold ,int pageNum,int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<HouseHold> houseHolds = houseHoldDao.selectHouseHoldByHouseHoldInfo(houseHold);
+        return new PageInfo<>(houseHolds);
     }
 
     @Override
