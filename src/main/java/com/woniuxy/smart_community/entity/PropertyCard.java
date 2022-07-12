@@ -4,19 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 /**
  * @Description
  * @Author noby
- * @Date 2022/7/8 18:34
+ * @Date 2022/7/11 10:06
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class HouseUnit {
+public class PropertyCard {
     private Integer id;
-    private String name;
-    private Integer buildingId;
-    private List<HouseFloor> houseFloorList;
+    private String cardNumber;//房卡编号
+    private Integer houseId;
+    private Double lastMoney;//余额
+    private Double limitMoney;//欠费限制
+    private Integer state;
 }

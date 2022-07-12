@@ -1,15 +1,15 @@
 package com.woniuxy.smart_community.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import com.woniuxy.smart_community.dao.HouseBuildingDao;
 import com.woniuxy.smart_community.dao.HouseDao;
-import com.woniuxy.smart_community.entity.House;
-import com.woniuxy.smart_community.entity.ResponseEntity;
+import com.woniuxy.smart_community.dao.HouseFloorDao;
+import com.woniuxy.smart_community.dao.HouseUnitDao;
+import com.woniuxy.smart_community.entity.*;
 import com.woniuxy.smart_community.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * @Author :  Fiver_Hu
@@ -24,57 +24,80 @@ import java.util.List;
 public class HouseServiceImpl implements HouseService {
 
     @Autowired
+    HouseBuildingDao houseBuildingDao;
+    @Autowired
+    HouseUnitDao houseUnitDao;
+    @Autowired
+    HouseFloorDao houseFloorDao;
+    @Autowired
     HouseDao houseDao;
 
+
     @Override
-    public ResponseEntity insertHouse(House house) {
-        int isadd = houseDao.insertHouse(house);
-        if(isadd == 1){
-            return new ResponseEntity(200,"添加成功！",isadd);
-        }else {
-            return new ResponseEntity(401, "添加失败！", null);
+    public ArrayList<Integer> selectHouseId(HouseInfo houseInfo) {
+        ArrayList<Integer> houseId = new ArrayList<>();
+        ResponseEntity<ArrayList<Integer>> responseEntityHouse = null;
+        if (houseInfo.getFloorId() != null) {
+            HouseFloor houseFloor = houseDao.selectHouseByFloorId(houseInfo.getFloorId());
+            for(House house : houseFloor.getHouseList()){
+                    houseId.add(house.getId());
+            }
+
+            return houseId;
         }
+        if(houseInfo.getUnitId() != null){
+            HouseUnit houseUnit = houseDao.selectHouseByUnitId(houseInfo.getUnitId());
+            for(HouseFloor houseFloor : houseUnit.getHouseFloorList()){
+                    for(House house : houseFloor.getHouseList()){
+                        houseId.add(house.getId());
+                    }
+                }
+            return houseId;
+        }
+
+        if(houseInfo.getBuildingId() != null){
+            HouseBuilding houseBuilding = houseDao.selectHouseByBuildingId(houseInfo.getBuildingId());
+            for(HouseUnit houseUnit : houseBuilding.getHouseUnitList()){
+                    for(HouseFloor houseFloor : houseUnit.getHouseFloorList()){
+                        for(House house : houseFloor.getHouseList()){
+                            houseId.add(house.getId());
+                        }
+                    }
+                }
+
+            responseEntityHouse = new ResponseEntity<ArrayList<Integer>>(200, "获取成功！", houseId);
+            return houseId;
+        }
+        return houseId;
     }
 
     @Override
-    public ResponseEntity deleteHouseById(Integer id) {
-        int isdelete = houseDao.deleteHouseById(id);
-        if(isdelete == 1){
-            return new ResponseEntity(200,"删除成功！",null);
-        }else {
-            return new ResponseEntity(401, "删除失败！", null);
+    public ResponseEntity selectHouse(HouseInfo houseInfo, int pageNum, int pageSize) {
+
+        ResponseEntity<HouseFloor> responseEntityHouse = null;
+        ResponseEntity<HouseUnit> responseEntityFloor = null;
+        ResponseEntity<HouseBuilding> responseEntityBuilding = null;
+        if (houseInfo.getFloorId() != null) {
+            HouseFloor houseFloor = houseDao.selectHouseByFloorId(houseInfo.getFloorId());
+            responseEntityHouse = new ResponseEntity<HouseFloor>(200, "获取成功！", houseFloor);
+            return responseEntityHouse;
         }
+        if(houseInfo.getUnitId() != null){
+            HouseUnit houseUnit = houseDao.selectHouseByUnitId(houseInfo.getUnitId());
+            responseEntityFloor = new ResponseEntity<HouseUnit>(200, "获取成功！", houseUnit);
+            return responseEntityFloor;
+        }
+        if(houseInfo.getBuildingId() != null){
+            HouseBuilding houseBuilding = houseDao.selectHouseByBuildingId(houseInfo.getBuildingId());
+            responseEntityBuilding = new ResponseEntity<HouseBuilding>(200, "获取成功！", houseBuilding);
+            return responseEntityBuilding;
+        }
+        return responseEntityHouse = new ResponseEntity<>(200,"获取失败！",null);
+
     }
 
     @Override
-    public ResponseEntity updateHouse(House house) {
-        int isupdate = houseDao.updateHouse(house);
-        if(isupdate == 1){
-            return new ResponseEntity(200,"更新成功！",null);
-        }else {
-            return new ResponseEntity(401, "更新失败！", null);
-        }
-    }
-
-    @Override
-    public ResponseEntity selectHouseByHouseInfo(House house, int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
-        List<House> houses = houseDao.selectHouseByHouseInfo(house);
-        PageInfo<House> pageInfo = new PageInfo<>(houses);
-        if(houses.size()>0){
-            return new ResponseEntity(200,"获取成功！",pageInfo);
-        }else {
-            return new ResponseEntity(401,"获取失败！",pageInfo);
-        }
-    }
-
-    @Override
-    public ResponseEntity countHouses(House house) {
-        Integer countHouses = houseDao.countHouses(house);
-        if(countHouses == 1){
-            return new ResponseEntity(200,"获取成功！",countHouses);
-        }else {
-            return new ResponseEntity(401, "删除失败！", null);
-        }
+    public ResponseEntity updateHouse(HouseInfo houseInfo) {
+        return null;
     }
 }

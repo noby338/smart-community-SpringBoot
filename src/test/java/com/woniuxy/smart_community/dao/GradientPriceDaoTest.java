@@ -1,14 +1,11 @@
 package com.woniuxy.smart_community.dao;
 
 import com.woniuxy.smart_community.entity.GradientPrice;
-import net.sf.jsqlparser.util.deparser.GrantDeParser;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @Description 测试类

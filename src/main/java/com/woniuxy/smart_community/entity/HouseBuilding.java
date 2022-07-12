@@ -14,9 +14,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class HouseFloor {
+public class HouseBuilding {
     private Integer id;
     private String name;
-    private Integer unitId;
-    private List<House> houseList;
+    private List<HouseUnit> houseUnitList;
 }
