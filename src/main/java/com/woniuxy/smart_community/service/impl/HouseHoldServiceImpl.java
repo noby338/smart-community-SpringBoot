@@ -62,28 +62,13 @@ public class HouseHoldServiceImpl implements HouseHoldService {
 
 
     @Override
-    public List<Integer> selectHouseIdListByHouseParam(HouseParam houseParam) {
+    public List<Integer> selectHouseIdListByHouseInfo(HouseInfo houseInfo) {
         List<Integer> houseIdList = new ArrayList<>();
-        if(houseParam.getBuildingId() != null){
-            HouseBuilding houseBuilding = houseDao.selectHouseByBuildingId(houseParam.getBuildingId());
+
+        List<HouseBuilding> buildings = houseDao.selectHouseByBuildingId(houseInfo);
+        for(HouseBuilding houseBuilding : buildings){
             for(HouseUnit houseUnit: houseBuilding.getHouseUnitList()){
                 for(HouseFloor houseFloor: houseUnit.getHouseFloorList()){
-                    for(House house: houseFloor.getHouseList()){
-                        houseIdList.add(house.getId());
-                    }
-                }
-            }
-        }else {
-            if(houseParam.getUtilId() != null){
-                HouseUnit houseUnit = houseDao.selectHouseByUnitId(houseParam.getUtilId());
-                for(HouseFloor houseFloor: houseUnit.getHouseFloorList()){
-                    for(House house: houseFloor.getHouseList()){
-                        houseIdList.add(house.getId());
-                    }
-                }
-            }else {
-                if(houseParam.getFloorId() != null){
-                    HouseFloor houseFloor = houseDao.selectHouseByFloorId(houseParam.getFloorId());
                     for(House house: houseFloor.getHouseList()){
                         houseIdList.add(house.getId());
                     }

@@ -3,6 +3,7 @@ package com.woniuxy.smart_community.dao;
 import com.woniuxy.smart_community.entity.House;
 import com.woniuxy.smart_community.entity.HouseFloor;
 import com.woniuxy.smart_community.entity.HouseHold;
+import com.woniuxy.smart_community.entity.HouseInfo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,25 +30,28 @@ public class HouseHoldDaoTset {
         HouseHold houseHold = new HouseHold();
         RandomPhoneNum randomPhoneNum = new RandomPhoneNum();
         RandomUserInfo randomUserInfo = new RandomUserInfo();
+        HouseInfo houseInfo = new HouseInfo();
         House house = new House();
         for(int i =1;i<=1920;i++){
             house.setId(i);
-            HouseFloor houseFloor = houseDao.selectHouseByFloorId(1);
-            for(House house1: houseFloor.getHouseList()){
-                if(house1.getHousePeopleNums() != 0){
-                    for(int j = 1;j <= house1.getHousePeopleNums();j++){
-                        houseHold.setHouseId(house1.getId());
-                        houseHold.setAge(randomUserInfo.getAge());
-                        boolean sex = randomUserInfo.getSex();
-                        houseHold.setGender(sex);
-                        houseHold.setName(randomUserInfo.getFamilyName()+randomUserInfo.getFamilyName());
-                        houseHold.setTelephone(randomPhoneNum.getPhoneNum());
-                        houseHold.setOwner(randomUserInfo.getSex());
-                        houseHold.setState(new Random().nextInt(2)+1);
-                        houseHoldDao.insert(houseHold);
+            List<HouseFloor> houseFloors = houseDao.selectHouseByFloorId(houseInfo);
+            for(HouseFloor houseFloor : houseFloors){
+                for(House house1: houseFloor.getHouseList()){
+                    if(house1.getHousePeopleNums() != 0){
+                        for(int j = 1;j <= house1.getHousePeopleNums();j++){
+                            houseHold.setHouseId(house1.getId());
+                            houseHold.setAge(randomUserInfo.getAge());
+                            boolean sex = randomUserInfo.getSex();
+                            houseHold.setGender(sex);
+                            houseHold.setName(randomUserInfo.getFamilyName()+randomUserInfo.getFamilyName());
+                            houseHold.setTelephone(randomPhoneNum.getPhoneNum());
+                            houseHold.setOwner(randomUserInfo.getSex());
+                            houseHold.setState(new Random().nextInt(2)+1);
+                            houseHoldDao.insert(houseHold);
+                        }
                     }
-                }
 
+                }
             }
 
         }
@@ -57,8 +61,9 @@ public class HouseHoldDaoTset {
     public void select(){
         House house = new House();
         house.setId(2);
-        HouseFloor houseFloor = houseDao.selectHouseByFloorId(1);
-        System.out.println(houseFloor);
+        HouseInfo houseInfo = new HouseInfo();
+        List<HouseFloor> houseFloors = houseDao.selectHouseByFloorId(houseInfo);
+        System.out.println(houseFloors);
     }
 
     @Test
@@ -81,7 +86,7 @@ public class HouseHoldDaoTset {
     @Test
     public void selectHouseHoldByHouseHoldInfoTest(){
         HouseHold houseHold = new HouseHold();
-        houseHold.setAge(1);
+        houseHold.setGender(false);
         System.out.println(houseHoldDao.selectHouseHoldByHouseHoldInfo(houseHold));
     }
 
