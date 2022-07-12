@@ -24,19 +24,6 @@ public class HouseController {
     @Autowired
     HouseService houseService;
 
-    /**
-     * 通过房间信息查询相关数据
-     *
-     * @param houseInfo 房间号
-     * @return 实例对象
-     */
-    @GetMapping("/selectAllHouseId")
-    public ResponseEntity selectAllHouseId(
-            @Param("houseInfo") HouseInfo houseInfo){
-        ResponseEntity response = houseService.selectHouseId(houseInfo);
-        System.out.println(response);
-        return response;
-    }
 
     /**
      * 通过房间信息查询相关数据

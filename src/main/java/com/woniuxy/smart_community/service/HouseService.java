@@ -6,6 +6,7 @@ import com.woniuxy.smart_community.entity.HouseParam;
 import com.woniuxy.smart_community.entity.ResponseEntity;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public interface HouseService {
      * @param houseInfo 房间号
      * @return 实例对象
      */
-    ResponseEntity selectHouseId(HouseInfo houseInfo);
+    ArrayList<Integer> selectHouseId(HouseInfo houseInfo);
 
     /**
      * 通过房间信息查询相关数据

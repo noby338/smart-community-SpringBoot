@@ -35,7 +35,7 @@ public class HouseServiceImpl implements HouseService {
 
 
     @Override
-    public ResponseEntity selectHouseId(HouseInfo houseInfo) {
+    public ArrayList<Integer> selectHouseId(HouseInfo houseInfo) {
         ArrayList<Integer> houseId = new ArrayList<>();
         ResponseEntity<ArrayList<Integer>> responseEntityHouse = null;
         if (houseInfo.getFloorId() != null) {
@@ -43,8 +43,8 @@ public class HouseServiceImpl implements HouseService {
             for(House house: houses){
                 houseId.add(house.getId());
             }
-            responseEntityHouse = new ResponseEntity<>(200, "获取成功！", houseId);
-            return responseEntityHouse;
+
+            return houseId;
         }
         if(houseInfo.getUnitId() != null){
             List<HouseFloor> floors = houseDao.selectHouseByUnitId(houseInfo.getUnitId());
@@ -53,8 +53,7 @@ public class HouseServiceImpl implements HouseService {
                     houseId.add(house.getId());
                 }
             }
-            responseEntityHouse = new ResponseEntity<ArrayList<Integer>>(200, "获取成功！", houseId);
-            return responseEntityHouse;
+            return houseId;
         }
         if(houseInfo.getBuildingId() != null){
             List<HouseBuilding> buildings = houseDao.selectHouseByBuildingId(houseInfo.getBuildingId());
@@ -68,9 +67,9 @@ public class HouseServiceImpl implements HouseService {
                 }
             }
             responseEntityHouse = new ResponseEntity<ArrayList<Integer>>(200, "获取成功！", houseId);
-            return responseEntityHouse;
+            return houseId;
         }
-        return responseEntityHouse = new ResponseEntity<>(200,"获取失败！",null);
+        return houseId;
     }
 
     @Override
