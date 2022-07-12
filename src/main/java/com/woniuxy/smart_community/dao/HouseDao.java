@@ -1,9 +1,6 @@
 package com.woniuxy.smart_community.dao;
 
-import com.woniuxy.smart_community.entity.House;
-import com.woniuxy.smart_community.entity.HouseBuilding;
-import com.woniuxy.smart_community.entity.HouseFloor;
-import com.woniuxy.smart_community.entity.HouseUnit;
+import com.woniuxy.smart_community.entity.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,26 +25,26 @@ public interface HouseDao {
     /**
      * 通过房间信息查询相关数据
      *
-     * @param buildingId 楼栋号
+     * @param houseInfo 楼栋号
      * @return 实例对象
      */
-    HouseBuilding selectHouseByBuildingId(Integer buildingId);
+    List<HouseBuilding> selectHouseByBuildingId(@Param("houseInfo") HouseInfo houseInfo);
 
     /**
      * 通过房间信息查询相关数据
      *
-     * @param unitId 楼栋号
+     * @param houseInfo 楼栋号
      * @return 实例对象
      */
-    HouseUnit selectHouseByUnitId(Integer unitId);
+    List<HouseUnit> selectHouseByUnitId(@Param("houseInfo") HouseInfo houseInfo);
 
     /**
      * 通过房间信息查询相关数据
      *
-     * @param floorId 楼栋号
+     * @param houseInfo 楼栋号
      * @return 实例对象
      */
-    HouseFloor selectHouseByFloorId(Integer floorId);
+    List<HouseFloor> selectHouseByFloorId(@Param("houseInfo") HouseInfo houseInfo);
 
     //孙浚钦使用---car页面
     List<House> selectAllHouseForCarShow();
