@@ -15,19 +15,17 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 public class ParkingRecord {
-    private Integer pRecordId;
-    private String pRecordNo;       //进出记录编号  32位
-    private String carNo;           //车牌号
-
-    private Integer carId;              //外键 关联车辆信息
+    private Integer id;
+    private String recordNumber;       //进出记录编号  32位
+    //外键
     private CarInfo carInfo;
 
-    private Integer owId;               //外键  关联车主信息
+    //外键  关联车主信息
     private OwnersInfo ownersInfo;
 
-    private Date pIntime;
-    private Date pOutime;
+    private Date inTime;
+    private Date outTime;
 
-    private BigDecimal pCost;       //费用价格
+    private BigDecimal cost;       //费用价格
     private String payType;         //支付方式  后台编写分类
 }
