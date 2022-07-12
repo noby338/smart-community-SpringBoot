@@ -1,10 +1,13 @@
 package com.woniuxy.smart_community.dao;
 
 import com.woniuxy.smart_community.entity.House;
+import com.woniuxy.smart_community.entity.HouseFloor;
+import com.woniuxy.smart_community.entity.HouseUnit;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
@@ -14,6 +17,8 @@ import java.util.Stack;
  * @Date 2022/7/5 16:43 星期二
  * @Version 1.0
  **/
+
+
 @SpringBootTest
 public class HouseDaoTest {
     @Autowired
@@ -28,20 +33,22 @@ public class HouseDaoTest {
     @Test
     public void insertHouse(){
         House house = new House();
+        HouseFloor houseFloor = new HouseFloor();
+        HouseUnit houseUnit = new HouseUnit();
         for (int i = 1; i <= 480; i++) {//楼层id
             for (int i2 = 1; i2 <= 4; i2++) {//门牌号
-                house.setFloorId(i);
-
-                HouseFloor houseFloor = houseFloorDao.selectById(i);
+                houseFloor.setUnitId(i);
+                houseFloor.setId(i);
+                List<HouseFloor> houseFloors = houseFloorDao.selectHouseFloor(houseFloor);
                 String floorNum = houseFloor.getName().substring(0,houseFloor.getName().length()-1);
                 Integer unitId = houseFloor.getUnitId();
-
-                HouseUnit houseUnit = houseUnitDao.select(unitId);
-                String unitNum = houseUnit.getName().substring(0, houseUnit.getName().length()-2);
+                houseUnit.setId(1);
+                List<HouseUnit> houseUnits = houseUnitDao.selectHouseUnit(houseUnit);
+                String zhNumStr = houseUnit.getName().substring(0, houseUnit.getName().length()-2);
 
                 Integer buildingId = houseUnit.getBuildingId();
 
-                int unit = zh2arbaNum(unitNum);
+                int unit = zh2arbaNum(zhNumStr);
                 System.out.println(buildingId);
                 System.out.println(unit);
                 System.out.println(floorNum);
@@ -53,7 +60,7 @@ public class HouseDaoTest {
                 houseDao.insertHouse(house);
             }
         }
-
+    }
     @Test
     public void updateHouse(){
         House house = new House();
@@ -70,42 +77,8 @@ public class HouseDaoTest {
         house.setFloorId(2400);
         houseDao.selectHouse(house);
     }
-//
-//    @Test
-//    public  void  selectHouseByHouseInfoTest(){
-//        House house = new House();
-//        house.setFloor(1);
-//        System.out.println(houseDao.selectHouseByHouseInfo(house));
-//    }
-//
-//    @Test
-//    public void updateHouse(){
-//        House house = new House();
-//        for(int i = 0 ;i<100;i++){
-//            house.setId(i);
-//            house.setBuilding(i%2);
-//            house.setUnit(i%2);
-//            house.setFloor(i%2);
-//            house.setHouseNum("12131415");
-//            house.setHousePeopleNums(i%2);
-//            house.setHouseState(i%2);
-//            houseDao.updateHouse(house);
-//        }
-//    }
-//
-//    @Test
-//    public void deleteByIdTest(){
-//        houseDao.deleteHouseById(1);
-//    }
-//
-//    @Test
-//    public void count(){
-//        House house = new House();
-//        house.setFloor(2);
-//        System.out.println(houseDao.countHouses(house));
-//    }
 
-    public static int zh2arbaNum(String zhNumStr) {
+    private int zh2arbaNum(String zhNumStr) {
         Stack<Integer> stack = new Stack<>();
         String numStr = "一二三四五六七八九";
         String unitStr = "十百千万亿";

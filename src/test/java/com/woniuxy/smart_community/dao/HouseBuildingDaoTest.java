@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 /**
  * @Author :  Fiver_Hu
  * @Date : 2022/7/9 11:24 星期六
@@ -51,7 +53,7 @@ public class HouseBuildingDaoTest {
         HouseBuilding houseBuilding = new HouseBuilding();
         houseBuilding.setId(22);
         houseBuilding.setName("测试");
-        HouseBuilding houseBuilding1 = houseBuildingDao.selectHouseBuilding(houseBuilding);
+        List<HouseBuilding> houseBuilding1 = houseBuildingDao.selectHouseBuilding(houseBuilding);
         System.out.println(houseBuilding1);
     }
 
