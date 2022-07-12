@@ -26,4 +26,7 @@ public interface ParkingInfoDao {
     //假删除
     void deleteParkingInfoById(int parkId);
 
+
+    //车辆页面使用查询--使用中--孙
+    List<ParkingInfo> selectParkingListByOwnerId(int ownerId);
 }

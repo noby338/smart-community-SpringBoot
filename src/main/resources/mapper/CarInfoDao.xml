@@ -42,4 +42,12 @@
     <update id="updateImgByCarNumber">
         UPDATE car_info SET car_jpg = #{imgAddress} WHERE car_number=#{carNumber}
     </update>
+
+    <select id="selectCarByParkId" resultType="CarInfo">
+        select * from car_info where park_id=#{id}
+    </select>
+
+    <update id="updateCarInfoByIdAndParkId">
+        UPDATE car_info SET park_id = #{parkId} WHERE id=#{carId}
+    </update>
 </mapper>

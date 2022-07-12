@@ -14,4 +14,9 @@ public interface CarInfoDao {
 
     void updateImgByCarNumber(@Param("carNumber") String carNumber,
                               @Param("imgAddress") String imgAddress);
+    //通过一个车位id找到一个车辆：1对1
+    CarInfo selectCarByParkId(Integer id);
+
+    void updateCarInfoByIdAndParkId(@Param("carId")int carId,
+                                    @Param("parkId")int parkId);
 }

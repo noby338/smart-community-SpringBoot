@@ -37,11 +37,11 @@ public class CarInfoController {
     }
 
 
-    @PostMapping("/parkNumbersSelect/{id}")
-    public ResponseEntity getParkingInfoParkNumbers(@PathVariable int id){
+    @PostMapping("/parkNumbersSelect/{parkId}/{ownerId}")
+    public ResponseEntity getParkingInfoParkNumbers(@PathVariable int parkId,@PathVariable int ownerId){
         ResponseEntity responseEntity=null;
         try{
-            List<ForSelect> forSelects=carInfoService.getALLParkingInfoIdAndParkNumber(id);
+            List<ForSelect> forSelects=carInfoService.getALLParkingInfoIdAndParkNumber(parkId,ownerId);
             responseEntity=new ResponseEntity(200,"ok",forSelects);
         }catch (Exception e){
             responseEntity=new ResponseEntity(401,"无车位信息",null);
@@ -73,6 +73,17 @@ public class CarInfoController {
         return responseEntity;
     }
 
+    @PostMapping("/changeParkIdByCarId/{carId}/{parkId}")
+    public ResponseEntity changeParkIdByCarId(@PathVariable int carId,@PathVariable int parkId){
+        ResponseEntity responseEntity=null;
+        try{
+            carInfoService.changeParkIdByCarId(carId,parkId);
+            responseEntity=new ResponseEntity(200,"ok",null);
+        }catch (Exception e){
+            responseEntity=new ResponseEntity(401,"改绑失败",null);
+        }
+        return responseEntity;
+    }
 
     @PostMapping("/uploadImages/{carNumber}")
     public ResponseEntity uploadImages(MultipartFile img,@PathVariable String carNumber){
