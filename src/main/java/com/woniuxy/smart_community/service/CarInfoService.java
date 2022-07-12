@@ -24,4 +24,6 @@ public interface CarInfoService {
     List<ForSelect> getAllHouse();
 
     void changeParkIdByCarId(int carId, int parkId);
+
+    void changeOwnerIdByCarId(int ownerId, int carId);
 }

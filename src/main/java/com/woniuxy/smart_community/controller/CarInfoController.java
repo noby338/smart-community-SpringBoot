@@ -85,6 +85,18 @@ public class CarInfoController {
         return responseEntity;
     }
 
+    @PostMapping("/changeOwnerIdByCarId/{ownerId}/{carId}")
+    public ResponseEntity changeOwnerIdByCarId(@PathVariable int ownerId,@PathVariable int carId){
+        ResponseEntity responseEntity=null;
+        try{
+            carInfoService.changeOwnerIdByCarId(ownerId,carId);
+            responseEntity=new ResponseEntity(200,"ok",null);
+        }catch (Exception e){
+            responseEntity=new ResponseEntity(401,"改绑失败",null);
+        }
+        return responseEntity;
+    }
+
     @PostMapping("/uploadImages/{carNumber}")
     public ResponseEntity uploadImages(MultipartFile img,@PathVariable String carNumber){
         ResponseEntity responseEntity=null;

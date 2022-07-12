@@ -108,6 +108,11 @@ public class CarInfoServiceImpl implements CarInfoService {
         carInfoDao.updateCarInfoByIdAndParkId(carId,parkId);
     }
 
+    @Override
+    public void changeOwnerIdByCarId(int ownerId, int carId) {
+        carInfoDao.updateCarInfoByIdAndOwnerId(carId,ownerId);
+    }
+
 
     @Override
     public void addImgAddress(String carNumber, String imgAddress) {

@@ -50,4 +50,8 @@
     <update id="updateCarInfoByIdAndParkId">
         UPDATE car_info SET park_id = #{parkId} WHERE id=#{carId}
     </update>
+
+    <update id="updateCarInfoByIdAndOwnerId">
+        UPDATE car_info SET owner_id = #{ownerId},park_id=null WHERE id=#{carId}
+    </update>
 </mapper>

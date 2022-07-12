@@ -19,4 +19,7 @@ public interface CarInfoDao {
 
     void updateCarInfoByIdAndParkId(@Param("carId")int carId,
                                     @Param("parkId")int parkId);
+
+    void updateCarInfoByIdAndOwnerId(@Param("carId")int carId,
+                                     @Param("ownerId")int ownerId);
 }
