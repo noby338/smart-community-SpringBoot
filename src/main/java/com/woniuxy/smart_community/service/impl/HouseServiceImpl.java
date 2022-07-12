@@ -9,6 +9,7 @@ import com.woniuxy.smart_community.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,6 +34,44 @@ public class HouseServiceImpl implements HouseService {
     HouseDao houseDao;
 
 
+    @Override
+    public ResponseEntity selectHouseId(HouseInfo houseInfo) {
+        ArrayList<Integer> houseId = new ArrayList<>();
+        ResponseEntity<ArrayList<Integer>> responseEntityHouse = null;
+        if (houseInfo.getFloorId() != null) {
+            List<House> houses = houseDao.selectHouseByFloorId(houseInfo.getFloorId());
+            for(House house: houses){
+                houseId.add(house.getId());
+            }
+            responseEntityHouse = new ResponseEntity<>(200, "获取成功！", houseId);
+            return responseEntityHouse;
+        }
+        if(houseInfo.getUnitId() != null){
+            List<HouseFloor> floors = houseDao.selectHouseByUnitId(houseInfo.getUnitId());
+            for(HouseFloor houseFloor : floors){
+                for(House house : houseFloor.getHouseList()) {
+                    houseId.add(house.getId());
+                }
+            }
+            responseEntityHouse = new ResponseEntity<ArrayList<Integer>>(200, "获取成功！", houseId);
+            return responseEntityHouse;
+        }
+        if(houseInfo.getBuildingId() != null){
+            List<HouseBuilding> buildings = houseDao.selectHouseByBuildingId(houseInfo.getBuildingId());
+            for(HouseBuilding building : buildings){
+                for(HouseUnit houseUnit : building.getHouseUnitList()){
+                    for(HouseFloor houseFloor : houseUnit.getHouseFloorList()){
+                        for(House house : houseFloor.getHouseList()){
+                            houseId.add(house.getId());
+                        }
+                    }
+                }
+            }
+            responseEntityHouse = new ResponseEntity<ArrayList<Integer>>(200, "获取成功！", houseId);
+            return responseEntityHouse;
+        }
+        return responseEntityHouse = new ResponseEntity<>(200,"获取失败！",null);
+    }
 
     @Override
     public ResponseEntity selectHouse(HouseInfo houseInfo, int pageNum, int pageSize) {

@@ -31,7 +31,7 @@ public class HouseHoldDaoTset {
         House house = new House();
         for(int i =1;i<=1920;i++){
             house.setId(i);
-            List<House> houses = houseDao.selectHouseByHouseInfo(house);
+            List<House> houses = houseDao.selectHouseByFloorId(1);
             for(House house1: houses){
                 if(house1.getHousePeopleNums() != 0){
                     for(int j = 1;j <= house1.getHousePeopleNums();j++){
@@ -39,7 +39,7 @@ public class HouseHoldDaoTset {
                         houseHold.setAge(randomUserInfo.getAge());
                         boolean sex = randomUserInfo.getSex();
                         houseHold.setGender(sex);
-                        houseHold.setName(randomUserInfo.getFamilyName()+randomUserInfo.getNameAndSex(sex));
+                        houseHold.setName(randomUserInfo.getFamilyName()+randomUserInfo.getFamilyName());
                         houseHold.setTelephone(randomPhoneNum.getPhoneNum());
                         houseHold.setOwner(randomUserInfo.getSex());
                         houseHold.setState(new Random().nextInt(2)+1);
@@ -56,7 +56,7 @@ public class HouseHoldDaoTset {
     public void select(){
         House house = new House();
         house.setId(2);
-        List<House> houses = houseDao.selectHouseByHouseInfo(house);
+        List<House> houses = houseDao.selectHouseByFloorId(1);
         System.out.println(houses);
     }
 
@@ -98,7 +98,7 @@ public class HouseHoldDaoTset {
     public void countByHouseInfoTest(){
         HouseHold houseHold = new HouseHold();
         houseHold.setHouseId(2);
-        System.out.println(houseHoldDao.countByHouseInfo(houseHold));
+        System.out.println(houseHoldDao.selectHouseHoldByHouseHoldInfo(houseHold));
     }
 
     @Test

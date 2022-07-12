@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * @Description 测试类
  * @Author noby
@@ -30,7 +28,7 @@ class HouseFloorDaoTest {
         for(int i = 1; i <= 5 ;i++){
             houseUnit.setBuildingId(i);
             houseUnit.setName("一单元");
-            houseUnitDao.insert(houseUnit);
+            houseUnitDao.insertHouseUnit(houseUnit);
         }
     }
 
@@ -59,7 +57,7 @@ class HouseFloorDaoTest {
             for (int j = 1; j <= 20; j++) {//单元id
                 houseFloor.setName(i+"楼");
                 houseFloor.setUnitId(j);
-                houseFloorDao.insert(houseFloor);
+                houseFloorDao.insertHouseFloor(houseFloor);
             }
         }
     }

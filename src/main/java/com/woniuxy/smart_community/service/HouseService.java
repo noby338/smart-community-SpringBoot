@@ -25,6 +25,14 @@ public interface HouseService {
      * @param houseInfo 房间号
      * @return 实例对象
      */
+    ResponseEntity selectHouseId(HouseInfo houseInfo);
+
+    /**
+     * 通过房间信息查询相关数据
+     *
+     * @param houseInfo 房间号
+     * @return 实例对象
+     */
     ResponseEntity selectHouse(HouseInfo houseInfo, int pageNum, int pageSize);
 
     /**
