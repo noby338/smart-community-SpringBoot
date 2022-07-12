@@ -3,6 +3,7 @@ package com.woniuxy.smart_community.controller;
 import com.github.pagehelper.PageInfo;
 import com.woniuxy.smart_community.entity.CarInfo;
 import com.woniuxy.smart_community.entity.ForSelect;
+import com.woniuxy.smart_community.entity.House;
 import com.woniuxy.smart_community.entity.ResponseEntity;
 import com.woniuxy.smart_community.service.CarInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,8 +65,8 @@ public class CarInfoController {
     public ResponseEntity getAllHouse(){
         ResponseEntity responseEntity=null;
         try{
-
-            responseEntity=new ResponseEntity(200,"ok",null);
+            List<ForSelect> forSelects=carInfoService.getAllHouse();
+            responseEntity=new ResponseEntity(200,"ok",forSelects);
         }catch (Exception e){
             responseEntity=new ResponseEntity(401,"无车主信息",null);
         }

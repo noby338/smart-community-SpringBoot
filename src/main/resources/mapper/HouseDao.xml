@@ -60,5 +60,16 @@
             </where>
     </select>
 
+    
+    
+    
+    
+    
+    
+    <!--car页面使用(孙浚钦)-->
+    <select id="selectAllHouseForCarShow" resultType="House">
+        select *
+        from house;
+    </select>
 </mapper>
 

@@ -3,6 +3,7 @@ package com.woniuxy.smart_community.service;
 import com.github.pagehelper.PageInfo;
 import com.woniuxy.smart_community.entity.CarInfo;
 import com.woniuxy.smart_community.entity.ForSelect;
+import com.woniuxy.smart_community.entity.House;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface CarInfoService {
     void addImgAddress(String carNumber, String imgAddress);
 
     List<ForSelect> getAllCarOwnersIdAndName(int id);
+
+    List<ForSelect> getAllHouse();
 }

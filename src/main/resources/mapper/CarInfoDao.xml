@@ -21,8 +21,18 @@
     <select id="selectParkingInfoById" resultType="ParkingInfo">
         select * from parking_info where id=#{id}
     </select>
-    <select id="selectOwnersInfoById" resultType="OwnersInfo">
+    <select id="selectOwnersInfoById" resultMap="ownersInfoMap">
         select * from owners_info where id=#{id}
+    </select>
+    <resultMap id="ownersInfoMap" type="OwnersInfo">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="telephone" column="telephone"/>
+        <result property="state" column="state"/>
+        <association property="house" column="house_id" javaType="House" select="selectHouseById"/>
+    </resultMap>
+    <select id="selectHouseById" resultType="House">
+        select * from house where id=#{id}
     </select>
 
     <select id="selectCountCarInfo" resultType="int">
