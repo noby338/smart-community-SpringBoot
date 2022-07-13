@@ -2,6 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.woniuxy.smart_community.dao.HouseDao">
 
+    <update id="updateHouse">
+        update house set house_num = #{house.housePeopleNums}, house_state = #{house.houseState}, remark = #{house.remark} where id = #{house.id}
+    </update>
+
+    <select id="selectHouseByBuildingId" resultMap="buiding_map">
+        select * from house_building
+        <where>
+            <if test="buildingId != null">
+                and id=#{buildingId}
+            </if>
+        </where>
+    </select>
+    <select id="selectAllHouseBuilding" resultMap="buiding_map">
+        select * from house_building
+    </select>
     <resultMap id="buiding_map" type="houseBuilding">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
@@ -32,19 +47,6 @@
 
 
 
-    <update id="updateHouse">
-        update house set house_num = #{house.housePeopleNums}, house_state = #{house.houseState}, remark = #{house.remark} where id = #{house.id}
-    </update>
-
-    <select id="selectHouseByBuildingId" resultMap="buiding_map">
-        select * from house_building
-        <where>
-            <if test="houseInfo.buildingId != null">
-                and id=#{houseInfo.buildingId}
-            </if>
-        </where>
-    </select>
-
     <select id="selectHouseByUnitId" resultMap="unit_map">
         select * from house_unit
             <where>
@@ -63,12 +65,12 @@
             </where>
     </select>
 
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
     <!--car页面使用(孙浚钦)-->
     <select id="selectAllHouseForCarShow" resultType="House">
         select *

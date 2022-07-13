@@ -27,25 +27,44 @@ class WaterDaoTest {
      */
     @Test
     void testInsert() {
-        Water water = new Water();
-        int year = 2022;
-        int month = 1;
-        //房屋id
-        for (int i = 1; i <= 200; i++) {
-            //某房屋某月份的初始表用量
-            BigDecimal nowMonthNums = new BigDecimal(0);
-            //月份
-            for (int i1 = 0; i1 < 3; i1++) {
-                water.setHouseId(i);
-                water.setMonth(String.format("%02d/%02d", year,month+i1));
-                //本月随机写入[2,40)立方用水
-                double randomSage = (int) ((Math.random() * 40 * 10000) + 2 * 10000) / 10000.0;
-                nowMonthNums = BigDecimal.valueOf(randomSage).add(nowMonthNums);
-                water.setNowMonthNums(nowMonthNums.doubleValue());
-                water.setNowPrices(gradientPriceService.getPriceByUtilIdQuantity(2, randomSage).doubleValue());
-                water.setState(1);
-                waterDao.insert(water);
-            }
-        }
+
+//        Water water = new Water();
+//        //房屋id
+//        for (int i = 1; i <= 1920; i++) {
+//            for (int year = 2021; year <= 2022; year++) {
+//                //某房屋某月份的初始表用量
+//                BigDecimal nowMonthNums = new BigDecimal(0);
+//                if (year == 2021) {
+//                    for (int month = 10; month <= 12; month++) {
+//                        water.setHouseId(i);
+//                        water.setMonth(String.format("%02d/%02d", year, month));
+//                        //本月随机写入[2,40)立方用水
+//                        double randomSage = (int) ((Math.random() * 40 * 10000) + 2 * 10000) / 10000.0;
+//                        nowMonthNums = BigDecimal.valueOf(randomSage).add(nowMonthNums);
+//                        water.setNowMonthNums(nowMonthNums.doubleValue());
+//                        water.setNowPrices(gradientPriceService.getPriceByUtilIdQuantity(2, randomSage).doubleValue());
+//                        water.setState(1);
+//                        water.setUtilPriceId(3);
+//                        waterDao.insert(water);
+//                    }
+//                }
+//                if (year == 2022) {
+//                    for (int month = 1; month <= 3; month++) {
+//                        water.setHouseId(i);
+//                        water.setMonth(String.format("%02d/%02d", year, month));
+//                        //本月随机写入[2,40)立方用水
+//                        double randomSage = (int) ((Math.random() * 40 * 10000) + 2 * 10000) / 10000.0;
+//                        nowMonthNums = BigDecimal.valueOf(randomSage).add(nowMonthNums);
+//                        water.setNowMonthNums(nowMonthNums.doubleValue());
+//                        water.setNowPrices(gradientPriceService.getPriceByUtilIdQuantity(2, randomSage).doubleValue());
+//                        water.setState(1);
+//                        water.setUtilPriceId(3);
+//                        waterDao.insert(water);
+//                    }
+//                }
+//
+//            }
+//
+//        }
     }
 }

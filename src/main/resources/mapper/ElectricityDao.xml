@@ -4,11 +4,33 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.woniuxy.smart_community.dao.ElectricityDao">
     <insert id="insert">
-        insert into electricity(house_id, month, now_month_nums, now_prices, state)
-        values (#{houseId}, #{month}, #{nowMonthNums}, #{nowPrices}, #{state})
+        insert into electricity(house_id, month, now_month_nums, now_prices, state, util_price_id)
+        values (#{houseId}, #{month}, #{nowMonthNums}, #{nowPrices}, #{state}, #{utilPriceId})
     </insert>
 
     <select id="selectByElectricity" resultType="com.woniuxy.smart_community.entity.Electricity">
-        select * from electricity where id = #{id}
+        select *
+        from electricity
+        where id = #{id}
+    </select>
+    <select id="selectByMonth" resultType="com.woniuxy.smart_community.entity.Electricity">
+        select *
+        from electricity
+        where month = #{month}
+    </select>
+
+    <select id="selectElectricityByHouseIdListAndMonth" resultType="com.woniuxy.smart_community.entity.Electricity">
+        select * from electricity
+        <where>
+            <if test="houseIdList != null and houseIdList != ''">
+                house_id in
+                <foreach collection="houseIdList" item="houseId" open="(" close=")" separator=",">
+                    #{houseId}
+                </foreach>
+            </if>
+            <if test="month != null and month != ''">
+                and month = #{month}
+            </if>
+        </where>
     </select>
 </mapper>

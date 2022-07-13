@@ -1,5 +1,7 @@
 package com.woniuxy.smart_community.controller;
 
+import com.woniuxy.smart_community.entity.Cascade;
+import com.woniuxy.smart_community.entity.HouseBuilding;
 import com.woniuxy.smart_community.entity.House;
 import com.woniuxy.smart_community.entity.HouseBuilding;
 import com.woniuxy.smart_community.entity.HouseInfo;
@@ -8,6 +10,8 @@ import com.woniuxy.smart_community.service.HouseService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,5 +59,16 @@ public class HouseController {
          System.out.println(response);
          return response;
      }
+
+    /**
+     * 获取所有的 houseBuilding 对象集合
+     * @return houseBuilding 对象集合
+     */
+    @GetMapping("/selectAllHouseBuilding")
+    public ResponseEntity selectAllHouseBuilding(){
+        List<Cascade> houseBuildingList = houseService.selectAllHouseBuilding();
+        System.out.println("houseBuildingList = " + houseBuildingList);
+        return new ResponseEntity(200,"y",houseBuildingList);
+    }
 
 }

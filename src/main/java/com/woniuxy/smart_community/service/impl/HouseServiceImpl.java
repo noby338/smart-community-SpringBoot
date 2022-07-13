@@ -172,4 +172,53 @@ public class HouseServiceImpl implements HouseService {
     public ResponseEntity updateHouse(HouseInfo houseInfo) {
         return null;
     }
+
+    @Override
+    public List<Cascade> selectAllHouseBuilding() {
+        List<HouseBuilding> houseBuildingList = houseDao.selectAllHouseBuilding();
+        List<Cascade> cascadeArrayList = new ArrayList<>();
+
+
+        for (HouseBuilding houseBuilding : houseBuildingList) {
+            Cascade cascade = new Cascade();
+            cascade.setValue(houseBuilding.getId()+"");
+            cascade.setLabel(houseBuilding.getName());
+            List<Cascade> cascadeArrayList1 = new ArrayList<>();
+            List<HouseUnit> houseUnitList = houseBuilding.getHouseUnitList();
+
+            for (HouseUnit houseUnit : houseUnitList) {
+                Cascade cascade1 = new Cascade();
+                cascade1.setValue(houseUnit.getId()+"");
+                cascade1.setLabel(houseUnit.getName());
+                List<Cascade> cascadeArrayList2 = new ArrayList<>();
+                List<HouseFloor> houseFloorList = houseUnit.getHouseFloorList();
+
+                for (HouseFloor houseFloor : houseFloorList) {
+                    Cascade cascade2 = new Cascade();
+                    cascade2.setValue(houseFloor.getId()+"");
+                    cascade2.setLabel(houseFloor.getName());
+                    List<Cascade> cascadeArrayList3 = new ArrayList<>();
+                    List<House> houseList = houseFloor.getHouseList();
+
+                    for (House house : houseList) {
+                        Cascade cascade3 = new Cascade();
+                        cascade3.setValue(house.getId()+"");
+                        cascade3.setLabel(house.getHouseNum());
+                        cascadeArrayList3.add(cascade3);
+                    }
+
+                    cascade2.setChildren(cascadeArrayList3);
+                    cascadeArrayList2.add(cascade2);
+                }
+
+                cascade1.setChildren(cascadeArrayList2);
+                cascadeArrayList1.add(cascade1);
+            }
+
+            cascade.setChildren(cascadeArrayList1);
+            cascadeArrayList.add(cascade);
+        }
+        return cascadeArrayList;
+//        return null;
+    }
 }

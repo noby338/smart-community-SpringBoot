@@ -5,10 +5,10 @@
 <mapper namespace="com.woniuxy.smart_community.dao.UtilPriceDao">
 
 
-    <select id="selectAll" resultMap="gradient_price_map">
+    <select id="selectAll" resultMap="util_map">
         select * from util_price;
     </select>
-    <resultMap id="gradient_price_map" type="UtilPrice">
+    <resultMap id="util_map" type="UtilPrice">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <collection column="id" property="gradientPriceList" ofType="GradientPrice" select="selectGradientPriceById" />
@@ -17,5 +17,8 @@
         select * from gradient_price where util_id=#{id};
     </select>
 
+    <select id="selectById" resultMap="util_map">
+        select * from util_price where id=#{id}
+    </select>
 
 </mapper>
