@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * (RbacMenu)实体类
@@ -27,6 +28,8 @@ public class RbacMenu implements Serializable {
     private String url;
     
     private Integer fid;
+
+    private List<RbacMenu> childMenu;
 
 
 

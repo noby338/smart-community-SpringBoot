@@ -19,7 +19,7 @@ public class PropertyUser implements Serializable {
     private static final long serialVersionUID = 722980034706566798L;
     
     private Integer id;
-    
+
     private String loginName;
     
     private String password;
@@ -34,7 +34,9 @@ public class PropertyUser implements Serializable {
     
     private Integer state;
 
+    private String rname;
 
+private String token;
 
 }
 

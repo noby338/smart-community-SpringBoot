@@ -1,9 +1,12 @@
 package com.woniuxy.smart_community.dao;
 
 import com.woniuxy.smart_community.entity.PropertyUser;
+import com.woniuxy.smart_community.entity.RbacMenu;
+import com.woniuxy.smart_community.entity.RbacPerm;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * (PropertyUser)表数据库访问层
@@ -20,12 +23,30 @@ public interface PropertyUserDao {
 */
 
 
-    List<PropertyUser> findAll();
+    List<PropertyUser> findAll(int state);
 
     boolean update(PropertyUser propertyUser);
 
     boolean insert(PropertyUser propertyUser);
 
     boolean deleteByLoginName(String loginName);
+
+    PropertyUser login(PropertyUser propertyUser);
+
+    String findPassword(String loginName);
+
+    Set<String> findAllRoles(String username);
+
+    Set<String> findAllPerms( String username);
+
+    Set<RbacPerm> findOtherByLoginName(String loginName);
+
+    Set<RbacPerm> allRoles();
+
+    int findrolesByName(String role);
+
+    int updatePerm(@Param("roleId") int roleId,@Param("userId") int userId);
+
+    void deleteByUserId(int userId);
 }
 

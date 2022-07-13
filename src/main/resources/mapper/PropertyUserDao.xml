@@ -26,6 +26,9 @@
         select
           id, login_name, password, name, age, gender, tellphone, state
         from property_user
+<where>
+    state = #{state}
+</where>
 
     </select>
 
@@ -119,9 +122,50 @@
     </update>
 
     <!--通过主键删除-->
-    <delete id="deleteByLoginName">
-        delete from property_user where login_name = #{loginName}
-    </delete>
+    <update id="deleteByLoginName">
+        update property_user set state = "0" where login_name = #{loginName}
+    </update>
+    <!--通过主键删除-->
+    <select id="login" resultMap="PropertyUserMap" >
+        select * from property_user where login_name = #{loginName} and state=1
+    </select>
+    <!--通过主键删除-->
+    <select id="findPassword" resultType="string">
+        select password from property_user where login_name = #{loginName}
+    </select>
+    <!--通过主键删除-->
+    <select id="findAllRoles" resultType="string">
+        SELECT role_id FROM property_user
+                                INNER JOIN rbac_role_user ru ON  id= ru.user_id
+                                INNER JOIN rbac_role r ON r.id=ru.role_id
+        WHERE login_name = #{loginName}
+    </select>
+    <select id="findAllPerms" resultType="string">
+        SELECT DISTINCT p.code FROM property_user
+                                        LEFT JOIN rbac_role_user ru ON  id= ru.user_id
+                                        INNER JOIN rbac_role r ON r.id=ru.role_id
+                                        INNER JOIN rbac_manager_perm mp ON ru.role_id=mp.role_id
+                                        LEFT JOIN rbac_perm p ON p.id=mp.perm_id
+        WHERE login_name = #{login_name}
+    </select>
+    <select id="findOtherByLoginName" resultType="com.woniuxy.smart_community.entity.RbacPerm">
+        SELECT id,name FROM rbac_role WHERE id  IN (SELECT r.id FROM property_user
+                                                                       INNER JOIN rbac_role_user ru ON  id= ru.user_id
+                                                                       INNER JOIN rbac_role r ON r.id=ru.role_id
+                                                  WHERE login_name =#{loginName})
+    </select>
 
+    <select id="allRoles" resultType="com.woniuxy.smart_community.entity.RbacPerm">
+        SELECT * FROM  rbac_role
+    </select>
+    <select id="findrolesByName" resultType="int">
+        SELECT id FROM  rbac_role where name=#{name}
+    </select>
+    <insert id="updatePerm" >
+        insert into rbac_role_user values (#{roleId},#{userId})
+    </insert>
+    <delete id="deleteByUserId" >
+        DELETE FROM rbac_role_user WHERE user_id=#{userId}
+    </delete>
 </mapper>
 
