@@ -22,4 +22,10 @@ public interface CarInfoDao {
 
     void updateCarInfoByIdAndOwnerId(@Param("carId")int carId,
                                      @Param("ownerId")int ownerId);
+
+    CarInfo selectCarIfoById(@Param("carId")int carId);
+
+    CarInfo selectCarIfoByCarNumber(@Param("carNumber")String carNumber);
+
+    void updateCarNumberById(@Param("carNumber")String carNumber, @Param("carId")int carId);
 }
