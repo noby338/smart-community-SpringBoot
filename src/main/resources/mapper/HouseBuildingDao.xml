@@ -23,6 +23,9 @@
             <if test="houseBuilding.name !=null and houseBuilding.name != ''"  >
                 and name = #{houseBuilding.name}
             </if>
+            <if test="houseBuilding.id !=null"  >
+                and id = #{houseBuilding.id}
+            </if>
         </where>
     </select>
 </mapper>

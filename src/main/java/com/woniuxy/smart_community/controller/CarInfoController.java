@@ -8,9 +8,7 @@ import com.woniuxy.smart_community.entity.ResponseEntity;
 import com.woniuxy.smart_community.service.CarInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -25,10 +23,12 @@ public class CarInfoController {
     CarInfoService carInfoService;
 
     @PostMapping("/cars/{pageIndex}/{pageSize}")
-    public ResponseEntity getAllCarInfo(@PathVariable int pageIndex,@PathVariable int pageSize){
+    public ResponseEntity getAllCarInfo(@PathVariable int pageIndex,
+                                        @PathVariable int pageSize,
+                                        @RequestBody CarInfo carInfo){
         ResponseEntity responseEntity=null;
         try {
-            PageInfo<CarInfo> pageInfo = carInfoService.getAllCarInfo(pageIndex,pageSize);
+            PageInfo<CarInfo> pageInfo = carInfoService.getAllCarInfo(pageIndex,pageSize,carInfo);
             responseEntity=new ResponseEntity(200,"ok",pageInfo);
         }catch (Exception e){
             responseEntity=new ResponseEntity(401,"无车辆信息",null);
@@ -113,6 +113,32 @@ public class CarInfoController {
         return responseEntity;
     }
 
+    @PostMapping("/addCarByNumber/{carNumber}")
+    public ResponseEntity addCarByNumber(@PathVariable String carNumber){
+        ResponseEntity responseEntity=null;
+        try{
+            int state = carInfoService.addCarByNumber(carNumber);
+            if(state==1){
+                responseEntity=new ResponseEntity(401,"添加失败，"+carNumber+"已存在",null);
+            }else {
+                responseEntity=new ResponseEntity(200,"添加成功",null);
+            }
+        }catch (Exception e){
+            responseEntity=new ResponseEntity(401,"改绑失败",null);
+        }
+        return responseEntity;
+    }
+    @PostMapping("/deleteCarById/{id}")
+    public ResponseEntity deleteCarById(@PathVariable int id){
+        ResponseEntity responseEntity=null;
+        try{
+            carInfoService.deleteCarById(id);
+            responseEntity=new ResponseEntity(200,"删除成功",null);
+        }catch (Exception e){
+            responseEntity=new ResponseEntity(401,"删除失败",null);
+        }
+        return responseEntity;
+    }
     @PostMapping("/uploadImages/{carNumber}")
     public ResponseEntity uploadImages(MultipartFile img,@PathVariable String carNumber){
         ResponseEntity responseEntity=null;

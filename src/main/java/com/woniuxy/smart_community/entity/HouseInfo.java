@@ -21,8 +21,11 @@ import java.util.List;
 public class HouseInfo {
 
     private Integer buildingId;
+    private String  buildingName;
     private Integer unitId;
+    private String  nuitName;
     private Integer floorId;
+    private String  floorName;
     private Integer houseId;
     private Integer housePeopleNums;
     private Integer houseState;

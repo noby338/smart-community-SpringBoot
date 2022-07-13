@@ -36,9 +36,9 @@ public class CarInfoServiceImpl implements CarInfoService {
     HouseDao houseDao;
 
     @Override
-    public PageInfo<CarInfo> getAllCarInfo(int pageIndex,int pageSize) {
+    public PageInfo<CarInfo> getAllCarInfo(int pageIndex,int pageSize,CarInfo queryCar) {
         PageHelper.startPage(pageIndex, pageSize);
-        List<CarInfo> carInfos=carInfoDao.selectAllCarInfos();
+        List<CarInfo> carInfos=carInfoDao.selectAllCarInfos(queryCar);
         for(CarInfo carInfo:carInfos){
             String carJpg = carInfo.getCarJpg();
             if(carJpg!=null){
@@ -46,7 +46,7 @@ public class CarInfoServiceImpl implements CarInfoService {
             }
         }
         PageInfo<CarInfo> pageInfo=new PageInfo<>(carInfos);
-        int total=carInfoDao.selectCountCarInfo();
+        int total=carInfoDao.selectCountCarInfo(queryCar);
         pageInfo.setTotal(total);
         return pageInfo;
     }
@@ -122,6 +122,22 @@ public class CarInfoServiceImpl implements CarInfoService {
             carInfoDao.updateCarNumberById(carNumber,carId);
             return 0;
         }
+    }
+
+    @Override
+    public int addCarByNumber(String carNumber) {
+        CarInfo carInfo=carInfoDao.selectCarIfoByCarNumber(carNumber);
+        if(carInfo!=null){
+            return 1;
+        }else {
+            carInfoDao.insertCarInfoByCarNumber(carNumber);
+            return 0;
+        }
+    }
+
+    @Override
+    public void deleteCarById(int id) {
+        carInfoDao.deleteCarById(id);
     }
 
 
