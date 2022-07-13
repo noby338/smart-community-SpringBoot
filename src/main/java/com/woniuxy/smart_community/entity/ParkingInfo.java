@@ -14,17 +14,20 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Data
 public class ParkingInfo {
-    private Integer parkId;
-    private String parkNo;      //车位编号 5位
+    private Integer id;
+    //车位编号 10位
+    //A1234
+    //B1231
+    private String parkNumber;
 
-    private Integer parkLotId;
-    private ParkingLot parkingLot; //外键 关联停车场信息列表
+    //外键 关联停车场信息列表
+    private ParkingLot parkingLot;
 
-    private BigDecimal parkArea;    //车位面积
+    //车位面积
+    private BigDecimal parkArea;
 
-    private Integer pTypeId;        //外键
-    private ParkingType parkingType;    //外键 关联车位状态表
-
-    private Integer owId;               //外键 关联车位所有人信息表
+    //外键 关联车位状态表
+    private ParkingType parkingType;
+    //外键 关联车位所有人信息表
     private OwnersInfo ownersInfo;
 }

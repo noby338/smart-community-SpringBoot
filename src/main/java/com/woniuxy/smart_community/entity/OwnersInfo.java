@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class OwnersInfo {
-    private Integer owId;
-    private String owName;
-    private String owPhone;
-    private String owType;  //人员状态
-
-    private Integer id;//外键 关联住址
+    private Integer id;
+    private String name;
+    private String telephone;
+    //外键对应房间
     private House house;
+    //人员状态 0注销 1车主(非业主) 2车主(业主)
+    private Integer state;
 }

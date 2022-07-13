@@ -1,5 +1,6 @@
 package com.woniuxy.smart_community.dao;
 
+import com.woniuxy.smart_community.entity.ParkingLot;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,22 +8,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 /**
  * @Description
  * @Author LittleCode
- * @Date 2022/7/6 16:39
+ * @Date 2022/7/9 20:58
  */
 @SpringBootTest
-public class CarInfoDaoTest {
+public class parkingLotDaotest {
     @Autowired
-    CarInfoDao carInfoDao;
+    ParkingLotDao parkingLotDao;
 
     @Test
     void test01(){
-        System.out.println(carInfoDao.selectCarInfoByCarid(1));
+        ParkingLot parkingLot = parkingLotDao.selectParkingLotById(1);
+        System.out.println(parkingLot);
     }
-    @Test
-    void test02(){
-        System.out.println(carInfoDao.selectAllCarInfos());
-    }
-
-
-
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniuxy.smart_community.dao.HouseUnitDao">
+    <insert id="insertHouseUnit">
+        insert into house_unit (name, building_id) values (#{houseUnit.name},#{houseUnit.buildingId})
+    </insert>
+
+    <delete id="delectHouseUnit">
+        delete from house_unit where id=#{houseUnit.id}
+    </delete>
+
+    <update id="updateHouseUnit">
+        update house_unit set name=#{houseUnit.name}, building_id=#{houseUnit.buildingId} where id=#{houseUnit.id}
+    </update>
+
+    <select id="selectHouseUnit" resultType="HouseUnit">
+        select * from house_unit
+            <where>
+                <if test="houseUnit.name !=null and houseUnit.name != ''"  >
+                    and name = #{houseUnit.name}
+                </if>
+                <if test="houseUnit.buildingId !=null"  >
+                    and building_id = #{houseUnit.buildingId}
+                </if>
+            </where>
+
+    </select>
+</mapper>

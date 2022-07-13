@@ -1,6 +1,8 @@
 package com.woniuxy.smart_community.service.impl;
 
+import com.woniuxy.smart_community.dao.ParkingInfoDao;
 import com.woniuxy.smart_community.dao.ParkingLotDao;
+import com.woniuxy.smart_community.entity.ParkingInfo;
 import com.woniuxy.smart_community.entity.ParkingLot;
 import com.woniuxy.smart_community.service.ParkingLotService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ public class ParkingLotServiceImpl implements ParkingLotService {
 
     @Autowired
     ParkingLotDao parkingLotDao;
+    @Autowired
+    ParkingInfoDao parkingInfoDao;
 
 //    查询
     @Override
@@ -21,6 +25,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         return parkingLots;
     }
 
+    //使用
     @Override
     public ParkingLot getParkingLotById(int id) {
         ParkingLot parkingLot = parkingLotDao.selectParkingLotById(id);
@@ -43,6 +48,14 @@ public class ParkingLotServiceImpl implements ParkingLotService {
 //    修改
     @Override
     public void changeParkingLot(ParkingLot parkingLot) {
+        System.out.println("更新parkingLot表数据"+parkingLot);
+        int parkNums = parkingInfoDao.selectCount(new ParkingInfo());
+        int sellParkNums = parkingInfoDao.selectCountByParkingType(1);
+        int hireParkNums = parkingInfoDao.selectCountByParkingType(2);
+        //nowUseNums数据需要查询parking_record表
+        parkingLot.setParkNums(parkNums);
+        parkingLot.setSellParkNums(sellParkNums);
+        parkingLot.setHireParkNums(hireParkNums);
         parkingLotDao.updateParkingLot(parkingLot);
     }
 

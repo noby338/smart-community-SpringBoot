@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @Description 单价表
+ * @Description 单价梯度
  * @Author noby
  * @Date 2022/7/7 9:09
  */

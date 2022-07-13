@@ -1,6 +1,5 @@
 package com.woniuxy.smart_community.controller;
 
-import com.github.pagehelper.PageInfo;
 import com.woniuxy.smart_community.entity.ResponseEntity;
 import com.woniuxy.smart_community.entity.UtilPrice;
 import com.woniuxy.smart_community.service.UtilPriceService;
@@ -14,12 +13,11 @@ import java.util.List;
  * @Author noby
  * @Date 2022/7/7 10:30
  */
-@CrossOrigin
 @RestController
 @RequestMapping("/utilPrice")
 public class UtilController {
     @Autowired
-    UtilPriceService utilPriceService;
+    private UtilPriceService utilPriceService;
 
     @GetMapping("/selectAll")
     public ResponseEntity<List<UtilPrice>> selectAll() {

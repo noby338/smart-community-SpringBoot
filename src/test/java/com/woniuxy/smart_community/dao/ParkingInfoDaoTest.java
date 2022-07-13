@@ -1,16 +1,20 @@
 package com.woniuxy.smart_community.dao;
 
+import com.woniuxy.smart_community.entity.OwnersInfo;
 import com.woniuxy.smart_community.entity.ParkingInfo;
+import com.woniuxy.smart_community.entity.ParkingLot;
+import com.woniuxy.smart_community.entity.ParkingType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
- * @Author: LittleCode
- * @Date: 2022/7/6 14:09
- * @Description:
+ * @Description
+ * @Author LittleCode
+ * @Date 2022/7/10 13:37
  */
 @SpringBootTest
 public class ParkingInfoDaoTest {
@@ -19,41 +23,27 @@ public class ParkingInfoDaoTest {
 
     @Test
     void test01(){
-        System.out.println(parkingInfoDao.selectAllParkingInfo());
-    }
-     @Test
-    void test02(){
-         ParkingInfo parkingInfo=new ParkingInfo();
-         //parkingInfo.setParkId(1);
-         parkingInfo.setParkNo("A");
-         System.out.println(parkingInfoDao.selectCount(parkingInfo));
-         System.out.println(parkingInfoDao.selectParkingInfoByParkingInfo(parkingInfo));
+        ParkingInfo parkingInfo=new ParkingInfo();
+        List<ParkingInfo> parkingInfos = parkingInfoDao.selectParkingInfoByParkingInfo(parkingInfo);
+        System.out.println(parkingInfos);
     }
 
-    /**
-     * 批量添加信息
-     */
     @Test
-    void test03(){
-        for(int i=0;i<200;i++){
-            ParkingInfo parkingInfo=new ParkingInfo();
-            parkingInfo.setParkLotId(1);
-            parkingInfo.setPTypeId(3);
-            if(i<101){
-                parkingInfo.setParkNo("A0"+i);
-                parkingInfo.setParkArea(BigDecimal.valueOf(21.00));
-            }else {
-                parkingInfo.setParkNo("B0"+(i-100));
-                parkingInfo.setParkArea(BigDecimal.valueOf(20));
-            }
-
+    void test02(){
+        ParkingInfo parkingInfo = new ParkingInfo();
+        BigDecimal areas=new BigDecimal(21.00);
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLot.setId(3);
+        ParkingType parkingType = new ParkingType();
+        parkingType.setId(3);
+        for(int i=0;i<100;i++){
+            parkingInfo.setId(i+1);
+            parkingInfo.setParkingLot(parkingLot);
+            parkingInfo.setParkingType(parkingType);
+            parkingInfo.setParkArea(areas);
+            parkingInfo.setParkNumber("A001"+i);
+            parkingInfo.setOwnersInfo(new OwnersInfo(1,null,null,null,null));
             parkingInfoDao.insertParkingInfo(parkingInfo);
-            System.out.println("获取id:"+parkingInfo.getParkId());
         }
-
     }
-
-
-
-
 }

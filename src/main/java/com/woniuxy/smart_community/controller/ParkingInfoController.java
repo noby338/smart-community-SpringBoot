@@ -1,10 +1,7 @@
 package com.woniuxy.smart_community.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.woniuxy.smart_community.entity.OwnersInfo;
-import com.woniuxy.smart_community.entity.ParkingInfo;
-import com.woniuxy.smart_community.entity.ParkingLot;
-import com.woniuxy.smart_community.entity.ResponseEntity;
+import com.woniuxy.smart_community.entity.*;
 import com.woniuxy.smart_community.service.OwnersInfoService;
 import com.woniuxy.smart_community.service.ParkingInfoService;
 import com.woniuxy.smart_community.service.ParkingLotService;
@@ -54,37 +51,61 @@ public class ParkingInfoController {
 
 
     /**
-     * 车位购买功能
+     * 车位购买/租赁功能
      * @return
      */
     @PostMapping("buyParking")
-    public ResponseEntity buyParkingBusiness(OwnersInfo ownersInfo,ParkingInfo parkingInfo,int pTypeId){
+    public ResponseEntity buyParkingBusiness(@RequestBody ParkingBusiness parkingBusiness){
+        System.out.println("车位购买功能："+parkingBusiness);
         ResponseEntity responseEntity=null;
-
-
-
-        return null;
+        parkingInfoService.addParkingInfoByParkingBusiness(parkingBusiness.getParkingInfo(), parkingBusiness.getParkingPrice(),parkingBusiness.getPayType(),parkingBusiness.getExpireTime());
+        //交易完成---更新parkingLot表数据
+        parkingLotService.changeParkingLot(parkingBusiness.getParkingInfo().getParkingLot());
+        responseEntity=new ResponseEntity(200,"success",null);
+        return responseEntity;
     }
 
     /**
-     * 变更车位所有人信息
-     * 变更前判断车位状态是否不为自由状态
+     * 管理员添加车位
+     * @param parkingInfo
      * @return
      */
-
-    public ResponseEntity changeParkingInfoByOwnersInfo(){
-        return null;
+    @PostMapping("/addParkingInfo")
+    public ResponseEntity addParkingInfo(@RequestBody ParkingInfo parkingInfo){
+        ResponseEntity responseEntity=null;
+        System.out.println("添加车位："+parkingInfo);
+        parkingInfoService.addParkingInfo(parkingInfo);
+        responseEntity=new ResponseEntity(200,"success",null);
+        return responseEntity;
     }
 
 
     /**
-     *
+     * 删除车位信息
+     * @param parkId
      * @return
      */
-
-    public ResponseEntity changeParkingInfo(){
-        return null;
+    @DeleteMapping("/deleteParkingInfoByParkId/{parkId}")
+    public ResponseEntity delParkingInfoByParkId(@PathVariable("parkId") int parkId){
+        ResponseEntity responseEntity=null;
+        System.out.println("删除操作 parkId="+parkId);
+        parkingInfoService.removeParkingInfoByParkId(parkId);
+        responseEntity=new ResponseEntity(200,"success",null);
+        return responseEntity;
     }
 
+    /**
+     * 管理员过更改车位基本信息
+     * @param parkingInfo
+     * @return
+     */
+    @PutMapping("/changeParkingInfo")
+    public ResponseEntity changeParkingInfo(@RequestBody ParkingInfo parkingInfo){
+        ResponseEntity responseEntity=null;
+        parkingInfoService.changeParkingInfo(parkingInfo);
+        System.out.println("更改车位信息："+parkingInfo);
+        responseEntity=new ResponseEntity(200,"success",null);
+        return responseEntity;
+    }
 
 }

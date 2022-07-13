@@ -10,7 +10,9 @@ import java.util.List;
 public interface ParkingLotDao {
 //    查询
     List<ParkingLot> selectAllParkingLot();
-    ParkingLot selectParkingLotById(int id);
+
+    ParkingLot selectParkingLotById(int id);//使用
+
     List<ParkingLot> selectParkingLotByName(@Param("parkingName") String parkingName);
 
 

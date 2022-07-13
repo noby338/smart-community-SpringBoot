@@ -9,54 +9,49 @@
     <select id="selectAllCarInfos" resultMap="carInfoMapper">
         select * from car_info
     </select>
-
-    <select id="selectCarInfoByCarid" resultMap="carInfoMapper">
-        select * from car_info where carid=#{carId}
+<!--共用功能-->
+    <resultMap id="carInfoMapper" type="CarInfo">
+        <id column="id" property="id"/>
+        <result column="car_number" property="carNumber"/>
+        <result column="car_jpg" property="carJpg"/>
+        <result column="state" property="state"/>
+        <association property="parkingInfo" javaType="ParkingInfo" column="park_id" select="selectParkingInfoById"/>
+        <association property="ownersInfo" javaType="OwnersInfo" column="owner_id" select="selectOwnersInfoById"/>
+    </resultMap>
+    <select id="selectParkingInfoById" resultType="ParkingInfo">
+        select * from parking_info where id=#{id}
+    </select>
+    <select id="selectOwnersInfoById" resultMap="ownersInfoMap">
+        select * from owners_info where id=#{id}
+    </select>
+    <resultMap id="ownersInfoMap" type="OwnersInfo">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="telephone" column="telephone"/>
+        <result property="state" column="state"/>
+        <association property="house" column="house_id" javaType="House" select="selectHouseById"/>
+    </resultMap>
+    <select id="selectHouseById" resultType="House">
+        select * from house where id=#{id}
     </select>
 
-    <select id="selectCarInfoByCarno" resultMap="carInfoMapper">
-        select * from car_info where carno like '%' #{carNo} '%'
+    <select id="selectCountCarInfo" resultType="int">
+        select count(*) from car_info
     </select>
 
-
-
-    
-<!--添加-->
-    <insert id="insertCarInfo">
-        insert into car_info values(null,
-        #{carInfo.carNo},#{carInfo.carJpg},#{carInfo.parkId},#{carInfo.owId},1)
-    </insert>
-
-
-<!--修改-->
-    <update id="updateCarInfoState">
-        update car_info set carstate=#{carState} where carid=#{carId}
+    <update id="updateImgByCarNumber">
+        UPDATE car_info SET car_jpg = #{imgAddress} WHERE car_number=#{carNumber}
     </update>
 
-
-<!--删除-->
-    <delete id="deleteCarInfoByCarid">
-        delete car_info where carid=#{carId}
-    </delete>
-
-
-<!--共用功能-->
-
-    <resultMap id="carInfoMapper" type="carInfo">
-        <id column="carid" property="carId"/>
-        <result column="carno" property="carNo"/>
-        <result column="carjpg" property="carJpg"/>
-        <result column="carstate" property="carState"/>
-        <association property="parkingInfo" javaType="parkingInfo" column="parkid" select="selectParkingInfoByParkId"/>
-        <association property="ownersInfo" javaType="ownersInfo" column="owid" select="selectOwnersInfoByOwId"/>
-    </resultMap>
-    <select id="selectParkingInfoByParkId" resultType="parkingInfo">
-        select * from parking_info where parkid=#{parkid}
-    </select>
-    <select id="selectOwnersInfoByOwId" resultType="ownersInfo">
-        select * from owners_info where owid=#{owid}
+    <select id="selectCarByParkId" resultType="CarInfo">
+        select * from car_info where park_id=#{id}
     </select>
 
+    <update id="updateCarInfoByIdAndParkId">
+        UPDATE car_info SET park_id = #{parkId} WHERE id=#{carId}
+    </update>
 
-
+    <update id="updateCarInfoByIdAndOwnerId">
+        UPDATE car_info SET owner_id = #{ownerId},park_id=null WHERE id=#{carId}
+    </update>
 </mapper>

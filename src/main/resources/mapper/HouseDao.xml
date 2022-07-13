@@ -2,98 +2,77 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.woniuxy.smart_community.dao.HouseDao">
 
-    <!--新增房间数据-->
-    <insert id="insertHouse">
-        insert into house(id, building, unit, floor, house_num, house_people_nums, house_state, remark)
-        values (#{house.id}, #{house.building}, #{house.unit}, #{house.floor}, #{house.houseNum}, #{house.housePeopleNums}, #{house.houseState}, #{house.remark})
-    </insert>
+    <resultMap id="buiding_map" type="houseBuilding">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <collection column="id" property="houseUnitList" ofType="houseUnit" select="selectHouseUnitByBuildingId"/>
+    </resultMap>
 
-    <!--通过主键删除房间信息数据-->
-    <delete id="deleteHouseById" >
-        delete from house where id = #{id}
-    </delete>
+    <select id="selectHouseUnitByBuildingId" resultMap="unit_map">
+        select * from house_unit where building_id= #{id}
+    </select>
+    <resultMap id="unit_map" type="houseUnit">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <collection column="id" property="houseFloorList" ofType="houseFloor" select="selectFloorByUnitId"/>
+    </resultMap>
 
-    <!--通过主键修改房间信息数据-->
+    <select id="selectFloorByUnitId" resultMap="floor_map">
+        select * from house_floor where unit_id= #{id}
+    </select>
+    <resultMap id="floor_map" type="houseFloor">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <collection column="id" property="houseList" ofType="house" select="selectByFloorId"/>
+    </resultMap>
+
+    <select id="selectByFloorId" resultType="com.woniuxy.smart_community.entity.House">
+        select * from house where floor_id= #{id}
+    </select>
+
+
+
     <update id="updateHouse">
-        update house
-        <set>
-            <if test="house.building != null and house.building != ''">
-                building = #{house.building},
-            </if>
-            <if test="house.unit != null and house.unit != ''">
-                unit = #{house.unit},
-            </if>
-            <if test="house.floor != null and house.floor != ''">
-                floor = #{house.floor},
-            </if>
-            <if test="house.houseNum != null and #{house.houseNum} != ''">
-                house_num = #{house.houseNum},
-            </if>
-            <if test="house.housePeopleNums != null and house.housePeopleNums != ''">
-                house_people_nums = #{house.housePeopleNums},
-            </if>
-            <if test="house.houseState != null and house.houseState != ''">
-                house_state = #{house.houseState}
-            </if>
-        </set>
-        where id = #{house.id}
+        update house set house_num = #{house.housePeopleNums}, house_state = #{house.houseState}, remark = #{house.remark} where id = #{house.id}
     </update>
 
-    <!--通过房间信息查询相关数据-->
-    <select id="selectHouseByHouseInfo" resultType="house">
-        select * from house
+    <select id="selectHouseByBuildingId" resultMap="buiding_map">
+        select * from house_building
         <where>
-            <if test="house.id != null">
-                and id = #{house.id}
-            </if>
-            <if test="house.building != null">
-                and building = #{house.building}
-            </if>
-            <if test="house.unit != null ">
-                and unit = #{house.unit}
-            </if>
-            <if test="house.floor != null">
-                and floor = #{house.floor}
-            </if>
-            <if test="house.houseNum != null and house.houseNum != ''">
-                and house_num = #{house.houseNum}
-            </if>
-            <if test="house.housePeopleNums != null">
-                and house_people_nums = #{house.housePeopleNums}
-            </if>
-            <if test="house.houseState != null and house.houseState != ''">
-                and house_state = #{house.houseState}
+            <if test="houseInfo.buildingId != null">
+                and id=#{houseInfo.buildingId}
             </if>
         </where>
     </select>
 
-    <!--根据房间信息统计总行数-->
-    <select id="countHouses" resultType="integer">
-        select count(*)
-        from house
-        <where>
-            <if test="house.id != null">
-                and id = #{house.id}
-            </if>
-            <if test="house.building != null">
-                and building = #{house.building}
-            </if>
-            <if test="house.unit != null ">
-                and unit = #{house.unit}
-            </if>
-            <if test="house.floor != null">
-                and floor = #{house.floor}
-            </if>
-            <if test="house.houseNum != null and house.houseNum != ''">
-                and house_num = #{house.houseNum}
-            </if>
-            <if test="house.housePeopleNums != null">
-                and house_people_nums = #{house.housePeopleNums}
-            </if>
-            <if test="house.houseState != null">
-                and house_state = #{house.houseState}
-            </if>
-        </where>
+    <select id="selectHouseByUnitId" resultMap="unit_map">
+        select * from house_unit
+            <where>
+                <if test="houseInfo.unitId != null">
+                    and id = #{houseInfo.unitId}
+                </if>
+            </where>
+    </select>
+
+    <select id="selectHouseByFloorId" resultMap="floor_map">
+        select * from house_floor
+            <where>
+                <if test="houseInfo.floorId != null">
+                    and id=#{houseInfo.floorId}
+                </if>
+            </where>
+    </select>
+
+    
+    
+    
+    
+    
+    
+    <!--car页面使用(孙浚钦)-->
+    <select id="selectAllHouseForCarShow" resultType="House">
+        select *
+        from house;
     </select>
 </mapper>
 
