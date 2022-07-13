@@ -15,6 +15,7 @@ import com.woniuxy.smart_community.service.PropertyUserService;
 import com.woniuxy.smart_community.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -66,6 +67,7 @@ public class PropertyUserServiceImpl implements PropertyUserService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity deleteByLoginName(String loginName) {
         boolean delete= propertyUserDao.deleteByLoginName(loginName);
         if(delete) {
@@ -76,6 +78,7 @@ public class PropertyUserServiceImpl implements PropertyUserService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity login(PropertyUser propertyUser) {
         PropertyUser login= propertyUserDao.login(propertyUser);
 
@@ -124,6 +127,7 @@ public class PropertyUserServiceImpl implements PropertyUserService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity updatePerm(int userId,String loginName, String[] perms) {
 
         propertyUserDao.deleteByUserId(userId);
