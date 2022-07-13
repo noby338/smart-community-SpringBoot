@@ -17,9 +17,4 @@ class GradientPriceDaoTest {
     @Autowired
     GradientPriceDao gradientPriceDao;
 
-    @Test
-    void testSelectByUtilId() {
-        List<GradientPrice> gradientPrices = gradientPriceDao.selectByUtilId(2);
-        System.out.println("gradientPrices = " + gradientPrices);
-    }
 }

@@ -1,5 +1,6 @@
 package com.woniuxy.smart_community.service;
 
+import com.woniuxy.smart_community.entity.Cascade;
 import com.woniuxy.smart_community.entity.House;
 import com.woniuxy.smart_community.entity.HouseInfo;
 import com.woniuxy.smart_community.service.impl.HouseServiceImpl;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author :  Fiver_Hu
@@ -23,6 +25,11 @@ public class HouseServiceTest {
     @Autowired
     HouseServiceImpl houseService;
 
+    @Test
+    public void selectAllHouseBuilding() {
+        List<Cascade> cascades = houseService.selectAllHouseBuilding();
+        System.out.println("cascades = " + cascades);
+    }
 
 
 
@@ -68,8 +75,4 @@ public class HouseServiceTest {
         ArrayList<House> houses = houseService.selectHouse(houseInfo);
         System.out.println(houses);
     }
-
-
-
-
 }

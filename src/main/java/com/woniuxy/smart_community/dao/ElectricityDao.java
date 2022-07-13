@@ -1,6 +1,11 @@
 package com.woniuxy.smart_community.dao;
 
 import com.woniuxy.smart_community.entity.Electricity;
+import com.woniuxy.smart_community.entity.HouseBuilding;
+import com.woniuxy.smart_community.entity.HouseUnit;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @Description 电费dao
@@ -20,4 +25,16 @@ public interface ElectricityDao {
      * @param electricity 电费表
      */
     void insert(Electricity electricity);
+
+    /**
+     * 月份条件查询电表
+     * @return
+     */
+    List<Electricity> selectByMonth(String month);
+    /**
+     * 月份条件查询电表
+     * @return
+     */
+    List<Electricity> selectElectricityByHouseIdListAndMonth(
+            @Param("houseIdList") List<Integer> houseIdList,@Param("month") String month);
 }

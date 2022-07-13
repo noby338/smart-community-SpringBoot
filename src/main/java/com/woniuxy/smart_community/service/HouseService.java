@@ -4,6 +4,8 @@ import com.woniuxy.smart_community.entity.House;
 import com.woniuxy.smart_community.entity.HouseBuilding;
 import com.woniuxy.smart_community.entity.HouseInfo;
 import com.woniuxy.smart_community.entity.ResponseEntity;
+import com.woniuxy.smart_community.entity.*;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +56,12 @@ public interface HouseService {
      * @return 影响行数
      */
     ResponseEntity updateHouse(HouseInfo houseInfo);
+
+    /**
+     * 获取所有楼栋集合对象，该对象包括所有的属性集合(noby)
+     * @return 级联对象
+     */
+    List<Cascade> selectAllHouseBuilding();
 
 
 

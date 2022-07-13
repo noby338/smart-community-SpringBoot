@@ -5,7 +5,7 @@
 <mapper namespace="com.woniuxy.smart_community.dao.GasDao">
 
     <insert id="insert">
-        insert into gas (house_id, month, now_month_nums, now_prices, state)
-        value (#{houseId}, #{month}, #{nowMonthNums}, #{nowPrices}, #{state})
+        insert into gas (house_id, month, now_month_nums, now_prices, state,util_price_id)
+        value (#{houseId}, #{month}, #{nowMonthNums}, #{nowPrices}, #{state},#{utilPriceId})
     </insert>
 </mapper>
