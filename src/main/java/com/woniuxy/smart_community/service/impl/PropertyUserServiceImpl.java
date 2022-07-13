@@ -140,4 +140,14 @@ public class PropertyUserServiceImpl implements PropertyUserService {
         }
     }
 
+    @Override
+    public ResponseEntity activeByLoginName(String loginName) {
+        boolean delete= propertyUserDao.activeByLoginName(loginName);
+        if(delete) {
+            return new ResponseEntity(200, "激活成功", null);
+        }else {
+            return new ResponseEntity(500, "激活失败", null);
+        }
+    }
+
 }

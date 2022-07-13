@@ -30,7 +30,7 @@ public interface PropertyUserDao {
     boolean insert(PropertyUser propertyUser);
 
     boolean deleteByLoginName(String loginName);
-
+    boolean activeByLoginName(String loginName);
     PropertyUser login(PropertyUser propertyUser);
 
     String findPassword(String loginName);

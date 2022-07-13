@@ -48,6 +48,11 @@ public class PropertyUserController {
     public ResponseEntity deleteByLoginName(@PathVariable String loginName){
 return propertyUserService.deleteByLoginName(loginName);
 }
+    @DeleteMapping("/active/{loginName}")
+    public ResponseEntity activeByLoginName(@PathVariable String loginName){
+        return propertyUserService.activeByLoginName(loginName);
+    }
+
 @RequestMapping("/findOther/{loginName}")
 public ResponseEntity findOtherByLoginName(@PathVariable String loginName){
     return propertyUserService.findOtherByLoginName(loginName);

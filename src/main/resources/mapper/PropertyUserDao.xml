@@ -125,6 +125,9 @@
     <update id="deleteByLoginName">
         update property_user set state = "0" where login_name = #{loginName}
     </update>
+    <update id="activeByLoginName">
+        update property_user set state = "1" where login_name = #{loginName}
+    </update>
     <!--通过主键删除-->
     <select id="login" resultMap="PropertyUserMap" >
         select * from property_user where login_name = #{loginName} and state=1

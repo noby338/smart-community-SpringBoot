@@ -42,4 +42,6 @@ public interface PropertyUserService {
     ResponseEntity allRoles();
 
     ResponseEntity updatePerm(int userId,String loginName, String[] perms);
+
+    ResponseEntity activeByLoginName(String loginName);
 }
