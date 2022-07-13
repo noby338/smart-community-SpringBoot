@@ -9,8 +9,8 @@ import java.util.List;
 @Mapper
 public interface CarInfoDao {
     //查询分页显示的车辆信息
-    List<CarInfo> selectAllCarInfos();
-    int selectCountCarInfo();
+    List<CarInfo> selectAllCarInfos(@Param("queryCar")CarInfo queryCar);
+    int selectCountCarInfo(@Param("queryCar")CarInfo queryCar);
 
     void updateImgByCarNumber(@Param("carNumber") String carNumber,
                               @Param("imgAddress") String imgAddress);
@@ -28,4 +28,8 @@ public interface CarInfoDao {
     CarInfo selectCarIfoByCarNumber(@Param("carNumber")String carNumber);
 
     void updateCarNumberById(@Param("carNumber")String carNumber, @Param("carId")int carId);
+
+    void insertCarInfoByCarNumber(@Param("carNumber")String carNumber);
+
+    void deleteCarById(@Param("id") int id);
 }

@@ -7,9 +7,23 @@
 <mapper namespace="com.woniuxy.smart_community.dao.CarInfoDao">
 <!--查询-->
     <select id="selectAllCarInfos" resultMap="carInfoMapper">
-        select * from car_info
+        select * from car_info where state!=0
+        <if test="queryCar!=null">
+            <include refid="selectPage"/>
+        </if>
+    </select>
+    <select id="selectCountCarInfo" resultType="int">
+        select count(*) from car_info where state!=0
+        <if test="queryCar!=null">
+            <include refid="selectPage"/>
+        </if>
     </select>
 <!--共用功能-->
+    <sql id="selectPage">
+            <if test="queryCar.carNumber!=null and queryCar.carNumber!=''">
+                and car_number like '%' #{queryCar.carNumber} '%'
+            </if>
+    </sql>
     <resultMap id="carInfoMapper" type="CarInfo">
         <id column="id" property="id"/>
         <result column="car_number" property="carNumber"/>
@@ -35,16 +49,13 @@
         select * from house where id=#{id}
     </select>
 
-    <select id="selectCountCarInfo" resultType="int">
-        select count(*) from car_info
-    </select>
 
     <update id="updateImgByCarNumber">
         UPDATE car_info SET car_jpg = #{imgAddress} WHERE car_number=#{carNumber}
     </update>
 
     <select id="selectCarByParkId" resultType="CarInfo">
-        select * from car_info where park_id=#{id}
+        select * from car_info where park_id=#{id} and state!=0
     </select>
 
     <update id="updateCarInfoByIdAndParkId">
@@ -56,12 +67,19 @@
     </update>
 
     <select id="selectCarIfoById" resultMap="carInfoMapper">
-        select * from car_info where id=#{carId}
+        select * from car_info where id=#{carId} and state!=0
     </select>
     <select id="selectCarIfoByCarNumber" resultMap="carInfoMapper">
-        select * from car_info where car_number=#{carNumber}
+        select * from car_info where car_number=#{carNumber} and state!=0
     </select>
     <update id="updateCarNumberById">
         update car_info set car_number=#{carNumber} where id=#{carId}
+    </update>
+
+    <insert id="insertCarInfoByCarNumber">
+        insert into car_info values (null,#{carNumber},null,null,null,1)
+    </insert>
+    <update id="deleteCarById">
+        update car_info set state=0 where id=#{id}
     </update>
 </mapper>
