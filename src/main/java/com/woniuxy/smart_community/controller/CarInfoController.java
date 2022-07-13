@@ -97,6 +97,22 @@ public class CarInfoController {
         return responseEntity;
     }
 
+    @PostMapping("/changeCarNumber/{carId}/{carNumber}")
+    public ResponseEntity changeCarNumber(@PathVariable int carId,@PathVariable String carNumber){
+        ResponseEntity responseEntity=null;
+        try{
+            int state = carInfoService.changeCarNumber(carId, carNumber);
+            if(state==1){
+                responseEntity=new ResponseEntity(401,"修改失败，"+carNumber+"已存在",null);
+            }else {
+                responseEntity=new ResponseEntity(200,"修改成功",null);
+            }
+        }catch (Exception e){
+            responseEntity=new ResponseEntity(401,"修改失败",null);
+        }
+        return responseEntity;
+    }
+
     @PostMapping("/uploadImages/{carNumber}")
     public ResponseEntity uploadImages(MultipartFile img,@PathVariable String carNumber){
         ResponseEntity responseEntity=null;

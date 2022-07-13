@@ -54,4 +54,14 @@
     <update id="updateCarInfoByIdAndOwnerId">
         UPDATE car_info SET owner_id = #{ownerId},park_id=null WHERE id=#{carId}
     </update>
+
+    <select id="selectCarIfoById" resultMap="carInfoMapper">
+        select * from car_info where id=#{carId}
+    </select>
+    <select id="selectCarIfoByCarNumber" resultMap="carInfoMapper">
+        select * from car_info where car_number=#{carNumber}
+    </select>
+    <update id="updateCarNumberById">
+        update car_info set car_number=#{carNumber} where id=#{carId}
+    </update>
 </mapper>

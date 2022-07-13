@@ -26,4 +26,6 @@ public interface CarInfoService {
     void changeParkIdByCarId(int carId, int parkId);
 
     void changeOwnerIdByCarId(int ownerId, int carId);
+
+    int changeCarNumber(int carId, String carNumber);
 }
