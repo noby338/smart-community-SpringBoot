@@ -6,14 +6,6 @@
         update house set house_num = #{house.housePeopleNums}, house_state = #{house.houseState}, remark = #{house.remark} where id = #{house.id}
     </update>
 
-    <select id="selectHouseByBuildingId" resultMap="buiding_map">
-        select * from house_building
-        <where>
-            <if test="houseInfo.buildingId != null">
-                and id=#{houseInfo.buildingId}
-            </if>
-        </where>
-    </select>
     <select id="selectAllHouseBuilding" resultMap="buiding_map">
         select * from house_building
     </select>
@@ -68,8 +60,15 @@
 
 
 
-
-
+    <!--noby级联查询使用-->
+    <select id="selectHouseByBuildingId" resultMap="buiding_map">
+        select * from house_building
+        <where>
+            <if test="houseInfo.buildingId != null">
+                and id=#{houseInfo.buildingId}
+            </if>
+        </where>
+    </select>
 
     <!--car页面使用(孙浚钦)-->
     <select id="selectAllHouseForCarShow" resultType="House">

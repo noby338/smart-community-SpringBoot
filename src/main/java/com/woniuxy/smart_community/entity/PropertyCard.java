@@ -16,7 +16,8 @@ public class PropertyCard {
     private Integer id;
     private String cardNumber;//房卡编号
     private Integer houseId;
+    private HouseHold houseHold;//房主
     private Double lastMoney;//余额
-    private Double limitMoney;//欠费限制
+    private LimitMoney limitMoney;//欠费限制对象
     private Integer state;
 }

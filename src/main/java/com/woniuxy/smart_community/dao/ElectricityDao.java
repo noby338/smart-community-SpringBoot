@@ -13,12 +13,6 @@ import java.util.List;
  * @Date 2022/7/6 15:39
  */
 public interface ElectricityDao {
-    /**
-     * 通过电费表id查询电费表
-     * @param electricityId 电费表
-     * @return Electricity 电费对象
-     */
-    Electricity selectByElectricity(int electricityId);
 
     /**
      * 插入电费月用量
@@ -26,14 +20,12 @@ public interface ElectricityDao {
      */
     void insert(Electricity electricity);
 
+
     /**
-     * 月份条件查询电表
-     * @return
-     */
-    List<Electricity> selectByMonth(String month);
-    /**
-     * 月份条件查询电表
-     * @return
+     * 月份及房屋id集合查询电费
+     * @param houseIdList 房屋id集合
+     * @param month 月份
+     * @return 电费集合
      */
     List<Electricity> selectElectricityByHouseIdListAndMonth(
             @Param("houseIdList") List<Integer> houseIdList,@Param("month") String month);

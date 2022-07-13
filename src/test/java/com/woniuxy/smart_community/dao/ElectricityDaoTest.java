@@ -34,8 +34,8 @@ class ElectricityDaoTest {
 
     @Test
     void selectByElectricity() {
-        Electricity electricity = electricityDao.selectByElectricity(1);
-        System.out.println("electricity = " + electricity);
+//        Electricity electricity = electricityDao.selectByElectricity(1);
+//        System.out.println("electricity = " + electricity);
     }
 
     /**
@@ -89,8 +89,8 @@ class ElectricityDaoTest {
      */
     @Test
     void selectByMonth() {
-        List<Electricity> electricities = electricityDao.selectByMonth("2022/01");
-        System.out.println("electricities = " + electricities);
+//        List<Electricity> electricities = electricityDao.selectByMonth("2022/01");
+//        System.out.println("electricities = " + electricities);
     }
 
     /**

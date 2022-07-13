@@ -56,4 +56,5 @@ public interface HouseDao {
 
     //孙浚钦使用---car页面
     List<House> selectAllHouseForCarShow();
+
 }
