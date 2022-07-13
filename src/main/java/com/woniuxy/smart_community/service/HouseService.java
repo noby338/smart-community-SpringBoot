@@ -1,5 +1,6 @@
 package com.woniuxy.smart_community.service;
 
+import com.woniuxy.smart_community.entity.House;
 import com.woniuxy.smart_community.entity.HouseInfo;
 import com.woniuxy.smart_community.entity.ResponseEntity;
 
@@ -31,7 +32,7 @@ public interface HouseService {
      * @param houseInfo 房间号
      * @return 实例对象
      */
-    ResponseEntity selectHouse(HouseInfo houseInfo, int pageNum, int pageSize);
+    ArrayList<House> selectHouse(HouseInfo houseInfo);
 
 
     /**

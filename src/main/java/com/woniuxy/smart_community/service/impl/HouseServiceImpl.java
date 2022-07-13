@@ -1,9 +1,6 @@
 package com.woniuxy.smart_community.service.impl;
 
-import com.woniuxy.smart_community.dao.HouseBuildingDao;
-import com.woniuxy.smart_community.dao.HouseDao;
-import com.woniuxy.smart_community.dao.HouseFloorDao;
-import com.woniuxy.smart_community.dao.HouseUnitDao;
+import com.woniuxy.smart_community.dao.*;
 import com.woniuxy.smart_community.entity.*;
 import com.woniuxy.smart_community.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +27,8 @@ public class HouseServiceImpl implements HouseService {
     HouseUnitDao houseUnitDao;
     @Autowired
     HouseFloorDao houseFloorDao;
+    @Autowired
+    HouseHoldDao houseHoldDao;
     @Autowired
     HouseDao houseDao;
 
@@ -86,28 +85,69 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public ResponseEntity selectHouse(HouseInfo houseInfo, int pageNum, int pageSize) {
-
-        ResponseEntity<List<HouseFloor>> responseEntityHouse = null;
-        ResponseEntity<List<HouseUnit>> responseEntityFloor = null;
-        ResponseEntity<List<HouseBuilding>> responseEntityBuilding = null;
+    public ArrayList<House> selectHouse(HouseInfo houseInfo) {
+        HouseHold houseHold = new HouseHold();
+        HouseInfo houseInfo1 = new HouseInfo();
+        ArrayList<House> houseArrayList = new ArrayList<House>();
         if (houseInfo.getFloorId() != null) {
             List<HouseFloor> houseFloors = houseDao.selectHouseByFloorId(houseInfo);
-            responseEntityHouse = new ResponseEntity<List<HouseFloor>>(200, "获取成功！", houseFloors);
-            return responseEntityHouse;
+            for(HouseFloor houseFloor : houseFloors){
+                houseInfo1.setUnitId(houseFloor.getUnitId());
+            }
+            List<HouseBuilding> buildings = houseDao.selectHouseByBuildingId(houseInfo1);
+            for(HouseBuilding houseBuilding: buildings){
+                houseInfo1.setBuildingId(houseBuilding.getId());
+            }
+            for(HouseFloor houseFloor: houseFloors){
+                for(House house : houseFloor.getHouseList()){
+                    houseHold.setHouseId(house.getId());
+                    List<HouseHold> houseHolds = houseHoldDao.selectHouseHoldByHouseHoldInfo(houseHold);
+                    house.setHouseHoldList(houseHolds);
+                    house.setBuildingId(houseInfo1.getBuildingId());
+                    house.setUnitId(houseInfo1.getUnitId());
+                    houseArrayList.add(house);
+                }
+            }
+            return houseArrayList;
         }
         if(houseInfo.getUnitId() != null){
+            houseInfo1.setUnitId(houseInfo.getUnitId());
             List<HouseUnit> houseUnits = houseDao.selectHouseByUnitId(houseInfo);
-            responseEntityFloor = new ResponseEntity<List<HouseUnit>>(200, "获取成功！", houseUnits);
-            return responseEntityFloor;
+            for(HouseUnit houseUnit : houseUnits){
+                houseInfo1.setBuildingId(houseUnit.getBuildingId());
+                for(HouseFloor houseFloor : houseUnit.getHouseFloorList()){
+                    for(House house : houseFloor.getHouseList()){
+                        houseHold.setHouseId(house.getId());
+                        List<HouseHold> houseHolds = houseHoldDao.selectHouseHoldByHouseHoldInfo(houseHold);
+                        house.setHouseHoldList(houseHolds);
+                        house.setBuildingId(houseInfo1.getBuildingId());
+                        house.setUnitId(houseInfo1.getUnitId());
+                        houseArrayList.add(house);
+                    }
+                }
+            }
+            return houseArrayList;
         }
-        if(houseInfo.getBuildingId() != null){
-            List<HouseBuilding> buildings = houseDao.selectHouseByBuildingId(houseInfo);
-            responseEntityBuilding = new ResponseEntity<List<HouseBuilding>>(200, "获取成功！", buildings);
-            return responseEntityBuilding;
-        }
-        return responseEntityHouse = new ResponseEntity<>(200,"获取失败！",null);
 
+            List<HouseBuilding> buildings = houseDao.selectHouseByBuildingId(houseInfo);
+            for(HouseBuilding houseBuilding: buildings){
+                houseInfo1.setBuildingId(houseBuilding.getId());
+                for(HouseUnit houseUnit: houseBuilding.getHouseUnitList()){
+                    houseInfo1.setUnitId(houseUnit.getId());
+                    for(HouseFloor houseFloor: houseUnit.getHouseFloorList()){
+                        for(House house: houseFloor.getHouseList()){
+                            houseHold.setHouseId(house.getId());
+                            List<HouseHold> houseHolds = houseHoldDao.selectHouseHoldByHouseHoldInfo(houseHold);
+                            house.setHouseHoldList(houseHolds);
+                            house.setBuildingId(houseInfo1.getBuildingId());
+                            house.setUnitId(houseInfo1.getUnitId());
+                            houseArrayList.add(house);
+                        }
+                    }
+                }
+            }
+
+        return houseArrayList;
     }
 
     @Override

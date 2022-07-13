@@ -19,6 +19,8 @@ import java.util.List;
 @NoArgsConstructor
 public class House {
     private Integer id;
+    private Integer buildingId;
+    private Integer unitId;
     private Integer floorId;
     private String houseNum;
     private Integer housePeopleNums;
