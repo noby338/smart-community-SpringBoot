@@ -38,8 +38,6 @@ public class CarInfoServiceImpl implements CarInfoService {
     @Override
     public PageInfo<CarInfo> getAllCarInfo(int pageIndex,int pageSize,CarInfo queryCar) {
         PageHelper.startPage(pageIndex, pageSize);
-        System.out.println(queryCar);
-        System.out.println("/"+pageIndex+"/"+pageSize);
         List<CarInfo> carInfos=carInfoDao.selectAllCarInfos(queryCar);
         for(CarInfo carInfo:carInfos){
             String carJpg = carInfo.getCarJpg();

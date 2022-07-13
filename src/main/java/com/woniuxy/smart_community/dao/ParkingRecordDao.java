@@ -13,12 +13,10 @@ import java.util.List;
  */
 @Mapper
 public interface ParkingRecordDao {
-    List<ParkingRecord> selectParkingRecord(@Param("parkingRecord") ParkingRecord parkingRecord);
+    //文总使用
+    int selectCountNotOut();
 
-    int selectParkingRecordNums(@Param("parkingRecord") ParkingRecord parkingRecord);
-
-    void insertParingRecordInto(@Param("parkingRecord") ParkingRecord parkingRecord);
-
-    void updateParkingRecordOut(@Param("parkingRecord") ParkingRecord parkingRecord);
+    List<ParkingRecord> selectParkingRecordToPage(@Param("parkingRecord")ParkingRecord queryParkingRecord);
+    int selectCountToPage(@Param("parkingRecord")ParkingRecord queryParkingRecord);
 
 }
