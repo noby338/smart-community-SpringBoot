@@ -8,14 +8,19 @@
 
     <!--多表查询-->
     <select id="selectCount" resultType="int">
-        select count(*) from parking_info
+        select count(*) from parking_info where park_type_id!=4
         <if test="parkingInfo!=null">
             <include refid="sqlParkingInfo"/>
         </if>
+
+    </select>
+    
+    <select id="selectCountByParkingType" resultType="int">
+        select count(*) from parking_info where park_type_id=#{parkingType}
     </select>
 
     <select id="selectParkingInfoByParkingInfo" resultMap="mapperParkingInfo">
-        select * from parking_info
+        select * from parking_info where park_type_id !=4
         <if test="parkingInfo!=null">
             <include refid="sqlParkingInfo"/>
         </if>
@@ -49,7 +54,7 @@
         select * from house where id=#{id}
     </select>
     <sql id="sqlParkingInfo">
-        <where>
+
             <if test="parkingInfo.id!=null and parkingInfo.id!=''">
                 and id=#{parkingInfo.id}
             </if>
@@ -59,20 +64,27 @@
             <if test="parkingInfo.parkArea!=null and parkingInfo.parkArea!=''">
                 and park_area>=#{parkingInfo.parkArea}
             </if>
-            <if test="parkingInfo.parkingType.id!=null and parkingInfo.parkingType.id!=null">
-                and park_type_id=#{parkingInfo.parkingType.id}
+            <if test="parkingInfo.parkingType!=null">
+                <if test="parkingInfo.parkingType.id!=null and parkingInfo.parkingType.id!=null">
+                    and park_type_id=#{parkingInfo.parkingType.id}
+                </if>
             </if>
-            <if test="parkingInfo.parkingType.id==null">
-                and park_type_id !=4
+<!--            <if test="parkingInfo.parkingType==null">-->
+<!--                and park_type_id !=4-->
+<!--            </if>-->
+            <if test="parkingInfo.ownersInfo!=null">
+                <if test="parkingInfo.ownersInfo.id!=null">
+                    and owner_id=#{parkingInfo.ownersInfo.id}
+                </if>
             </if>
-        </where>
+
     </sql>
 
     <!--添加-->
     <insert id="insertParkingInfo">
         insert into parking_info
         values (null, #{parkingInfo.parkNumber},
-                #{parkingInfo.parkingLot.id}, #{parkingInfo.parkArea}, #{parkingInfo.parkingType.id}, #{parkingInfo.ownersInfo.id},1)
+                #{parkingInfo.parkingLot.id}, #{parkingInfo.parkArea}, #{parkingInfo.parkingType.id}, #{parkingInfo.ownersInfo.id})
     </insert>
 
     <update id="deleteParkingInfoById">
@@ -99,12 +111,19 @@
         <if test="parkingInfo.parkArea!=null">
             ,park_area=#{parkingInfo.parkArea}
         </if>
-        <if test="parkingInfo.parkingType.id!=null">
-            ,park_type_id=#{parkingInfo.parkingType.id}
+        <if test="parkingInfo.parkingType!=null">
+            <if test="parkingInfo.parkingType.id!=null">
+                ,park_type_id=#{parkingInfo.parkingType.id}
+            </if>
         </if>
         <if test="parkingInfo.ownersInfo.id!=null">
             ,owner_id=#{parkingInfo.ownersInfo.id}
         </if>
     </sql>
 
+
+    <!-- 使用中:::孙   -->
+    <select id="selectParkingListByOwnerId" resultMap="mapperParkingInfo">
+        select * from parking_info where owner_id=#{id}
+    </select>
 </mapper>

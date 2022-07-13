@@ -23,6 +23,8 @@ public class HouseServiceTest {
     HouseServiceImpl houseService;
 
 
+
+
 //    @Test
 //    public void insertHouseTest(){
 ////        House house= new House(99,4,5,6,"789",10,1);
@@ -66,4 +68,8 @@ public class HouseServiceTest {
         ArrayList<Integer> houses = houseService.selectHouseById(houseInfo);
         System.out.println(houses);
     }
+
+
+
+
 }

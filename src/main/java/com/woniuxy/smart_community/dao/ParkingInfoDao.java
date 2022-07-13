@@ -18,7 +18,7 @@ public interface ParkingInfoDao {
     //分页+条件查询车位信息，返回显示
     int selectCount(@Param("parkingInfo") ParkingInfo parkingInfo);
     List<ParkingInfo> selectParkingInfoByParkingInfo(@Param("parkingInfo") ParkingInfo parkingInfo);
-
+    int selectCountByParkingType(int parkingType);
     //添加
     void insertParkingInfo(@Param("parkingInfo") ParkingInfo parkingInfo);
 
@@ -26,4 +26,7 @@ public interface ParkingInfoDao {
     //假删除
     void deleteParkingInfoById(int parkId);
 
+
+    //车辆页面使用查询--使用中--孙
+    List<ParkingInfo> selectParkingListByOwnerId(int ownerId);
 }

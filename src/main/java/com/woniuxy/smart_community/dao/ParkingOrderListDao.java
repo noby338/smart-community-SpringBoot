@@ -23,4 +23,11 @@ public interface ParkingOrderListDao {
     void updateParkingOrderState(@Param("orderState") int orderState,
                                  @Param("orderId") int orderId,
                                  @Param("orderNo") String orderNo);
+
+    void updateParkingOrderInfoByRemark(@Param("ordeRemark") String ordeRemark,
+                                @Param("orderId") int orderId,
+                                @Param("orderNo") String orderNo);
+
+    void deleteParkingOrderInfoByOrder(@Param("orderId") int orderId,
+                                       @Param("orderNo") String orderNo);
 }

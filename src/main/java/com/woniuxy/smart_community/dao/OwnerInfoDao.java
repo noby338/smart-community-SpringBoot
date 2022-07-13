@@ -14,7 +14,9 @@ public interface OwnerInfoDao {
     OwnersInfo selectOwnerByNameAndTelephone(@Param("name") String name,
                                            @Param("telephone") String telephone);
 
-    OwnersInfo selectOwnerByOwnerInfo(@Param("ownersInfo") OwnersInfo ownersInfo);
+    int selectOwnersInfoByCount(@Param("ownersInfo") OwnersInfo ownersInfo);
+
+    List<OwnersInfo> selectOwnerByOwnerInfo(@Param("ownersInfo") OwnersInfo ownersInfo);
 
     List<OwnersInfo> selectAllOwners();
 

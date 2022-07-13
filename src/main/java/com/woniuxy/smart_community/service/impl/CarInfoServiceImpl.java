@@ -52,19 +52,22 @@ public class CarInfoServiceImpl implements CarInfoService {
     }
 
     @Override
-    public List<ForSelect> getALLParkingInfoIdAndParkNumber(int id) {
+    public List<ForSelect> getALLParkingInfoIdAndParkNumber(int parkId,int ownerId) {
         List<ForSelect> forSelects=new ArrayList<ForSelect>();
-        List<ParkingInfo> parkingInfos=parkingInfoDao.selectParkingInfoByParkingInfo(null);
+        List<ParkingInfo> parkingInfos=parkingInfoDao.selectParkingListByOwnerId(ownerId);
 
         for(ParkingInfo parkingInfo:parkingInfos){
             ForSelect forSelect=new ForSelect();
             forSelect.setValue(parkingInfo.getId());
             forSelect.setLabel(parkingInfo.getParkNumber());
-            if(parkingInfo.getOwnersInfo()!=null){
+            if(parkingInfo.getId()==parkId){
+                forSelect.setLabel(parkingInfo.getParkNumber()+"(当前使用)");
                 forSelect.setDisabled(true);
             }
-            if(parkingInfo.getId()==id){
-                forSelect.setLabel(parkingInfo.getParkNumber()+"(当前使用)");
+            CarInfo carInfo=carInfoDao.selectCarByParkId(parkingInfo.getId());
+            if(carInfo!=null && parkingInfo.getId()!=parkId){
+                forSelect.setLabel(parkingInfo.getParkNumber()+"(已被使用)");
+                forSelect.setDisabled(true);
             }
             forSelects.add(forSelect);
         }
@@ -98,6 +101,16 @@ public class CarInfoServiceImpl implements CarInfoService {
             forSelects.add(forSelect);
         }
         return forSelects;
+    }
+
+    @Override
+    public void changeParkIdByCarId(int carId, int parkId) {
+        carInfoDao.updateCarInfoByIdAndParkId(carId,parkId);
+    }
+
+    @Override
+    public void changeOwnerIdByCarId(int ownerId, int carId) {
+        carInfoDao.updateCarInfoByIdAndOwnerId(carId,ownerId);
     }
 
 

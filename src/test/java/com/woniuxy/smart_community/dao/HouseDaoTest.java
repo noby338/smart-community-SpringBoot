@@ -1,17 +1,11 @@
 package com.woniuxy.smart_community.dao;
 
-import com.woniuxy.smart_community.entity.House;
-import com.woniuxy.smart_community.entity.HouseFloor;
-import com.woniuxy.smart_community.entity.HouseUnit;
-import com.woniuxy.smart_community.entity.*;
+import com.woniuxy.smart_community.entity.HouseBuilding;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-import java.util.Random;
-import java.util.List;
-import java.util.Stack;
 
 /**
  * @ClassName -> HouseDaoTest
@@ -107,5 +101,11 @@ public class HouseDaoTest {
         HouseInfo houseInfo = new HouseInfo();
         houseInfo.setBuildingId(1);
         System.out.println(houseDao.selectHouseByBuildingId(houseInfo));
+    }
+
+    @Test
+    void test01(){
+        List<HouseBuilding> houseBuildings = houseDao.selectHouseByBuildingId();
+        System.out.println(houseBuildings);
     }
 }

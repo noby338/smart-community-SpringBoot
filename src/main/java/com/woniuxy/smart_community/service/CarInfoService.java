@@ -15,11 +15,15 @@ import java.util.List;
 public interface CarInfoService {
     PageInfo<CarInfo> getAllCarInfo(int pageIndex, int pageSize);
 
-    List<ForSelect> getALLParkingInfoIdAndParkNumber(int id);
+    List<ForSelect> getALLParkingInfoIdAndParkNumber(int parkId,int ownerId);
 
     void addImgAddress(String carNumber, String imgAddress);
 
     List<ForSelect> getAllCarOwnersIdAndName(int id);
 
     List<ForSelect> getAllHouse();
+
+    void changeParkIdByCarId(int carId, int parkId);
+
+    void changeOwnerIdByCarId(int ownerId, int carId);
 }
