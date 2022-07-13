@@ -21,6 +21,6 @@ public interface HouseBuildingDao {
     //修改
     int updateHouseBuilding(@Param("houseBuilding") HouseBuilding houseBuilding);
     //查询
-    List<HouseBuilding> selectHouseBuilding(@Param("houseBuilding") HouseBuilding houseBuilding);
+    HouseBuilding selectHouseBuilding(@Param("houseBuilding") HouseBuilding houseBuilding);
 
 }

@@ -53,7 +53,7 @@ public class HouseBuildingDaoTest {
         HouseBuilding houseBuilding = new HouseBuilding();
         houseBuilding.setId(22);
         houseBuilding.setName("测试");
-        List<HouseBuilding> houseBuilding1 = houseBuildingDao.selectHouseBuilding(houseBuilding);
+        HouseBuilding houseBuilding1 = houseBuildingDao.selectHouseBuilding(houseBuilding);
         System.out.println(houseBuilding1);
     }
 

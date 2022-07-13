@@ -19,7 +19,7 @@ public interface HouseFloorDao {
     //修改
     int updateHouseFloor(@Param("houseFloor") HouseFloor houseFloor);
     //查询
-    List<HouseFloor> selectHouseFloor(@Param("houseFloor") HouseFloor houseFloor);
+    HouseFloor selectHouseFloor(@Param("houseFloor") HouseFloor houseFloor);
 
 
 }

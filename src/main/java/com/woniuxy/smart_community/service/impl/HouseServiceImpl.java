@@ -33,6 +33,7 @@ public class HouseServiceImpl implements HouseService {
     HouseDao houseDao;
 
 
+
     @Override
     public ArrayList<Integer> selectHouseById(HouseInfo houseInfo) {
         ArrayList<Integer> houseId = new ArrayList<>();
