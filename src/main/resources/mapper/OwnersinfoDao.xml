@@ -16,6 +16,11 @@
         select * from owners_info  where name=#{name} and telephone=#{telephone}
     </select>
 
+    <select id="selectOwnersInfoByCount" resultType="int">
+        select count(*) from owners_info
+        <include refid="selectOwnersInfo"/>
+    </select>
+
     <select id="selectOwnerByOwnerInfo" resultType="OwnersInfo">
         select * from owners_info
         <include refid="selectOwnersInfo"/>
@@ -42,7 +47,7 @@
         </where>
     </sql>
 
-    <select id="selectAllOwners" resultType="OwnersInfo">
+    <select id="selectAllOwners" resultType="OwnersInfo" >
         select * from owners_info
     </select>
 
@@ -50,7 +55,7 @@
 
     
 <!--添加-->
-    <insert id="insertOwnerInfo">
+    <insert id="insertOwnerInfo" parameterType="ownersInfo" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into owners_info values(null,#{ownersInfo.name},#{ownersInfo.telephone},#{ownersInfo.house.id},#{ownersInfo.state})
     </insert>
 
@@ -97,10 +102,10 @@
 <!--共用功能-->
     <!--联表查询-->
     <resultMap id="ownersInfoMapper" type="ownersInfo">
-        <id column="owid" property="owId"/>
-        <result column="owname" property="owName"/>
-        <result column="owphone" property="owPhone"/>
-        <result column="owtype" property="owType"/>
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="telephone" property="telephone"/>
+        <result column="state" property="state"/>
         <association property="house" javaType="house" column="id" select="selecctHouseById"/>
     </resultMap>
     <select id="selecctHouseById">

@@ -46,9 +46,6 @@
     <update id="update">
         update house_hold
             <set>
-                <if test="houseHold.id != null">
-                    id = #{houseHold.id},
-                </if>
                 <if test="houseHold.name != null and houseHold.name != ''">
                     name = #{houseHold.name},
                 </if>

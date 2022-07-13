@@ -1,5 +1,6 @@
 package com.woniuxy.smart_community.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class ParkingOrderList {
     //private Integer parkId;     //外键  关联订单交易中的车位信息
     private ParkingInfo parkingInfo;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date orderTime;     //下单时间
     private Date orderEndTime;
     private BigDecimal orderCost;       //订单金额
