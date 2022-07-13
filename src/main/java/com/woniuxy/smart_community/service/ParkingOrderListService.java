@@ -17,4 +17,6 @@ public interface ParkingOrderListService {
     void changeParkingOrderByOrder(ParkingOrderList parkingOrderList);
 
     void removeParkingOrderInfo(int orderId,String orderNo);
+
+    void orderExpirationCheck();
 }
