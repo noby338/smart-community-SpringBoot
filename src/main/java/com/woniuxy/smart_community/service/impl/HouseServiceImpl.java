@@ -165,7 +165,6 @@ public class HouseServiceImpl implements HouseService {
     public ResponseEntity<List<HouseBuilding>> selectAllHouseByBuilding() {
         ResponseEntity<List<HouseBuilding>> responseEntityBuilding = null;
         List<HouseBuilding> houseBuildings = houseDao.selectHouseByBuildingId();
-        //return responseEntityBuilding = new ResponseEntity<>(200,"获取失败！",houseBuildings)
         return responseEntityBuilding=new ResponseEntity<>(200,"获取成功",houseBuildings);
     }
 

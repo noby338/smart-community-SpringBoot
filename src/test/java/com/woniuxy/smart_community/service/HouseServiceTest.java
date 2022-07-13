@@ -1,5 +1,6 @@
 package com.woniuxy.smart_community.service;
 
+import com.woniuxy.smart_community.entity.House;
 import com.woniuxy.smart_community.entity.HouseInfo;
 import com.woniuxy.smart_community.service.impl.HouseServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -64,8 +65,7 @@ public class HouseServiceTest {
     @Test
     public void houseId(){
         HouseInfo  houseInfo = new HouseInfo();
-
-        ArrayList<Integer> houses = houseService.selectHouseById(houseInfo);
+        ArrayList<House> houses = houseService.selectHouse(houseInfo);
         System.out.println(houses);
     }
 

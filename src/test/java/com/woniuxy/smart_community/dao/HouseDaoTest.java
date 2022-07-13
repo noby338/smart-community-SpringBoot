@@ -1,6 +1,7 @@
 package com.woniuxy.smart_community.dao;
 
 import com.woniuxy.smart_community.entity.HouseBuilding;
+import com.woniuxy.smart_community.entity.HouseInfo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
