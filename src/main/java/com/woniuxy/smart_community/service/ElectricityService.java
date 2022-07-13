@@ -6,7 +6,7 @@ import com.woniuxy.smart_community.entity.HouseBuilding;
 import java.util.List;
 
 public interface ElectricityService {
-    List<Electricity> selectAll();
+    List<Electricity> selectElectricityByHouseIdListAndMonth(List<Integer> houseIdList,String month,int pageNum);
 }
 
 

@@ -5,7 +5,7 @@
 <mapper namespace="com.woniuxy.smart_community.dao.ElectricityDao">
     <insert id="insert">
         insert into electricity(house_id, month, now_month_nums, now_prices, state, util_price_id)
-        values (#{houseId}, #{month}, #{nowMonthNums}, #{nowPrices}, #{state}, #{utilPriceId})
+        values (#{house.id}, #{month}, #{nowMonthNums}, #{nowPrices}, #{state}, #{utilPriceId})
     </insert>
 
     <select id="selectByElectricity" resultType="com.woniuxy.smart_community.entity.Electricity">
@@ -19,7 +19,22 @@
         where month = #{month}
     </select>
 
-    <select id="selectElectricityByHouseIdListAndMonth" resultType="com.woniuxy.smart_community.entity.Electricity">
+<!--    <select id="selectElectricityByHouseIdListAndMonth" resultType="com.woniuxy.smart_community.entity.Electricity">-->
+<!--        select * from electricity-->
+<!--        <where>-->
+<!--            <if test="houseIdList != null and houseIdList != ''">-->
+<!--                house_id in-->
+<!--                <foreach collection="houseIdList" item="houseId" open="(" close=")" separator=",">-->
+<!--                    #{houseId}-->
+<!--                </foreach>-->
+<!--            </if>-->
+<!--            <if test="month != null and month != ''">-->
+<!--                and month = #{month}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+    <select id="selectElectricityByHouseIdListAndMonth" resultMap="electricity_map">
         select * from electricity
         <where>
             <if test="houseIdList != null and houseIdList != ''">
@@ -33,4 +48,17 @@
             </if>
         </where>
     </select>
+    <resultMap id="electricity_map" type="electricity">
+        <id column="id" property="id"/>
+        <result column="util_price_id" property="utilPriceId"/>
+        <result column="month" property="month"/>
+        <result column="now_month_nums" property="nowMonthNums"/>
+        <result column="now_prices" property="nowPrices"/>
+        <result column="state" property="state"/>
+        <association column="house_id" property="house" javaType="house" select="selectHouseById"/>
+    </resultMap>
+    <select id="selectHouseById" resultType="com.woniuxy.smart_community.entity.House">
+        select * from house where id= #{house_id}
+    </select>
+
 </mapper>

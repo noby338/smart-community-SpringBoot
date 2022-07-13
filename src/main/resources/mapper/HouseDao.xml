@@ -9,8 +9,8 @@
     <select id="selectHouseByBuildingId" resultMap="buiding_map">
         select * from house_building
         <where>
-            <if test="buildingId != null">
-                and id=#{buildingId}
+            <if test="houseInfo.buildingId != null">
+                and id=#{houseInfo.buildingId}
             </if>
         </where>
     </select>
