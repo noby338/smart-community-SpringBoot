@@ -82,4 +82,8 @@
     <update id="deleteCarById">
         update car_info set state=0 where id=#{id}
     </update>
+
+    <select id="selectAllCarInfosIdAndCarNumber" resultMap="carInfoMapper">
+        select * from car_info
+    </select>
 </mapper>

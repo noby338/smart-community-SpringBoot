@@ -32,4 +32,6 @@ public interface CarInfoDao {
     void insertCarInfoByCarNumber(@Param("carNumber")String carNumber);
 
     void deleteCarById(@Param("id") int id);
+
+    List<CarInfo> selectAllCarInfosIdAndCarNumber();
 }

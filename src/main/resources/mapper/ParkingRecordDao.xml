@@ -40,4 +40,22 @@
     <select id="selectOwnersInfoById" resultType="OwnersInfo">
         select * from owners_info where id=#{id}
     </select>
+
+    <select id="selectCarIdsDistinct" resultType="int">
+        SELECT DISTINCT car_id FROM parking_record
+    </select>
+
+    <select id="selectParkingRecordByCarIdAndNoOutTime" resultMap="mapParkingRecord">
+        select * from parking_record where car_id=#{id} and out_time is null
+    </select>
+    <insert id="insertParkingRecordBySelf">
+        INSERT INTO parking_record(record_number,car_id,owner_id,in_time)
+        VALUES(#{parkingRecord.recordNumber},#{parkingRecord.carInfo.id},#{parkingRecord.ownersInfo.id},#{parkingRecord.inTime})
+    </insert>
+    <select id="selectParkingRecordById" resultMap="mapParkingRecord">
+        select * from parking_record where id =#{id}
+    </select>
+    <update id="updateOutTimeAndCost">
+        update parking_record set out_time=#{outTime},cost=#{cost} where id=#{id}
+    </update>
 </mapper>
