@@ -91,41 +91,77 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public ArrayList<House> selectHouse(HouseInfo houseInfo) {
         HouseHold houseHold = new HouseHold();
+        HouseBuilding houseBuilding2 = new HouseBuilding();
+        HouseUnit houseUnit2 = new HouseUnit();
+        HouseFloor houseFloor2 = new HouseFloor();
+
         HouseInfo houseInfo1 = new HouseInfo();
         ArrayList<House> houseArrayList = new ArrayList<House>();
         if (houseInfo.getFloorId() != null) {
             List<HouseFloor> houseFloors = houseDao.selectHouseByFloorId(houseInfo);
-            for (HouseFloor houseFloor : houseFloors) {
+            for(HouseFloor houseFloor : houseFloors){
                 houseInfo1.setUnitId(houseFloor.getUnitId());
             }
             List<HouseBuilding> buildings = houseDao.selectHouseByBuildingId(houseInfo1);
-            for (HouseBuilding houseBuilding : buildings) {
+            for(HouseBuilding houseBuilding: buildings){
                 houseInfo1.setBuildingId(houseBuilding.getId());
             }
-            for (HouseFloor houseFloor : houseFloors) {
-                for (House house : houseFloor.getHouseList()) {
+            for(HouseFloor houseFloor: houseFloors){
+                for(House house : houseFloor.getHouseList()){
+                    //添加人员
                     houseHold.setHouseId(house.getId());
                     List<HouseHold> houseHolds = houseHoldDao.selectHouseHoldByHouseHoldInfo(houseHold);
                     house.setHouseHoldList(houseHolds);
+
+                    //添加楼栋名
                     house.setBuildingId(houseInfo1.getBuildingId());
+                    houseBuilding2.setId(houseInfo1.getBuildingId());
+                    HouseBuilding houseBuilding1 = houseBuildingDao.selectHouseBuilding(houseBuilding2);
+                    house.setBuildingName(houseBuilding1.getName());
+
+                    //添加单元名
                     house.setUnitId(houseInfo1.getUnitId());
+                    houseUnit2.setId(houseInfo1.getUnitId());
+                    HouseUnit houseUnit1 = houseUnitDao.selectHouseUnit(houseUnit2);
+                    house.setNuitName(houseUnit1.getName());
+
+                    //添加楼栋名
+                    houseFloor2.setId(houseInfo1.getFloorId());
+                    HouseFloor houseFloor1 = houseFloorDao.selectHouseFloor(houseFloor2);
+                    house.setFloorName(houseFloor1.getName());
                     houseArrayList.add(house);
                 }
             }
             return houseArrayList;
         }
-        if (houseInfo.getUnitId() != null) {
+        if(houseInfo.getUnitId() != null){
             houseInfo1.setUnitId(houseInfo.getUnitId());
             List<HouseUnit> houseUnits = houseDao.selectHouseByUnitId(houseInfo);
-            for (HouseUnit houseUnit : houseUnits) {
+            for(HouseUnit houseUnit : houseUnits){
                 houseInfo1.setBuildingId(houseUnit.getBuildingId());
-                for (HouseFloor houseFloor : houseUnit.getHouseFloorList()) {
-                    for (House house : houseFloor.getHouseList()) {
+                for(HouseFloor houseFloor : houseUnit.getHouseFloorList()){
+                    for(House house : houseFloor.getHouseList()){
+                        //添加人员
                         houseHold.setHouseId(house.getId());
                         List<HouseHold> houseHolds = houseHoldDao.selectHouseHoldByHouseHoldInfo(houseHold);
                         house.setHouseHoldList(houseHolds);
+
+                        //添加楼栋名
                         house.setBuildingId(houseInfo1.getBuildingId());
+                        houseBuilding2.setId(houseInfo1.getBuildingId());
+                        HouseBuilding houseBuilding1 = houseBuildingDao.selectHouseBuilding(houseBuilding2);
+                        house.setBuildingName(houseBuilding1.getName());
+
+                        //添加单元名
                         house.setUnitId(houseInfo1.getUnitId());
+                        houseUnit2.setId(houseInfo1.getUnitId());
+                        HouseUnit houseUnit1 = houseUnitDao.selectHouseUnit(houseUnit2);
+                        house.setNuitName(houseUnit1.getName());
+
+                        //添加楼栋名
+                        houseFloor2.setId(houseInfo1.getFloorId());
+                        HouseFloor houseFloor1 = houseFloorDao.selectHouseFloor(houseFloor2);
+                        house.setFloorName(houseFloor1.getName());
                         houseArrayList.add(house);
                     }
                 }
@@ -133,24 +169,40 @@ public class HouseServiceImpl implements HouseService {
             return houseArrayList;
         }
 
-        List<HouseBuilding> buildings = houseDao.selectHouseByBuildingId(houseInfo);
-        for (HouseBuilding houseBuilding : buildings) {
-            houseInfo1.setBuildingId(houseBuilding.getId());
-            for (HouseUnit houseUnit : houseBuilding.getHouseUnitList()) {
-                houseInfo1.setUnitId(houseUnit.getId());
-                for (HouseFloor houseFloor : houseUnit.getHouseFloorList()) {
-                    for (House house : houseFloor.getHouseList()) {
-                        houseHold.setHouseId(house.getId());
-                        List<HouseHold> houseHolds = houseHoldDao.selectHouseHoldByHouseHoldInfo(houseHold);
-                        house.setHouseHoldList(houseHolds);
-                        house.setBuildingId(houseInfo1.getBuildingId());
-                        house.setUnitId(houseInfo1.getUnitId());
-                        houseArrayList.add(house);
+            List<HouseBuilding> buildings = houseDao.selectHouseByBuildingId(houseInfo);
+            for(HouseBuilding houseBuilding: buildings){
+                houseInfo1.setBuildingId(houseBuilding.getId());
+                for(HouseUnit houseUnit: houseBuilding.getHouseUnitList()){
+                    houseInfo1.setUnitId(houseUnit.getId());
+                    for(HouseFloor houseFloor: houseUnit.getHouseFloorList()){
+                        houseInfo1.setFloorId(houseFloor.getId());
+                        for(House house: houseFloor.getHouseList()){
+                            //添加人员
+                            houseHold.setHouseId(house.getId());
+                            List<HouseHold> houseHolds = houseHoldDao.selectHouseHoldByHouseHoldInfo(houseHold);
+                            house.setHouseHoldList(houseHolds);
+
+                            //添加楼栋名
+                            house.setBuildingId(houseInfo1.getBuildingId());
+                            houseBuilding2.setId(houseInfo1.getBuildingId());
+                            HouseBuilding houseBuilding1 = houseBuildingDao.selectHouseBuilding(houseBuilding2);
+                            house.setBuildingName(houseBuilding1.getName());
+
+                            //添加单元名
+                            house.setUnitId(houseInfo1.getUnitId());
+                            houseUnit2.setId(houseInfo1.getUnitId());
+                            HouseUnit houseUnit1 = houseUnitDao.selectHouseUnit(houseUnit2);
+                            house.setNuitName(houseUnit1.getName());
+
+                            //添加楼栋名
+                            houseFloor2.setId(houseInfo1.getFloorId());
+                            HouseFloor houseFloor1 = houseFloorDao.selectHouseFloor(houseFloor2);
+                            house.setFloorName(houseFloor1.getName());
+                            houseArrayList.add(house);
+                        }
                     }
                 }
             }
-        }
-
         return houseArrayList;
     }
 
