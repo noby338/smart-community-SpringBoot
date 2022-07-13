@@ -15,5 +15,5 @@ public interface HouseUnitDao {
     int insertHouseUnit(@Param("houseUnit") HouseUnit houseUnit);
     int delectHouseUnit(@Param("houseUnit")HouseUnit houseUnit);
     int updateHouseUnit(@Param("houseUnit")HouseUnit houseUnit);
-    List<HouseUnit> selectHouseUnit(@Param("houseUnit")HouseUnit houseUnit);
+    HouseUnit selectHouseUnit(@Param("houseUnit")HouseUnit houseUnit);
 }

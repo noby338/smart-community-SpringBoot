@@ -22,8 +22,11 @@
             <if test="houseFloor.name !=null and houseFloor.name != ''"  >
                 and name = #{houseFloor.name}
             </if>
-            <if test="houseFloor.unitId !=null"  >
+            <if test="houseFloor.unitId != null"  >
                 and unit_id = #{houseFloor.unitId}
+            </if>
+            <if test="houseFloor.id != null"  >
+                and id = #{houseFloor.id}
             </if>
         </where>
     </select>
