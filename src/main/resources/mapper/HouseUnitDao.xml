@@ -24,6 +24,9 @@
                 <if test="houseUnit.buildingId !=null"  >
                     and building_id = #{houseUnit.buildingId}
                 </if>
+                <if test="houseUnit.id !=null"  >
+                    and id = #{houseUnit.id}
+                </if>
             </where>
 
     </select>

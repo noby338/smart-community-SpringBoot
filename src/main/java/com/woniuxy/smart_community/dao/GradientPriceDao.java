@@ -12,14 +12,29 @@ import java.util.List;
 public interface GradientPriceDao {
     /**
      * 根据单价梯度对象修改单价梯度
+     *
      * @param gradientPrice 单价梯度
      */
     void updateByGradientPrice(GradientPrice gradientPrice);
 
     /**
-     * 根据单价Id查询单价所有梯度
-     * @param utilId 单价Id
-     * @return 单价所有梯度集合
+     * 根据单价梯度id查询单价梯度
+     *
+     * @param id 单价梯度id
+     * @return 查询单价梯度对象
      */
-    List<GradientPrice> selectByUtilId(int utilId);
+    GradientPrice selectById(int id);
+
+    /**
+     * 新增单价梯度
+     *
+     * @param gradientPrice 单价梯度对象
+     */
+    void insert(GradientPrice gradientPrice);
+
+    /**
+     * 通过 id 值删除梯度
+     * @param id 梯度 id
+     */
+    void deleteById(int id);
 }

@@ -14,9 +14,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Water {
     private Integer id;
-    private Integer houseId;//房屋id
+    private House house;//房屋id
     private String month;//缴费的年月记录
     private Double nowMonthNums;//本月用量
     private Double nowPrices;//本月待缴费
     private Integer state;//1：正常，2：欠费，3：禁用
+    private Integer utilPriceId;//单价表id
 }

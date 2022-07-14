@@ -1,0 +1,11 @@
+### 根据单价梯度修改单价梯度
+POST http://localhost:8080/gas/select/all/1
+Content-Type: application/json
+x-requested-with: XMLHttpRequest
+
+{
+  "buildingId": null,
+  "unitId": null,
+  "floorId": null,
+  "houseId": 1
+}

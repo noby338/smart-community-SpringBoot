@@ -13,7 +13,7 @@ import java.util.List;
  * @Date 2022/7/6 17:56
  */
 public interface CarInfoService {
-    PageInfo<CarInfo> getAllCarInfo(int pageIndex, int pageSize);
+    PageInfo<CarInfo> getAllCarInfo(int pageIndex, int pageSize,CarInfo queryCar);
 
     List<ForSelect> getALLParkingInfoIdAndParkNumber(int parkId,int ownerId);
 
@@ -26,4 +26,10 @@ public interface CarInfoService {
     void changeParkIdByCarId(int carId, int parkId);
 
     void changeOwnerIdByCarId(int ownerId, int carId);
+
+    int changeCarNumber(int carId, String carNumber);
+
+    int addCarByNumber(String carNumber);
+
+    void deleteCarById(int id);
 }

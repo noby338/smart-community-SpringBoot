@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniuxy.smart_community.dao.PropertyCardDao">
+
+    <insert id="insert">
+        insert property_card (card_number, house_id, last_money, limit_money_id, state)
+        values (#{cardNumber},#{houseId},#{lastMoney},#{limitMoney.id},#{state})
+    </insert>
+    <select id="selectByCardNumber" resultType="com.woniuxy.smart_community.entity.PropertyCard">
+        select * from property_card where card_number=#{cardNumber}
+    </select>
+<!--    <resultMap id="propertyCard_map" type="propertyCard">-->
+<!--        <id column="id" property="id"/>-->
+<!--        <result column="card_number" property="cardNumber"/>-->
+<!--        <result column="month" property="lastMoney"/>-->
+<!--        <result column="now_month_nums" property="state"/>-->
+<!--        <association column="house_id" property="houseHold" javaType="houseHold" select="selectHouseHoldByHouseId"/>-->
+<!--    </resultMap>-->
+<!--    <select id="selectHouseHoldByHouseId" resultType="com.woniuxy.smart_community.entity.HouseHold">-->
+<!--        select * from house_hold where house_id= #{house_id} and is_owner = 1-->
+<!--    </select>-->
+
+</mapper>

@@ -33,6 +33,12 @@ public interface HouseDao {
     List<HouseBuilding> selectHouseByBuildingId();
 
     /**
+     * 查询所有楼栋(noby)
+     * @return HouseBuilding 集合
+     */
+    List<HouseBuilding> selectAllHouseBuilding();
+
+    /**
      * 通过房间信息查询相关数据
      *
      * @param houseInfo 楼栋号
@@ -50,4 +56,5 @@ public interface HouseDao {
 
     //孙浚钦使用---car页面
     List<House> selectAllHouseForCarShow();
+
 }

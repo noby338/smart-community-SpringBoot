@@ -74,7 +74,7 @@ public class ParkingOrderListServiceImpl implements ParkingOrderListService {
     /**
      * 项目启动后每一分钟启动一次--启动了添加配置@EnableScheduling
      */
-    @Scheduled(fixedRate = 60000)
+    @Override
     public void orderExpirationCheck(){
         //System.out.println("启动检查");
         ParkingOrderList ParkingOrderList=new ParkingOrderList();

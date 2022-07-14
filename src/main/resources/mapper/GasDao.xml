@@ -5,7 +5,34 @@
 <mapper namespace="com.woniuxy.smart_community.dao.GasDao">
 
     <insert id="insert">
-        insert into gas (house_id, month, now_month_nums, now_prices, state)
-        value (#{houseId}, #{month}, #{nowMonthNums}, #{nowPrices}, #{state})
+        insert into gas (house_id, month, now_month_nums, now_prices, state,util_price_id)
+        value (#{houseId}, #{month}, #{nowMonthNums}, #{nowPrices}, #{state},#{utilPriceId})
     </insert>
+
+    <select id="selectGasByHouseIdListAndMonth" resultMap="gas_map">
+        select * from gas
+        <where>
+            <if test="houseIdList != null and houseIdList != ''">
+                house_id in
+                <foreach collection="houseIdList" item="houseId" open="(" close=")" separator=",">
+                    #{houseId}
+                </foreach>
+            </if>
+            <if test="month != null and month != ''">
+                and month = #{month}
+            </if>
+        </where>
+    </select>
+    <resultMap id="gas_map" type="electricity">
+        <id column="id" property="id"/>
+        <result column="util_price_id" property="utilPriceId"/>
+        <result column="month" property="month"/>
+        <result column="now_month_nums" property="nowMonthNums"/>
+        <result column="now_prices" property="nowPrices"/>
+        <result column="state" property="state"/>
+        <association column="house_id" property="house" javaType="house" select="selectHouseById"/>
+    </resultMap>
+    <select id="selectHouseById" resultType="com.woniuxy.smart_community.entity.House">
+        select * from house where id= #{house_id}
+    </select>
 </mapper>

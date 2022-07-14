@@ -7,6 +7,8 @@ import com.woniuxy.smart_community.entity.HouseHold;
 
 import java.util.List;
 
+import java.util.List;
+
 /**
  * @ClassName -> House
  * @Author Fiver_Hu
@@ -20,8 +22,11 @@ import java.util.List;
 public class House {
     private Integer id;
     private Integer buildingId;
+    private String  buildingName;
     private Integer unitId;
+    private String  nuitName;
     private Integer floorId;
+    private String  floorName;
     private String houseNum;
     private Integer housePeopleNums;
     private Integer houseState;

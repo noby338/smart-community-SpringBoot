@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- XML约束头:MyBatis的约束文件使用的dtd，规范这个XML文档处理 遵守XML的一般规则以外，要遵守的自定义规则:能够使用哪些标签，使用哪些属性，出现的次数，标签的先后属性 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper是映射文件的根节点 namespace属性：名称空间，命名空间.就是一个名字 现在可以任意，以后使用接口的全限定名 -->
+<mapper namespace="com.woniuxy.smart_community.dao.ParkingRecordDao">
+    <select id="selectCountNotOut" resultType="int">
+        SELECT * FROM parking_record WHERE out_time IS NULL AND cost IS NULL
+    </select>
+    <!--  分页查询使用  -->
+    <select id="selectParkingRecordToPage" resultMap="mapParkingRecord">
+        select * from parking_record
+        <include refid="sqlForQuery"/>
+    </select>
+    <select id="selectCountToPage" resultType="int">
+        select count(*) from parking_record
+        <include refid="sqlForQuery"/>
+    </select>
+    <sql id="sqlForQuery">
+        <where>
+            <if test="parkingRecord.carInfo.id!=null and parkingRecord.carInfo.id!=''">
+                and car_id=#{parkingRecord.carInfo.id}
+            </if>
+        </where>
+    </sql>
+    <resultMap id="mapParkingRecord" type="ParkingRecord">
+        <id property="id" column="id"/>
+        <result property="recordNumber" column="record_number"/>
+        <result property="inTime" column="in_time"/>
+        <result property="outTime" column="out_time"/>
+        <result property="cost" column="cost"/>
+        <result property="payType" column="pay_type"/>
+        <association property="carInfo" column="car_id" javaType="CarInfo" select="selectCarInfoById"/>
+        <association property="ownersInfo" column="owner_id" javaType="OwnersInfo" select="selectOwnersInfoById"/>
+    </resultMap>
+    <select id="selectCarInfoById" resultType="CarInfo">
+        select * from car_info where id=#{id}
+    </select>
+    <select id="selectOwnersInfoById" resultType="OwnersInfo">
+        select * from owners_info where id=#{id}
+    </select>
+
+    <select id="selectCarIdsDistinct" resultType="int">
+        SELECT DISTINCT car_id FROM parking_record
+    </select>
+
+    <select id="selectParkingRecordByCarIdAndNoOutTime" resultMap="mapParkingRecord">
+        select * from parking_record where car_id=#{id} and out_time is null
+    </select>
+    <insert id="insertParkingRecordBySelf">
+        INSERT INTO parking_record(record_number,car_id,owner_id,in_time)
+        VALUES(#{parkingRecord.recordNumber},#{parkingRecord.carInfo.id},#{parkingRecord.ownersInfo.id},#{parkingRecord.inTime})
+    </insert>
+    <select id="selectParkingRecordById" resultMap="mapParkingRecord">
+        select * from parking_record where id =#{id}
+    </select>
+    <update id="updateOutTimeAndCost">
+        update parking_record set out_time=#{outTime},cost=#{cost} where id=#{id}
+    </update>
+</mapper>

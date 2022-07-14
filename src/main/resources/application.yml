@@ -9,6 +9,33 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123
+#新加quartz配置
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      max-active: 100
+      initial-size: 3
+      min-idle: 3
+      max-wait: 10000
+  quartz:
+    job-store-type: jdbc
+    overwrite-existing-jobs: true
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: MyScheduler
+            instanceId: AUTO
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            tablePrefix: QRTZ_
+            useProperties: false
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 10
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+#新加quartz配置
   mvc:
     servlet:
       load-on-startup: 1

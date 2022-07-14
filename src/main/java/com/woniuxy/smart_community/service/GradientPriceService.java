@@ -17,11 +17,16 @@ public interface GradientPriceService {
     void updateByGradientPrice(GradientPrice gradientPrice);
 
     /**
-     * 通过单价 Id 和用量计算，该 service 通过数据库中的单价梯度计算价格并返回
-     * @param utilId 单价 ID
-     * @param quantity 用量
-     * @return 价格
+     * 根据梯度对象插入梯度，
+     * 梯度对象中不 id 和 end 留空
+     * @param gradientPrice 梯度对象
      */
-    BigDecimal getPriceByUtilIdQuantity(int utilId,double quantity);
+    void insert(GradientPrice gradientPrice);
+
+    /**
+     * 通过 id 删除某价格梯度
+     * @param id 价格梯度 id
+     */
+    void delectById(int id);
 
 }

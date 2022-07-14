@@ -4,6 +4,8 @@ import com.woniuxy.smart_community.entity.ParkingRecord;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,12 +15,19 @@ import java.util.List;
  */
 @Mapper
 public interface ParkingRecordDao {
-    List<ParkingRecord> selectParkingRecord(@Param("parkingRecord") ParkingRecord parkingRecord);
+    //文总使用
+    int selectCountNotOut();
 
-    int selectParkingRecordNums(@Param("parkingRecord") ParkingRecord parkingRecord);
+    List<ParkingRecord> selectParkingRecordToPage(@Param("parkingRecord")ParkingRecord queryParkingRecord);
+    int selectCountToPage(@Param("parkingRecord")ParkingRecord queryParkingRecord);
 
-    void insertParingRecordInto(@Param("parkingRecord") ParkingRecord parkingRecord);
+    List<Integer> selectCarIdsDistinct();
 
-    void updateParkingRecordOut(@Param("parkingRecord") ParkingRecord parkingRecord);
+    ParkingRecord selectParkingRecordByCarIdAndNoOutTime(@Param("id")Integer id);
 
+    void insertParkingRecordBySelf(@Param("parkingRecord") ParkingRecord parkingRecord);
+
+    ParkingRecord selectParkingRecordById(@Param("id")int id);
+
+    void updateOutTimeAndCost(@Param("id") int id,@Param("outTime") Date outTime,@Param("cost") BigDecimal cost);
 }

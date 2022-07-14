@@ -3,6 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.woniuxy.smart_community.dao.GradientPriceDao">
+    <insert id="insert">
+        insert into gradient_price (name, util_id, beginning, price)
+        values (#{name}, #{utilId}, #{beginning}, #{price})
+    </insert>
 
     <update id="updateByGradientPrice">
         update gradient_price
@@ -10,9 +14,17 @@
             beginning=#{beginning},
             end=#{end},
             price=#{price}
-            where id = #{id}
+        where id = #{id}
     </update>
-    <select id="selectByUtilId" resultType="com.woniuxy.smart_community.entity.GradientPrice">
-        select * from gradient_price where util_id=#{utilId}
+    <delete id="deleteById">
+        delete
+        from gradient_price
+        where id = #{id}
+    </delete>
+    <select id="selectById" resultType="com.woniuxy.smart_community.entity.GradientPrice">
+        select *
+        from gradient_price
+        where id = #{id}
     </select>
+
 </mapper>
