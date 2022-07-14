@@ -1,5 +1,11 @@
 package com.woniuxy.smart_community.service;
 
+import com.woniuxy.smart_community.entity.PropertyUser;
+import com.woniuxy.smart_community.entity.RbacMenu;
+import com.woniuxy.smart_community.entity.ResponseEntity;
+
+import java.util.List;
+
 /**
  * (RbacMenu)表服务接口
  *
@@ -8,7 +14,8 @@ package com.woniuxy.smart_community.service;
  */
 public interface RbacMenuService {
 
-
+   ResponseEntity findAllMenu(PropertyUser propertyUser);
+//    List<RbacMenu> findAllSMenu(PropertyUser propertyUser);
     /**
      * 通过主键删除数据
      *

@@ -1,9 +1,11 @@
 package com.woniuxy.smart_community.dao;
 
+import com.woniuxy.smart_community.entity.PropertyUser;
 import com.woniuxy.smart_community.entity.RbacMenu;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * (RbacMenu)表数据库访问层
@@ -64,5 +66,8 @@ public interface RbacMenuDao {
      */
     int deleteById(Integer id);
 
+    List findAllFMenu(PropertyUser propertyUser);
+
+    List<RbacMenu> findAllSMenu(@Param("loginName") String loginName,@Param("fid") int fid);
 }
 
