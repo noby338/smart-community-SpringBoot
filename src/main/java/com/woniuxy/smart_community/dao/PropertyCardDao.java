@@ -14,5 +14,6 @@ public interface PropertyCardDao {
     PropertyCard selectByCardNumber(String cardNumber);
     PropertyCard selectById(int id);
     void update (PropertyCard propertyCard);
+    PropertyCard selectByHouseId(int id);
 
 }

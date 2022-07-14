@@ -7,6 +7,7 @@ import com.woniuxy.smart_community.dao.PropertyCardDao;
 import com.woniuxy.smart_community.dao.WaterDao;
 import com.woniuxy.smart_community.entity.*;
 import com.woniuxy.smart_community.service.ElectricityService;
+import com.woniuxy.smart_community.service.PropertyCardService;
 import com.woniuxy.smart_community.service.UtilPriceService;
 import com.woniuxy.smart_community.service.WaterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ public class WaterServiceImpl implements WaterService {
     PropertyCardDao propertyCardDao;
     @Autowired
     UtilPriceService utilPriceService;
+    @Autowired
+    PropertyCardService propertyCardService;
 
     @Override
     public List<Water> selectWaterByHouseIdListAndMonth(List<Integer> houseIdList, String month, int pageNum) {
@@ -79,5 +82,9 @@ public class WaterServiceImpl implements WaterService {
         water.setNowPrices(price.doubleValue());
         System.out.println("electricity = " + water);
         waterDao.updateByWater(water);
+
+        //自动扣费
+        PropertyCard propertyCard = propertyCardDao.selectByHouseId(id);
+        propertyCardService.updateLastMoneyAndState(propertyCard.getId(),-(price.doubleValue()));
     }
 }

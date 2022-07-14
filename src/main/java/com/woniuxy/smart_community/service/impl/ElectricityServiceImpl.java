@@ -36,6 +36,8 @@ public class ElectricityServiceImpl implements ElectricityService {
     HouseDao houseDao;
     @Autowired
     UtilPriceService utilPriceService;
+    @Autowired
+    PropertyCardService propertyCardService;
 
     @Override
     public List<Electricity> selectElectricityByHouseIdListAndMonth(List<Integer> houseIdList, String month, int pageNum) {
@@ -93,5 +95,10 @@ public class ElectricityServiceImpl implements ElectricityService {
         electricity.setNowPrices(price.doubleValue());
         System.out.println("electricity = " + electricity);
         electricityDao.updateByElectricity(electricity);
+
+        //自动扣费
+        PropertyCard propertyCard = propertyCardDao.selectByHouseId(id);
+        propertyCardService.updateLastMoneyAndState(propertyCard.getId(),-(price.doubleValue()));
+
     }
 }

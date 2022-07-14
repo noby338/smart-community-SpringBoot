@@ -7,6 +7,7 @@ import com.woniuxy.smart_community.dao.PropertyCardDao;
 import com.woniuxy.smart_community.dao.WaterDao;
 import com.woniuxy.smart_community.entity.*;
 import com.woniuxy.smart_community.service.GasService;
+import com.woniuxy.smart_community.service.PropertyCardService;
 import com.woniuxy.smart_community.service.UtilPriceService;
 import com.woniuxy.smart_community.service.WaterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ public class GasServiceImpl implements GasService {
     PropertyCardDao propertyCardDao;
     @Autowired
     UtilPriceService utilPriceService;
+    @Autowired
+    PropertyCardService propertyCardService;
 
 
     @Override
@@ -81,5 +84,8 @@ public class GasServiceImpl implements GasService {
         System.out.println("electricity = " + gas);
         gasDao.updateByGas(gas);
 
+        //自动扣费
+        PropertyCard propertyCard = propertyCardDao.selectByHouseId(id);
+        propertyCardService.updateLastMoneyAndState(propertyCard.getId(),-(price.doubleValue()));
     }
 }
