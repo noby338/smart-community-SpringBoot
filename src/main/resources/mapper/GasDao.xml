@@ -32,6 +32,7 @@
         <result column="state" property="state"/>
         <association column="house_id" property="house" javaType="house" select="selectHouseById"/>
     </resultMap>
+
     <select id="selectHouseById" resultType="com.woniuxy.smart_community.entity.House">
         select * from house where id= #{house_id}
     </select>
