@@ -1,5 +1,0 @@
-### 根据房号查询房卡
-GET http://localhost:8080/propertyCard/selectByCardNumber/01010101
-Content-Type: application/json
-x-requested-with: XMLHttpRequest
-

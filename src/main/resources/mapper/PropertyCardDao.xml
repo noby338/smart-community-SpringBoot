@@ -8,9 +8,27 @@
         insert property_card (card_number, house_id, last_money, limit_money_id, state)
         values (#{cardNumber},#{houseId},#{lastMoney},#{limitMoney.id},#{state})
     </insert>
+    <update id="update">
+        update property_card
+        set last_money=#{lastMoney},
+            state=#{state}
+            where id = #{id}
+    </update>
     <select id="selectByCardNumber" resultType="com.woniuxy.smart_community.entity.PropertyCard">
         select * from property_card where card_number=#{cardNumber}
     </select>
+
+
+
+
+
+
+
+
+
+
+
+
 <!--    <resultMap id="propertyCard_map" type="propertyCard">-->
 <!--        <id column="id" property="id"/>-->
 <!--        <result column="card_number" property="cardNumber"/>-->

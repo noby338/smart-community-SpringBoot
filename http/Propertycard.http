@@ -1,0 +1,19 @@
+### 根据房号查询房卡
+GET http://localhost:8080/propertyCard/selectByCardNumber/01010101
+Content-Type: application/json
+x-requested-with: XMLHttpRequest
+
+### 根据房间对象充钱
+POST http://localhost:8080/propertyCard/charge/100
+Content-Type: application/json
+x-requested-with: XMLHttpRequest
+
+{
+  "id": 1,
+  "cardNumber": "01010101",
+  "houseId": 1,
+  "houseHold": null,
+  "lastMoney": 212.09,
+  "limitMoney": null,
+  "state": 1
+}

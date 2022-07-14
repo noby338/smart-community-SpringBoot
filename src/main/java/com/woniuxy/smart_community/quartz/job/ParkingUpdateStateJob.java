@@ -11,16 +11,16 @@ import javax.sql.DataSource;
 import java.util.Date;
 
 //注：只可以向后改系统时间，quartz底层可能自带上次时间数字，向前修改无用.
-@Component
-public class ParkingUpdateStateJob extends QuartzJobBean {
-
-    @Autowired
-    DataSource dataSource;
-    @Autowired
-    ParkingOrderListService parkingOrderListService;
-
-    @Override
-    protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        parkingOrderListService.orderExpirationCheck();
-    }
-}
+//@Component
+//public class ParkingUpdateStateJob extends QuartzJobBean {
+//
+//    @Autowired
+//    DataSource dataSource;
+//    @Autowired
+//    ParkingOrderListService parkingOrderListService;
+//
+//    @Override
+//    protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+//        parkingOrderListService.orderExpirationCheck();
+//    }
+//}

@@ -32,4 +32,10 @@ public class PropertyCardController {
         PropertyCard propertyCard = propertyCardService.selectByCarNumber(cardNumber);
         return new ResponseEntity<>(200,"y",propertyCard);
     }
+
+    @PostMapping("/charge/{addMoney}")
+    public ResponseEntity<String> charge(@PathVariable Double addMoney,PropertyCard propertyCard) {
+        propertyCardService.charge(propertyCard,addMoney);
+        return new ResponseEntity<>(200,"y",null);
+    }
 }

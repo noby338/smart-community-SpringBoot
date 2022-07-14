@@ -9,4 +9,5 @@ import com.woniuxy.smart_community.entity.PropertyCard;
  */
 public interface PropertyCardService {
     PropertyCard selectByCarNumber(String carNumber);
+    void charge(PropertyCard propertyCard,Double addMoney);
 }
