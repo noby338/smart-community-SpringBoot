@@ -35,7 +35,7 @@ public class PropertyUserController {
 
        return propertyUserService.findAll(state,currentPage, pageSize);
     }
-    @RequiresPermissions("role_manage")
+//    @RequiresPermissions("role_manage")
 @RequestMapping("/update")
     public ResponseEntity update(@RequestBody PropertyUser propertyUser){
     return propertyUserService.update(propertyUser);
@@ -48,6 +48,7 @@ public class PropertyUserController {
     public ResponseEntity deleteByLoginName(@PathVariable String loginName){
 return propertyUserService.deleteByLoginName(loginName);
 }
+
     @DeleteMapping("/active/{loginName}")
     public ResponseEntity activeByLoginName(@PathVariable String loginName){
         return propertyUserService.activeByLoginName(loginName);
@@ -61,6 +62,8 @@ public ResponseEntity findOtherByLoginName(@PathVariable String loginName){
     public ResponseEntity allRoles(){
     return propertyUserService.allRoles();
 }
+
+    @RequiresPermissions("role_manage")
 @PutMapping("/updateperm/{userId}/{loginName}")
     public ResponseEntity updatePerm(@PathVariable("userId") int userId,@PathVariable("loginName") String loginName,@RequestBody String[] perms){
    return propertyUserService.updatePerm(userId,loginName,perms);
