@@ -1,19 +1,10 @@
 package com.woniuxy.smart_community.controller;
 
-import com.github.pagehelper.PageInfo;
-import com.woniuxy.smart_community.dao.PropertyCardDao;
-import com.woniuxy.smart_community.entity.Gas;
-import com.woniuxy.smart_community.entity.HouseInfo;
 import com.woniuxy.smart_community.entity.PropertyCard;
 import com.woniuxy.smart_community.entity.ResponseEntity;
-import com.woniuxy.smart_community.service.GasService;
-import com.woniuxy.smart_community.service.HouseService;
 import com.woniuxy.smart_community.service.PropertyCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @Description 房卡
@@ -29,13 +20,13 @@ public class PropertyCardController {
 
     @GetMapping("/selectByCardNumber/{cardNumber}")
     public ResponseEntity<PropertyCard> selectByCardNumber(@PathVariable String cardNumber) {
-        PropertyCard propertyCard = propertyCardService.selectByCarNumber(cardNumber);
+        PropertyCard propertyCard = propertyCardService.selectByCardNumber(cardNumber);
         return new ResponseEntity<>(200,"y",propertyCard);
     }
 
     @PostMapping("/charge/{addMoney}")
-    public ResponseEntity<String> charge(@PathVariable Double addMoney,PropertyCard propertyCard) {
-        propertyCardService.charge(propertyCard,addMoney);
+    public ResponseEntity<String> charge(@RequestBody PropertyCard propertyCard,@PathVariable Double addMoney) {
+        propertyCardService.updateLastMoneyAndState(propertyCard.getId(),addMoney);
         return new ResponseEntity<>(200,"y",null);
     }
 }

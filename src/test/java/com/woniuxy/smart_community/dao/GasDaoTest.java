@@ -2,6 +2,7 @@ package com.woniuxy.smart_community.dao;
 
 import com.woniuxy.smart_community.entity.Electricity;
 import com.woniuxy.smart_community.entity.Gas;
+import com.woniuxy.smart_community.entity.House;
 import com.woniuxy.smart_community.service.GradientPriceService;
 import com.woniuxy.smart_community.service.UtilPriceService;
 import org.junit.jupiter.api.Test;
@@ -39,7 +40,9 @@ class GasDaoTest {
 //                BigDecimal nowMonthNums = new BigDecimal(0);
                 if (year == 2021) {
                     for (int month = 10; month <= 12; month++) {
-//                        gas.setHouseId(i);
+                        House house = new House();
+                        house.setId(i);
+                        gas.setHouse(house);
                         gas.setMonth(String.format("%02d/%02d", year, month));
                         //本月随机写入[30,700)立方用气
                         double randomSage = (int) ((Math.random() * 700 * 10000) + 30 * 10000) / 10000.0;
@@ -51,8 +54,10 @@ class GasDaoTest {
                     }
                 }
                 if (year == 2022) {
-                    for (int month = 10; month <= 12; month++) {
-//                        gas.setHouseId(i);
+                    for (int month = 1; month <= 3; month++) {
+                        House house = new House();
+                        house.setId(i);
+                        gas.setHouse(house);
                         gas.setMonth(String.format("%02d/%02d", year, month));
                         //本月随机写入[30,700)立方用气
                         double randomSage = (int) ((Math.random() * 700 * 10000) + 30 * 10000) / 10000.0;

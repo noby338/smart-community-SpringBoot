@@ -29,4 +29,20 @@ public interface ElectricityDao {
      */
     List<Electricity> selectElectricityByHouseIdListAndMonth(
             @Param("houseIdList") List<Integer> houseIdList,@Param("month") String month);
+
+    /**
+     * 月份及房屋id集合查询总电费
+     * @param houseIdList 房屋id集合
+     * @param month 月份
+     * @return 总电费
+     */
+    Double selectElectricitySumByHouseIdListAndMonth(
+            @Param("houseIdList") List<Integer> houseIdList,@Param("month") String month);
+
+    /**
+     * 根据房屋id和月份更新状态和费用
+     * @param electricity
+     * @return
+     */
+    void updateByElectricity(Electricity electricity);
 }

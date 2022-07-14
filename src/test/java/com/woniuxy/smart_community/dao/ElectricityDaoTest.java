@@ -105,4 +105,18 @@ class ElectricityDaoTest {
 //        List<Electricity> electricityList = electricityDao.selectElectricityByHouseIdListAndMonth(houseIdList,"2021/12");
 //        System.out.println("electricityList = " + electricityList);
     }
+
+    /**
+     * 通过楼栋查数据
+     */
+    @Test
+    void selectElectricitySumByHouseIdListAndMonth() {
+        HouseInfo houseInfo = new HouseInfo();
+        houseInfo.setHouseId(1);
+        ArrayList<Integer> list = houseService.selectHouseById(houseInfo);
+//        List<Electricity> electricityList = electricityDao.selectElectricityByHouseIdListAndMonth(list, "2021/12");
+//        System.out.println("electricityList = " + electricityList);
+        Double all = electricityDao.selectElectricitySumByHouseIdListAndMonth(list, null);
+        System.out.println("all = " + all);
+    }
 }

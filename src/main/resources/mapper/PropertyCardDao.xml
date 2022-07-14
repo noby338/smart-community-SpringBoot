@@ -17,6 +17,9 @@
     <select id="selectByCardNumber" resultType="com.woniuxy.smart_community.entity.PropertyCard">
         select * from property_card where card_number=#{cardNumber}
     </select>
+    <select id="selectById" resultType="com.woniuxy.smart_community.entity.PropertyCard">
+        select * from property_card where id=#{id}
+    </select>
 
 
 

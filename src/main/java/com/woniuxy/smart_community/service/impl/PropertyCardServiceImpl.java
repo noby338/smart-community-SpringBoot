@@ -30,16 +30,28 @@ public class PropertyCardServiceImpl implements PropertyCardService {
     @Autowired
     LimitMoneyDao limitMoneyDao;
 
+    /**
+     * 根据房卡编号查询房卡对象
+     * @param cardNumber 房卡编号
+     * @return 房卡对象
+     */
     @Override
-    public PropertyCard selectByCarNumber(String carNumber) {
-        PropertyCard propertyCard = propertyCardDao.selectByCardNumber(carNumber);
+    public PropertyCard selectByCardNumber(String cardNumber) {
+        PropertyCard propertyCard = propertyCardDao.selectByCardNumber(cardNumber);
         return propertyCard;
     }
 
+    /**
+     * 根据房卡Id修改该房卡的费用和房卡状态(费用为变更量，而非直接设置量)
+     * 房卡的状态根据新余额自动变更
+     * @param propertyCardId 房卡id
+     * @param addMoney 增加的费用
+     */
     @Override
-    public void charge(PropertyCard propertyCard,Double addMoney) {
-        BigDecimal total = new BigDecimal(propertyCard.getLastMoney() + "").add(new BigDecimal(addMoney + ""));
-        BigDecimal limitDe = new BigDecimal(limitMoneyDao.selectById(1).getLimitMoney() + "");
+    public void updateLastMoneyAndState(int propertyCardId, Double addMoney) {
+        PropertyCard propertyCard1 = propertyCardDao.selectById(propertyCardId);
+        BigDecimal total = new BigDecimal(propertyCard1.getLastMoney()+"").add(new BigDecimal(addMoney + ""));
+        BigDecimal limitDe = new BigDecimal(-limitMoneyDao.selectById(1).getLimitMoney() + "");
         int flag = total.compareTo(limitDe);//缴费后的总费用是否大于-200
         int flag2 = total.compareTo(new BigDecimal(0));//缴费后的费用是否大于0
         int state;
@@ -50,8 +62,8 @@ public class PropertyCardServiceImpl implements PropertyCardService {
         } else {
             state = 2;
         }
-        propertyCard.setLastMoney(total.doubleValue());
-        propertyCard.setState(state);
-        propertyCardDao.update(propertyCard);
+        propertyCard1.setLastMoney(total.doubleValue());
+        propertyCard1.setState(state);
+        propertyCardDao.update(propertyCard1);
     }
 }

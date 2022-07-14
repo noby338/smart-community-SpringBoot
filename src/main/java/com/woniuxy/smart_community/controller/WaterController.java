@@ -42,4 +42,17 @@ public class WaterController {
         PageInfo<Water> page = new PageInfo<>(waterList);
         return new ResponseEntity<>(200,"y",page);
     }
+
+    @PostMapping("/selectSum/{month}")
+    public ResponseEntity<Double> selectSum(
+            @RequestBody HouseInfo houseInfo,
+            @PathVariable String month) {
+        ArrayList<Integer> houseIdList = houseService.selectHouseById(houseInfo);
+        String _month = null;
+        if (!"all".equals(month)) {
+            _month = month.replace('-','/');
+        }
+        Double sum = waterService.selectWaterSumByHouseIdListAndMonth(houseIdList, _month);
+        return new ResponseEntity<>(200,"y",sum);
+    }
 }

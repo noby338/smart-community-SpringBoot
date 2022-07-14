@@ -12,5 +12,7 @@ import java.util.List;
 public interface PropertyCardDao {
     void insert(PropertyCard propertyCard);
     PropertyCard selectByCardNumber(String cardNumber);
+    PropertyCard selectById(int id);
     void update (PropertyCard propertyCard);
+
 }

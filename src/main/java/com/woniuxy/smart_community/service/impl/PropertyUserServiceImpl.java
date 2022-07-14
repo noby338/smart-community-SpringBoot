@@ -12,7 +12,7 @@ import com.woniuxy.smart_community.entity.PropertyUser;
 import com.woniuxy.smart_community.entity.RbacPerm;
 import com.woniuxy.smart_community.entity.ResponseEntity;
 import com.woniuxy.smart_community.service.PropertyUserService;
-import com.woniuxy.smart_community.utils.JWTUtil;
+//import com.woniuxy.smart_community.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -80,15 +80,16 @@ public class PropertyUserServiceImpl implements PropertyUserService {
     @Override
     @Transactional
     public ResponseEntity login(PropertyUser propertyUser) {
-        PropertyUser login= propertyUserDao.login(propertyUser);
-
-        if(login!=null) {
-            String token= JWTUtil.sign(propertyUser.getLoginName(),propertyUser.getPassword());
-            login.setToken(token);
-            return new ResponseEntity(200, "登录成功", login);
-        }else {
-            return new ResponseEntity(500, "登录失败", null);
-        }
+//        PropertyUser login= propertyUserDao.login(propertyUser);
+//
+//        if(login!=null) {
+//            String token= JWTUtil.sign(propertyUser.getLoginName(),propertyUser.getPassword());
+//            login.setToken(token);
+//            return new ResponseEntity(200, "登录成功", login);
+//        }else {
+//            return new ResponseEntity(500, "登录失败", null);
+//        }
+        return  null;
     }
 
     @Override

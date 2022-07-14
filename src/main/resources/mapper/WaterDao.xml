@@ -5,8 +5,14 @@
 <mapper namespace="com.woniuxy.smart_community.dao.WaterDao">
     <insert id="insert">
         insert into water (house_id, month, now_month_nums, now_prices, state, util_price_id)
-            value (#{houseId}, #{month}, #{nowMonthNums}, #{nowPrices}, #{state}, #{utilPriceId})
+            value (#{house.id}, #{month}, #{nowMonthNums}, #{nowPrices}, #{state}, #{utilPriceId})
     </insert>
+
+    <update id="updateByWater">
+        update water
+        set now_month_nums = #{nowMonthNums} ,now_prices = #{nowPrices}
+        where house_id = #{house.id} and month = #{month}
+    </update>
 
     <select id="selectWaterByHouseIdListAndMonth" resultMap="water_map">
         select * from water
@@ -35,5 +41,20 @@
         select *
         from house
         where id = #{house_id}
+    </select>
+
+    <select id="selectWaterSumByHouseIdListAndMonth" resultType="double">
+        select sum(now_month_nums) from water
+        <where>
+            <if test="houseIdList != null and houseIdList != ''">
+                house_id in
+                <foreach collection="houseIdList" item="houseId" open="(" close=")" separator=",">
+                    #{houseId}
+                </foreach>
+            </if>
+            <if test="month != null and month != ''">
+                and month = #{month}
+            </if>
+        </where>
     </select>
 </mapper>

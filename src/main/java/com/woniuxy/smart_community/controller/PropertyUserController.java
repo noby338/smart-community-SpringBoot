@@ -5,8 +5,8 @@ import com.woniuxy.smart_community.entity.RbacPerm;
 import com.woniuxy.smart_community.entity.ResponseEntity;
 import com.woniuxy.smart_community.service.PropertyUserService;
 import lombok.experimental.Accessors;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.RequiresAuthentication;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -63,7 +63,7 @@ public ResponseEntity findOtherByLoginName(@PathVariable String loginName){
     return propertyUserService.allRoles();
 }
 
-    @RequiresPermissions("role_manage")
+//    @RequiresPermissions("role_manage")
 @PutMapping("/updateperm/{userId}/{loginName}")
     public ResponseEntity updatePerm(@PathVariable("userId") int userId,@PathVariable("loginName") String loginName,@RequestBody String[] perms){
    return propertyUserService.updatePerm(userId,loginName,perms);

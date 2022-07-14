@@ -1,6 +1,7 @@
 package com.woniuxy.smart_community.dao;
 
 import com.woniuxy.smart_community.entity.Gas;
+import com.woniuxy.smart_community.entity.House;
 import com.woniuxy.smart_community.entity.Water;
 import com.woniuxy.smart_community.service.GradientPriceService;
 import com.woniuxy.smart_community.service.UtilPriceService;
@@ -39,7 +40,9 @@ class WaterDaoTest {
 //                BigDecimal nowMonthNums = new BigDecimal(0);
                 if (year == 2021) {
                     for (int month = 10; month <= 12; month++) {
-//                        water.setHouseId(i);
+                        House house = new House();
+                        house.setId(i);
+                        water.setHouse(house);
                         water.setMonth(String.format("%02d/%02d", year, month));
                         //本月随机写入[2,40)立方用水
                         double randomSage = (int) ((Math.random() * 40 * 10000) + 2 * 10000) / 10000.0;
@@ -52,7 +55,9 @@ class WaterDaoTest {
                 }
                 if (year == 2022) {
                     for (int month = 1; month <= 3; month++) {
-//                        water.setHouseId(i);
+                        House house = new House();
+                        house.setId(i);
+                        water.setHouse(house);
                         water.setMonth(String.format("%02d/%02d", year, month));
                         //本月随机写入[2,40)立方用水
                         double randomSage = (int) ((Math.random() * 40 * 10000) + 2 * 10000) / 10000.0;

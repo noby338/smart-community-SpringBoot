@@ -28,4 +28,19 @@ public interface WaterDao {
      */
     List<Water> selectWaterByHouseIdListAndMonth(
             @Param("houseIdList") List<Integer> houseIdList, @Param("month") String month);
+
+    /**
+     * 月份及房屋id集合查询电费统计
+     * @param houseIdList 房屋id集合
+     * @param month 月份
+     * @return 电费统计
+     */
+    Double selectWaterSumByHouseIdListAndMonth(
+            @Param("houseIdList") List<Integer> houseIdList, @Param("month") String month);
+    /**
+     * 根据房屋id和月份更新状态和费用
+     * @param water
+     * @return
+     */
+    void updateByWater(Water water);
 }
