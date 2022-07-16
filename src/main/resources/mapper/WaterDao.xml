@@ -57,4 +57,13 @@
             </if>
         </where>
     </select>
+
+    <select id="selectByHouseIdAndState" resultType="com.woniuxy.smart_community.entity.Water">
+        select * from water where house_id=#{houseId} and state != 1
+    </select>
+    <update id="updateStateById">
+        update water
+        set state = #{state}
+        where id = #{id}
+    </update>
 </mapper>

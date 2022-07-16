@@ -14,6 +14,9 @@
         where house_id = #{house.id} and month = #{month}
     </update>
 
+
+
+
     <select id="selectElectricityByHouseIdListAndMonth" resultMap="electricity_map">
         select * from electricity
         <where>
@@ -58,5 +61,13 @@
             </if>
         </where>
     </select>
+    <select id="selectByHouseIdAndState" resultType="com.woniuxy.smart_community.entity.Electricity">
+        select * from electricity where house_id=#{houseId} and state != 1
+    </select>
+    <update id="updateStateById">
+        update electricity
+        set state = #{state}
+        where id = #{id}
+    </update>
 
 </mapper>

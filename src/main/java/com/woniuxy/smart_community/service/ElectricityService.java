@@ -34,6 +34,7 @@ public interface ElectricityService {
     /**
      * 根据房屋 Id 、用量、月份更新该月房屋月末的用量和总费用
      * 总费用将会根据用量自动计算
+     * 将根据费用自动在物业卡中扣费
      * @param id 房屋 Id
      * @param calendar 月份
      * @param dosage 本月用量

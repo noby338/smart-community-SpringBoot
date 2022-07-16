@@ -24,4 +24,10 @@ public class UtilController {
         List<UtilPrice> utilPrices = utilPriceService.selectAll();
         return new ResponseEntity<>(200,"y",utilPrices);
     }
+
+    @GetMapping("/selectQuantityAndCostArray/{utilId}")
+    public ResponseEntity<List<double[]>> selectQuantityAndCostArray(@PathVariable int utilId) {
+        List<double[]> quantityAndCostArray = utilPriceService.getQuantityAndCostArray(utilId);
+        return new ResponseEntity<>(200,"y",quantityAndCostArray);
+    }
 }

@@ -43,4 +43,17 @@ public interface WaterDao {
      * @return
      */
     void updateByWater(Water water);
+
+    /**
+     * 根据日期和房间id设置状态水费
+     * @param water
+     */
+    void updateStateById(Water water);
+
+    /**
+     * 根据房间id查出state不等于1的状态
+     * @param houseId
+     * @return
+     */
+    Water selectByHouseIdAndState(int houseId);
 }

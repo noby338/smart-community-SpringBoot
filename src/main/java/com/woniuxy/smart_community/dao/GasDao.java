@@ -43,4 +43,17 @@ public interface GasDao {
      * @return
      */
     void updateByGas(Gas gas);
+
+    /**
+     * 根据日期和房间id设置状态气费
+     * @param gas
+     */
+    void updateStateById(Gas gas);
+
+    /**
+     * 根据房间id查出state不等于1的状态
+     * @param houseId
+     * @return
+     */
+    Gas selectByHouseIdAndState(int houseId);
 }

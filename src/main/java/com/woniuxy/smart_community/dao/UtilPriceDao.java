@@ -22,4 +22,11 @@ public interface UtilPriceDao {
      * @return 单价对象
      */
     UtilPrice selectById(int id);
+
+    /**
+     * 根据单价 Id 查询所有梯度中的最大开始值
+     * @param utilId
+     * @return
+     */
+    Double selectMaxBeginningByUtilId(int utilId);
 }

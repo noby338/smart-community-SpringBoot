@@ -1,16 +1,15 @@
 package com.woniuxy.smart_community.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.woniuxy.smart_community.dao.GasDao;
-import com.woniuxy.smart_community.dao.LimitMoneyDao;
-import com.woniuxy.smart_community.dao.PropertyCardDao;
-import com.woniuxy.smart_community.entity.Gas;
-import com.woniuxy.smart_community.entity.LimitMoney;
-import com.woniuxy.smart_community.entity.PropertyCard;
+import com.woniuxy.smart_community.dao.*;
+import com.woniuxy.smart_community.entity.*;
+import com.woniuxy.smart_community.service.ElectricityService;
 import com.woniuxy.smart_community.service.GasService;
 import com.woniuxy.smart_community.service.PropertyCardService;
+import com.woniuxy.smart_community.service.WaterService;
 import org.apache.tomcat.jni.ProcErrorCallback;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 import javax.rmi.PortableRemoteObject;
@@ -29,6 +28,12 @@ public class PropertyCardServiceImpl implements PropertyCardService {
     PropertyCardDao propertyCardDao;
     @Autowired
     LimitMoneyDao limitMoneyDao;
+    @Autowired
+    ElectricityDao electricityDao;
+    @Autowired
+    WaterDao waterDao;
+    @Autowired
+    GasDao gasDao;
 
     /**
      * 根据房卡编号查询房卡对象
@@ -64,6 +69,29 @@ public class PropertyCardServiceImpl implements PropertyCardService {
         }
         propertyCard1.setLastMoney(total.doubleValue());
         propertyCard1.setState(state);
+
+        //根据房间id查出id!=1的电费
+        Electricity electricity = electricityDao.selectByHouseIdAndState(propertyCard1.getId());
+        if (electricity != null) {
+            electricity.setState(state);
+            electricityDao.updateStateById(electricity);
+        }
+
+
+        Water water = waterDao.selectByHouseIdAndState(propertyCard1.getId());
+        if (water != null) {
+            water.setState(state);
+            waterDao.updateStateById(water);
+        }
+
+
+        Gas gas = gasDao.selectByHouseIdAndState(propertyCard1.getId());
+        if (gas != null) {
+            gas.setState(state);
+            gasDao.updateStateById(gas);
+        }
+
+
         propertyCardDao.update(propertyCard1);
     }
 }

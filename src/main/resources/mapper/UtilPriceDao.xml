@@ -20,5 +20,8 @@
     <select id="selectById" resultMap="util_map">
         select * from util_price where id=#{id}
     </select>
+    <select id="selectMaxBeginningByUtilId" resultType="java.lang.Double">
+        select max(beginning) from gradient_price where util_id = #{utilId}
+    </select>
 
 </mapper>

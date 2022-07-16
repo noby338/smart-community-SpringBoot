@@ -1,13 +1,11 @@
 package com.woniuxy.smart_community.service;
 
-import com.woniuxy.smart_community.entity.UtilPrice;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
-
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
 
 /**
  * @Description 测试类
@@ -27,5 +25,16 @@ class UtilPriceServiceTest {
         System.out.println("150 = " + priceByUtilIdQuantity2);
         System.out.println("200 = " + priceByUtilIdQuantity3);
         System.out.println("300 = " + priceByUtilIdQuantity4);
+    }
+    @Test
+    void getQantityAndCostArray() {
+        List<double[]> quantityAndCostArray = utilPriceService.getQuantityAndCostArray(2);
+        for (double[] doubles : quantityAndCostArray) {
+            System.out.print("[");
+            for (double aDouble : doubles) {
+                System.out.print(aDouble+",");
+            }
+            System.out.print("]");
+        }
     }
 }

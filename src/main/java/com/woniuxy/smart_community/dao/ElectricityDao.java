@@ -45,4 +45,17 @@ public interface ElectricityDao {
      * @return
      */
     void updateByElectricity(Electricity electricity);
+
+    /**
+     * 根据日期和房间id设置状态电费
+     * @param electricity
+     */
+    void updateStateById(Electricity electricity);
+
+    /**
+     * 根据房间id查出state不等于1的状态
+     * @param houseId
+     * @return
+     */
+    Electricity selectByHouseIdAndState(int houseId);
 }

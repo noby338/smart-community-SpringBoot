@@ -2,6 +2,7 @@ package com.woniuxy.smart_community.service;
 
 import com.woniuxy.smart_community.entity.UtilPrice;
 
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -23,4 +24,10 @@ public interface UtilPriceService {
      * @return 价格
      */
     BigDecimal getPriceByUtilIdQuantity(int utilId, double quantity);
+
+    /**
+     * 获取某项费用的用量价格二维数组
+     * @return
+     */
+    List<double[]> getQuantityAndCostArray(int utilId);
 }

@@ -28,6 +28,6 @@ class ElectricityServiceTest {
     void testUpdateLastMoneyAndState() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(2022, 4,1);
-        electricityService.updateElectricityByCalenderAndDosage(1,calendar,140);
+        electricityService.updateElectricityByCalenderAndDosage(1,calendar,1400);
     }
 }

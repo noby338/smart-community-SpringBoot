@@ -28,6 +28,7 @@ public class GradientPriceServiceImpl implements GradientPriceService {
 
     /**
      * 根据controller传递的gradientPrice对象修改价格梯度
+     * @param gradientPrice 梯度对象
      */
     @Override
     public void updateByGradientPrice(GradientPrice gradientPrice) {
@@ -55,7 +56,6 @@ public class GradientPriceServiceImpl implements GradientPriceService {
         UtilPrice utilPrice = utilPriceDao.selectById(utilId);
         List<GradientPrice> gradientPriceList = utilPrice.getGradientPriceList();
         for (GradientPrice gra : gradientPriceList) {
-
             if (Objects.equals(gra.getId(), id)) {
                 //找到被修改的梯度
                 gra = gradientPrice;
@@ -63,6 +63,7 @@ public class GradientPriceServiceImpl implements GradientPriceService {
                 //找到被修改的记录的下一个梯度
                 if (gra.getEnd() != null) {
                     if (newEnd >= gra.getEnd()) {
+                        gradientPriceDao.updateByGradientPrice(gradientPrice1);
                         throw new RuntimeException("该结束值应小于下一梯度结束值");
                     } else {
                         gra.setBeginning(newEnd);
@@ -74,6 +75,7 @@ public class GradientPriceServiceImpl implements GradientPriceService {
                 //找到被修改记录的上一个梯度
                 if (Objects.equals(gra.getEnd(), beginning)) {
                     if (newBeginning <= gra.getBeginning()) {
+                        gradientPriceDao.updateByGradientPrice(gradientPrice1);
                         throw new RuntimeException("该起始值应大于上一梯度起始值");
                     } else {
                         gra.setEnd(newBeginning);

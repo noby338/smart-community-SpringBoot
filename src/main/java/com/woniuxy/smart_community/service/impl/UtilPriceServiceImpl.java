@@ -4,6 +4,7 @@ import com.woniuxy.smart_community.dao.UtilPriceDao;
 import com.woniuxy.smart_community.entity.GradientPrice;
 import com.woniuxy.smart_community.entity.UtilPrice;
 import com.woniuxy.smart_community.service.UtilPriceService;
+import net.sf.jsqlparser.statement.select.Limit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ public class UtilPriceServiceImpl implements UtilPriceService {
         return utilPriceDao.selectAll();
     }
     /**
-     * 通过单价 Id 和用量计算，该 service 通过数据库中的单价梯度计算价格并返回
+     * 通过单价 Id 和已存在的用量梯度计算价格
      * @param utilId 单价 ID
      * @param quantity 用量
      * @return 价格
@@ -78,9 +79,29 @@ public class UtilPriceServiceImpl implements UtilPriceService {
                         .multiply(new BigDecimal(before.getValue() + ""))).add(money);
                 break;
             }
-
         }
         //价格统一保留两位小数
         return money.setScale(2, RoundingMode.HALF_UP);
+    }
+
+    /**
+     * 获取某项费用的用量价格二维数组
+     * @return
+     */
+    @Override
+    public List<double[]> getQuantityAndCostArray(int utilId) {
+        Double maxBeginning = utilPriceDao.selectMaxBeginningByUtilId(utilId);
+        ArrayList<double[]> doubleArray = new ArrayList<>();
+        double limit;
+        if (maxBeginning == 0) {
+            limit = 300;
+        } else {
+            limit = maxBeginning*1.5;
+        }
+        for (int i = 0; i < limit; i++) {
+            double[] doubles = {i,this.getPriceByUtilIdQuantity(utilId,i).doubleValue()};
+            doubleArray.add(doubles);
+        }
+        return doubleArray;
     }
 }
